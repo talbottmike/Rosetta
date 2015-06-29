@@ -1,0 +1,295 @@
+﻿#region References
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using TransformR.Data;
+using TransformR.DataStores;
+
+#endregion
+
+namespace TransformR.WinForms
+{
+	public partial class MainForm : Form
+	{
+		#region Fields
+
+		private readonly DataService _dataService;
+		private string _destinationPath;
+		private string _destinationStore;
+		private string _sourcePath;
+		private string _sourceStore;
+
+		#endregion
+
+		#region Constructors
+
+		public MainForm()
+		{
+			InitializeComponent();
+
+			_dataService = new DataService();
+		}
+
+		#endregion
+
+		#region Methods
+
+		private void AddDestinationHeader_Click(object sender, EventArgs e)
+		{
+			DestinationHeaders.Items.Add(DestinationHeader.Text);
+			DestinationHeader.Text = string.Empty;
+			UpdateControlState();
+		}
+
+		private void AddMapping_Click(object sender, EventArgs e)
+		{
+			Mappings.Items.Add(MappingSource.SelectedItem + "," + MappingDestination.SelectedItem);
+			UpdateControlState();
+		}
+
+		private void AddSourceHeader_Click(object sender, EventArgs e)
+		{
+			SourceHeaders.Items.Add(SourceHeader.Text);
+			SourceHeader.Text = string.Empty;
+			UpdateControlState();
+		}
+
+		private void DesinationOpenFile_Click(object sender, EventArgs e)
+		{
+			var store = _dataService.Stores.FirstOrDefault(x => x.DisplayName == _destinationStore) as FileDataStore;
+			if (store == null)
+			{
+				return;
+			}
+
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.Filter = store.Filter;
+				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath) + "\\Sample Data";
+
+				if (dialog.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+
+				_destinationPath = dialog.FileName;
+
+				DestinationFileName.Text = Path.GetFileName(_destinationPath);
+				DestinationFileName.Visible = true;
+			}
+		}
+
+		private void DestinationBack_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = SourcePage;
+		}
+
+		private void DestinationHeader_TextChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
+		}
+
+		private void DestinationHeaders_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RemoveDestinationHeader.Enabled = DestinationHeaders.SelectedItems.Count > 0;
+		}
+
+		private void DestinationNext_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = MappingPage;
+		}
+
+		private void Destinations_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (Destinations.SelectedItems.Count > 0)
+			{
+				_destinationStore = Destinations.SelectedItems[0].Text;
+			}
+
+			UpdateControlState();
+		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			Sources.Items.AddRange(_dataService.Stores.Select(x => new ListViewItem(x.DisplayName)).ToArray());
+			Destinations.Items.AddRange(_dataService.Stores.Select(x => new ListViewItem(x.DisplayName)).ToArray());
+		}
+
+		private void MappingBack_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = DestinationPage;
+		}
+
+		private void MappingNext_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = ProcessPage;
+		}
+
+		private void Mappings_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RemoveMapping.Enabled = Mappings.SelectedItems.Count > 0;
+		}
+
+		private void Process_Click(object sender, EventArgs e)
+		{
+			var sourceStore = (FileDataStore) _dataService.Stores.First(x => x.DisplayName == _sourceStore);
+			sourceStore.FilePath = _sourcePath;
+
+			var source = sourceStore.Read();
+			var mappings = new List<Mapping>();
+
+			foreach (string item in Mappings.Items)
+			{
+				var items = item.Split(',');
+                var sourceHeader = items[0];
+				var destinationHeader = items[1];
+
+				mappings.Add(new Mapping
+				{
+					DestinationHeader = destinationHeader,
+					SourceHeaders = new[] { sourceHeader },
+					Type = "System.String"
+				});
+			}
+
+			var destination = Converter.Convert(source, mappings);
+			var destinationStore = (FileDataStore) _dataService.Stores.First(x => x.DisplayName == _destinationStore);
+
+			destinationStore.FilePath = _destinationPath;
+			destinationStore.Write(destination);
+		}
+
+		private void RemoveDestinationHeader_Click(object sender, EventArgs e)
+		{
+			if (DestinationHeaders.SelectedItems.Count < 0)
+			{
+				return;
+			}
+
+			DestinationHeaders.Items.Remove(DestinationHeaders.SelectedItem);
+			UpdateControlState();
+		}
+
+		private void RemoveMapping_Click(object sender, EventArgs e)
+		{
+			if (Mappings.SelectedItems.Count < 0)
+			{
+				return;
+			}
+
+			SourceHeaders.Items.Remove(SourceHeaders.SelectedItem);
+			UpdateControlState();
+		}
+
+		private void RemoveSourceHeader_Click(object sender, EventArgs e)
+		{
+			if (SourceHeaders.SelectedItems.Count < 0)
+			{
+				return;
+			}
+
+			SourceHeaders.Items.Remove(SourceHeaders.SelectedItem);
+			UpdateControlState();
+		}
+
+		private void SourceHeader_TextChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
+		}
+
+		private void SourceHeaders_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RemoveSourceHeader.Enabled = SourceHeaders.SelectedItems.Count > 0;
+		}
+
+		private void SourceNext_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = DestinationPage;
+		}
+
+		private void SourceOpenFile_Click(object sender, EventArgs e)
+		{
+			var store = _dataService.Stores.FirstOrDefault(x => x.DisplayName == _sourceStore) as FileDataStore;
+			if (store == null)
+			{
+				return;
+			}
+
+			using (var dialog = new OpenFileDialog())
+			{
+				dialog.Filter = store.Filter;
+				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath) + "\\Sample Data";
+
+				if (dialog.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+
+				_sourcePath = dialog.FileName;
+				store.FilePath = _sourcePath;
+				
+				var dataTable = store.Read();
+
+				SourceHeaders.Items.Clear();
+				SourceHeaders.Items.AddRange(dataTable.Columns.Cast<object>().ToArray());
+
+				SourceFileName.Text = Path.GetFileName(_sourcePath);
+				SourceFileName.Visible = true;
+
+				UpdateControlState();
+			}
+		}
+
+		private void Sources_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (Sources.SelectedItems.Count > 0)
+			{
+				_sourceStore = Sources.SelectedItems[0].Text;
+			}
+
+			UpdateControlState();
+		}
+
+		private void TabControl_Selected(object sender, TabControlEventArgs e)
+		{
+			UpdateControlState();
+		}
+
+		private void UpdateControlState()
+		{
+			Header.Text = TabControl.SelectedTab.Text;
+			SourceNext.Enabled = SourceHeaders.Items.Count > 0;
+			DestinationNext.Enabled = DestinationHeaders.Items.Count > 0;
+			MappingNext.Enabled = Mappings.Items.Count > 0;
+
+			if (TabControl.SelectedTab == SourcePage)
+			{
+				var sourceStore = _dataService.Stores.FirstOrDefault(x => x.DisplayName == _sourceStore);
+				SourceOpenFile.Enabled = sourceStore is FileDataStore;
+				SourceHeaders.Enabled = SourceOpenFile.Enabled;
+				SourceHeader.Enabled = SourceOpenFile.Enabled;
+				AddSourceHeader.Enabled = SourceOpenFile.Enabled && SourceHeader.Text.Length > 0;
+			}
+			else if (TabControl.SelectedTab == DestinationPage)
+			{
+				var destinationStore = _dataService.Stores.FirstOrDefault(x => x.DisplayName == _destinationStore);
+				DestinationSelectFile.Enabled = destinationStore is FileDataStore;
+				DestinationHeaders.Enabled = DestinationSelectFile.Enabled;
+				DestinationHeader.Enabled = DestinationSelectFile.Enabled;
+				AddDestinationHeader.Enabled = DestinationSelectFile.Enabled && DestinationHeader.Text.Length > 0;
+			}
+			else if (TabControl.SelectedTab == MappingPage)
+			{
+				MappingSource.Items.Clear();
+				MappingSource.Items.AddRange(SourceHeaders.Items);
+				MappingDestination.Items.Clear();
+				MappingDestination.Items.AddRange(DestinationHeaders.Items);
+			}
+		}
+
+		#endregion
+	}
+}
