@@ -6,7 +6,7 @@ using System.Linq;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public class StringTypeConverter : TypeConverter, ITypeConverter<string>, ITypeConverter<char>
 	{

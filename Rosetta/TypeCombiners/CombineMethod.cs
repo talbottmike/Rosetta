@@ -1,4 +1,4 @@
-namespace TransformR.TypeCombiners
+namespace Rosetta.TypeCombiners
 {
 	public enum CombineMethod
 	{

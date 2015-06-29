@@ -5,7 +5,7 @@ using System.Linq;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public class BooleanTypeConverter : TypeConverter, ITypeConverter<bool>
 	{
@@ -73,7 +73,7 @@ namespace TransformR.TypeConverters
 		{
 			var value = Converter.Convert<bool>(settings.Value);
 
-            switch (settings.Method)
+			switch (settings.Method)
 			{
 				case ProcessMethod.And:
 					return input & value;

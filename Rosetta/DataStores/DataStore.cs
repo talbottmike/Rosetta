@@ -1,10 +1,10 @@
 ﻿#region References
 
-using TransformR.Data;
+using Rosetta.Data;
 
 #endregion
 
-namespace TransformR.DataStores
+namespace Rosetta.DataStores
 {
 	public abstract class DataStore
 	{

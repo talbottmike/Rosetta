@@ -2,13 +2,13 @@
 
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TransformR.Data;
-using TransformR.TypeCombiners;
-using TransformR.TypeConverters;
+using Rosetta.Data;
+using Rosetta.TypeCombiners;
+using Rosetta.TypeConverters;
 
 #endregion
 
-namespace TransformR.UnitTests
+namespace Rosetta.UnitTests
 {
 	[TestClass]
 	public class ConverterTestForTables
@@ -75,7 +75,7 @@ namespace TransformR.UnitTests
 					SourceHeaders = new[] { "Height Inches", "Height Feet" },
 					Combiner = new NumberTypeCombiner(),
 					Type = "System.Int32",
-					PreProcesses = new[] { new ProcessSettings { Method = ProcessMethod.Multiply, Value = "12", Filter = "Height Feet" } },
+					PreProcesses = new[] { new ProcessSettings { Method = ProcessMethod.Multiply, Value = "12", Filter = "Height Feet" } }
 				}
 			};
 

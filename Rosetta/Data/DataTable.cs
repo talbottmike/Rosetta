@@ -6,7 +6,7 @@ using System.Linq;
 
 #endregion
 
-namespace TransformR.Data
+namespace Rosetta.Data
 {
 	public class DataTable
 	{

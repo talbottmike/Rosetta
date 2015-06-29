@@ -8,7 +8,7 @@ using System;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public class DecimalTypeConverter : TypeConverter, ITypeConverter<decimal>, ITypeConverter<float>, ITypeConverter<double>
 	{

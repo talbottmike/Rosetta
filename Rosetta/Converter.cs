@@ -4,13 +4,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TransformR.Data;
-using TransformR.TypeCombiners;
-using TransformR.TypeConverters;
+using Rosetta.Data;
+using Rosetta.TypeCombiners;
+using Rosetta.TypeConverters;
 
 #endregion
 
-namespace TransformR
+namespace Rosetta
 {
 	/// <summary>
 	/// Converts data rows from one format to another. This could be from string to decimal.

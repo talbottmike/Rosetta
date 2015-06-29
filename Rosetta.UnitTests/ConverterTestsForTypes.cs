@@ -2,11 +2,11 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TransformR.TypeConverters;
+using Rosetta.TypeConverters;
 
 #endregion
 
-namespace TransformR.UnitTests
+namespace Rosetta.UnitTests
 {
 	[TestClass]
 	public class ConverterTestsForTypes

@@ -1,4 +1,4 @@
-﻿namespace TransformR.DataStores
+﻿namespace Rosetta.DataStores
 {
 	public abstract class FileDataStore : DataStore
 	{
@@ -14,8 +14,8 @@
 
 		#region Properties
 
-		public string Filter { get; set; }
 		public string FilePath { get; set; }
+		public string Filter { get; set; }
 
 		#endregion
 	}

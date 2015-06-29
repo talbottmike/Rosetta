@@ -1,6 +1,10 @@
+#region References
+
 using System.Collections.Generic;
 
-namespace TransformR.TypeCombiners
+#endregion
+
+namespace Rosetta.TypeCombiners
 {
 	public interface ITypeCombiner<T>
 	{

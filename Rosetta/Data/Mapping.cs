@@ -1,7 +1,11 @@
-﻿using TransformR.TypeCombiners;
-using TransformR.TypeConverters;
+﻿#region References
 
-namespace TransformR.Data
+using Rosetta.TypeCombiners;
+using Rosetta.TypeConverters;
+
+#endregion
+
+namespace Rosetta.Data
 {
 	public class Mapping
 	{

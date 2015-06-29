@@ -6,7 +6,7 @@ using System.Reflection;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public abstract class TypeConverter
 	{

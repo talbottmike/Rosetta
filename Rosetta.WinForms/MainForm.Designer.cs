@@ -1,4 +1,4 @@
-﻿namespace TransformR.WinForms
+﻿namespace Rosetta.WinForms
 {
 	partial class MainForm
 	{
@@ -31,7 +31,7 @@
 			this.Header = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.TabControl = new TransformR.WinForms.CustomTabControl();
+			this.TabControl = new Rosetta.WinForms.CustomTabControl();
 			this.SourcePage = new System.Windows.Forms.TabPage();
 			this.SourceFileName = new System.Windows.Forms.Label();
 			this.RemoveSourceHeader = new System.Windows.Forms.Button();
@@ -485,7 +485,7 @@
 			this.MinimumSize = new System.Drawing.Size(590, 460);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "TransformR";
+			this.Text = "Rosetta";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();

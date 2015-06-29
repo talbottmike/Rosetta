@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace TransformR.WinForms
+namespace Rosetta.WinForms
 {
 	public class CustomTabControl : TabControl
 	{

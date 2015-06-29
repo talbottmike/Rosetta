@@ -1,6 +1,11 @@
-﻿using TransformR.Data;
+﻿#region References
 
-namespace TransformR.DataStores
+using System;
+using Rosetta.Data;
+
+#endregion
+
+namespace Rosetta.DataStores
 {
 	public class JsonFileDataStore : DataStore
 	{
@@ -13,14 +18,18 @@ namespace TransformR.DataStores
 
 		#endregion
 
+		#region Methods
+
 		public override DataTable Read()
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
 
 		public override void Write(DataTable table)
 		{
-			throw new System.NotImplementedException();
+			throw new NotImplementedException();
 		}
+
+		#endregion
 	}
 }

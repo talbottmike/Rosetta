@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace TransformR.TypeCombiners
+namespace Rosetta.TypeCombiners
 {
 	public class StringTypeCombiner : TypeCombiner, ITypeCombiner<string>
 	{

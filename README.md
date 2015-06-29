@@ -10,34 +10,35 @@ This data 1, 2, 3 could be transformed to 123, 6, "1,2,3", "123", and many more.
 
 ### Bool
 
-System.Boolean (bool)
+- System.Boolean (bool)
 
 ### Decimal
 
-System.Decimal (decimal)
-System.Double (double)
-System.Single (float)
+- System.Decimal (decimal)
+- System.Double (double)
+- System.Single (float)
 
 ### Numbers
 
-System.Byte (byte)
-System.SByte (sbyte)
-System.Int32 (int)
-System.UInt32 (uint)
-System.Int64 (long)
-System.UInt64 (ulong)
-System.Int16 (short)
-System.UInt16 (ushort)
+- System.Byte (byte)
+- System.SByte (sbyte)
+- System.Int32 (int)
+- System.UInt32 (uint)
+- System.Int64 (long)
+- System.UInt64 (ulong)
+- System.Int16 (short)
+- System.UInt16 (ushort)
 
 ### String 
-System.Char
-System.String
+
+- System.Char
+- System.String
 
 ### Date & Time
 
-System.DateTime
-System.TimeSpan
+- System.DateTime
+- System.TimeSpan
 
 #### Special support for any time coming soon
 
-System.Object (other)
+- System.Object (other)

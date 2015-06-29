@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using TransformR.Data;
-using TransformR.DataStores;
+using Rosetta.Data;
+using Rosetta.DataStores;
 
 #endregion
 
-namespace TransformR.WinForms
+namespace Rosetta.WinForms
 {
 	public partial class MainForm : Form
 	{
@@ -144,7 +144,7 @@ namespace TransformR.WinForms
 			foreach (string item in Mappings.Items)
 			{
 				var items = item.Split(',');
-                var sourceHeader = items[0];
+				var sourceHeader = items[0];
 				var destinationHeader = items[1];
 
 				mappings.Add(new Mapping
@@ -230,7 +230,7 @@ namespace TransformR.WinForms
 
 				_sourcePath = dialog.FileName;
 				store.FilePath = _sourcePath;
-				
+
 				var dataTable = store.Read();
 
 				SourceHeaders.Items.Clear();

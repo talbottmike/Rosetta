@@ -3,11 +3,11 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using TransformR.Data;
+using Rosetta.Data;
 
 #endregion
 
-namespace TransformR.DataStores
+namespace Rosetta.DataStores
 {
 	public class CommaSeperatedFileDataStore : FileDataStore
 	{
@@ -35,11 +35,10 @@ namespace TransformR.DataStores
 				{
 					response.Columns.Add(data[0][i]);
 				}
-				
+
 				for (var i = 0; i < data.Length; i++)
 				{
 					response.NewRow(data[i]);
-					
 				}
 			}
 

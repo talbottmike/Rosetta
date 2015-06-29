@@ -1,4 +1,4 @@
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public interface ITypeConverter<TType>
 	{

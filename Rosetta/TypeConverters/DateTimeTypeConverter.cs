@@ -5,7 +5,7 @@ using System.Linq;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public class DateTimeTypeConverter : TypeConverter, ITypeConverter<DateTime>
 	{

@@ -1,11 +1,11 @@
 ﻿#region References
 
 using System.Collections.Generic;
-using TransformR.DataStores;
+using Rosetta.DataStores;
 
 #endregion
 
-namespace TransformR
+namespace Rosetta
 {
 	public class DataService
 	{

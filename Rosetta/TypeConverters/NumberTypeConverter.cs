@@ -8,7 +8,7 @@ using System;
 
 #endregion
 
-namespace TransformR.TypeConverters
+namespace Rosetta.TypeConverters
 {
 	public class NumberTypeConverter : TypeConverter, ITypeConverter<byte>, ITypeConverter<sbyte>, ITypeConverter<short>, ITypeConverter<ushort>, ITypeConverter<int>, ITypeConverter<uint>, ITypeConverter<long>, ITypeConverter<ulong>
 	{

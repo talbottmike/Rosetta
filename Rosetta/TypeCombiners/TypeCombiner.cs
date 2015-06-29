@@ -6,7 +6,7 @@ using System.Linq;
 
 #endregion
 
-namespace TransformR.TypeCombiners
+namespace Rosetta.TypeCombiners
 {
 	public abstract class TypeCombiner
 	{

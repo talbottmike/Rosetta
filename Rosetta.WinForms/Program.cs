@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region References
+
+using System;
 using System.Windows.Forms;
 
-namespace TransformR.WinForms
+#endregion
+
+namespace Rosetta.WinForms
 {
-	static class Program
+	internal static class Program
 	{
+		#region Methods
+
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
-		static void Main()
+		private static void Main()
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
 		}
+
+		#endregion
 	}
 }
