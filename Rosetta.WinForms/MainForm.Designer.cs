@@ -33,6 +33,8 @@
 			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.TabControl = new Rosetta.WinForms.CustomTabControl();
 			this.SourcePage = new System.Windows.Forms.TabPage();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
 			this.SourceFileName = new System.Windows.Forms.Label();
 			this.RemoveSourceHeader = new System.Windows.Forms.Button();
 			this.SourceHeader = new System.Windows.Forms.TextBox();
@@ -42,6 +44,8 @@
 			this.SourceNext = new System.Windows.Forms.Button();
 			this.Sources = new System.Windows.Forms.ListView();
 			this.DestinationPage = new System.Windows.Forms.TabPage();
+			this.label6 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
 			this.DestinationFileName = new System.Windows.Forms.Label();
 			this.RemoveDestinationHeader = new System.Windows.Forms.Button();
 			this.DestinationHeader = new System.Windows.Forms.TextBox();
@@ -52,22 +56,41 @@
 			this.DestinationNext = new System.Windows.Forms.Button();
 			this.Destinations = new System.Windows.Forms.ListView();
 			this.MappingPage = new System.Windows.Forms.TabPage();
+			this.label9 = new System.Windows.Forms.Label();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.MappingBack = new System.Windows.Forms.Button();
+			this.MappingNext = new System.Windows.Forms.Button();
 			this.Mappings = new System.Windows.Forms.ListBox();
 			this.RemoveMapping = new System.Windows.Forms.Button();
 			this.AddMapping = new System.Windows.Forms.Button();
 			this.MappingDestination = new System.Windows.Forms.ListBox();
 			this.MappingSource = new System.Windows.Forms.ListBox();
-			this.MappingBack = new System.Windows.Forms.Button();
-			this.MappingNext = new System.Windows.Forms.Button();
+			this.ProcessorPage = new System.Windows.Forms.TabPage();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.ProcessorMethod = new System.Windows.Forms.ListBox();
+			this.ProcessorsBack = new System.Windows.Forms.Button();
+			this.ProcessorsNext = new System.Windows.Forms.Button();
+			this.ProcessorMappings = new System.Windows.Forms.ListBox();
 			this.ProcessPage = new System.Windows.Forms.TabPage();
+			this.ProcessLabel = new System.Windows.Forms.Label();
+			this.ProcessBack = new System.Windows.Forms.Button();
 			this.ProcessTextBox = new System.Windows.Forms.TextBox();
 			this.ProgressBar = new System.Windows.Forms.ProgressBar();
 			this.Process = new System.Windows.Forms.Button();
+			this.PreProcessors = new System.Windows.Forms.ListBox();
+			this.ProcessorValue = new System.Windows.Forms.TextBox();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.RemovePreProcessor = new System.Windows.Forms.Button();
+			this.AddPreProcessor = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.TabControl.SuspendLayout();
 			this.SourcePage.SuspendLayout();
 			this.DestinationPage.SuspendLayout();
 			this.MappingPage.SuspendLayout();
+			this.ProcessorPage.SuspendLayout();
 			this.ProcessPage.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -103,6 +126,7 @@
 			this.TabControl.Controls.Add(this.SourcePage);
 			this.TabControl.Controls.Add(this.DestinationPage);
 			this.TabControl.Controls.Add(this.MappingPage);
+			this.TabControl.Controls.Add(this.ProcessorPage);
 			this.TabControl.Controls.Add(this.ProcessPage);
 			this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TabControl.Location = new System.Drawing.Point(0, 71);
@@ -114,6 +138,8 @@
 			// 
 			// SourcePage
 			// 
+			this.SourcePage.Controls.Add(this.label4);
+			this.SourcePage.Controls.Add(this.label3);
 			this.SourcePage.Controls.Add(this.SourceFileName);
 			this.SourcePage.Controls.Add(this.RemoveSourceHeader);
 			this.SourcePage.Controls.Add(this.SourceHeader);
@@ -130,11 +156,34 @@
 			this.SourcePage.Text = "Source";
 			this.SourcePage.UseVisualStyleBackColor = true;
 			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label4.Location = new System.Drawing.Point(278, 20);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(55, 17);
+			this.label4.TabIndex = 68;
+			this.label4.Text = "headers";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label3.Location = new System.Drawing.Point(25, 20);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(74, 17);
+			this.label3.TabIndex = 67;
+			this.label3.Text = "data stores";
+			// 
 			// SourceFileName
 			// 
 			this.SourceFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.SourceFileName.AutoSize = true;
 			this.SourceFileName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.SourceFileName.ForeColor = System.Drawing.SystemColors.Highlight;
 			this.SourceFileName.Location = new System.Drawing.Point(136, 273);
 			this.SourceFileName.Name = "SourceFileName";
 			this.SourceFileName.Size = new System.Drawing.Size(71, 21);
@@ -181,9 +230,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.SourceHeaders.Enabled = false;
 			this.SourceHeaders.FormattingEnabled = true;
-			this.SourceHeaders.Location = new System.Drawing.Point(281, 27);
+			this.SourceHeaders.Location = new System.Drawing.Point(281, 40);
 			this.SourceHeaders.Name = "SourceHeaders";
-			this.SourceHeaders.Size = new System.Drawing.Size(260, 173);
+			this.SourceHeaders.Size = new System.Drawing.Size(260, 160);
 			this.SourceHeaders.TabIndex = 48;
 			this.SourceHeaders.SelectedIndexChanged += new System.EventHandler(this.SourceHeaders_SelectedIndexChanged);
 			// 
@@ -215,9 +264,10 @@
 			// 
 			this.Sources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.Sources.Location = new System.Drawing.Point(28, 27);
+			this.Sources.HideSelection = false;
+			this.Sources.Location = new System.Drawing.Point(28, 40);
 			this.Sources.Name = "Sources";
-			this.Sources.Size = new System.Drawing.Size(209, 233);
+			this.Sources.Size = new System.Drawing.Size(209, 220);
 			this.Sources.TabIndex = 1;
 			this.Sources.UseCompatibleStateImageBehavior = false;
 			this.Sources.View = System.Windows.Forms.View.List;
@@ -225,6 +275,8 @@
 			// 
 			// DestinationPage
 			// 
+			this.DestinationPage.Controls.Add(this.label6);
+			this.DestinationPage.Controls.Add(this.label5);
 			this.DestinationPage.Controls.Add(this.DestinationFileName);
 			this.DestinationPage.Controls.Add(this.RemoveDestinationHeader);
 			this.DestinationPage.Controls.Add(this.DestinationHeader);
@@ -242,11 +294,34 @@
 			this.DestinationPage.Text = "Destination";
 			this.DestinationPage.UseVisualStyleBackColor = true;
 			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label6.Location = new System.Drawing.Point(278, 20);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(55, 17);
+			this.label6.TabIndex = 68;
+			this.label6.Text = "headers";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label5.Location = new System.Drawing.Point(25, 20);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(74, 17);
+			this.label5.TabIndex = 67;
+			this.label5.Text = "data stores";
+			// 
 			// DestinationFileName
 			// 
 			this.DestinationFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.DestinationFileName.AutoSize = true;
 			this.DestinationFileName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.DestinationFileName.ForeColor = System.Drawing.SystemColors.Highlight;
 			this.DestinationFileName.Location = new System.Drawing.Point(136, 273);
 			this.DestinationFileName.Name = "DestinationFileName";
 			this.DestinationFileName.Size = new System.Drawing.Size(84, 21);
@@ -293,9 +368,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.DestinationHeaders.Enabled = false;
 			this.DestinationHeaders.FormattingEnabled = true;
-			this.DestinationHeaders.Location = new System.Drawing.Point(281, 27);
+			this.DestinationHeaders.Location = new System.Drawing.Point(281, 40);
 			this.DestinationHeaders.Name = "DestinationHeaders";
-			this.DestinationHeaders.Size = new System.Drawing.Size(260, 173);
+			this.DestinationHeaders.Size = new System.Drawing.Size(260, 160);
 			this.DestinationHeaders.TabIndex = 48;
 			this.DestinationHeaders.SelectedIndexChanged += new System.EventHandler(this.DestinationHeaders_SelectedIndexChanged);
 			// 
@@ -338,9 +413,10 @@
 			// 
 			this.Destinations.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-			this.Destinations.Location = new System.Drawing.Point(28, 27);
+			this.Destinations.HideSelection = false;
+			this.Destinations.Location = new System.Drawing.Point(28, 40);
 			this.Destinations.Name = "Destinations";
-			this.Destinations.Size = new System.Drawing.Size(209, 233);
+			this.Destinations.Size = new System.Drawing.Size(209, 220);
 			this.Destinations.TabIndex = 1;
 			this.Destinations.UseCompatibleStateImageBehavior = false;
 			this.Destinations.View = System.Windows.Forms.View.List;
@@ -348,13 +424,16 @@
 			// 
 			// MappingPage
 			// 
+			this.MappingPage.Controls.Add(this.label9);
+			this.MappingPage.Controls.Add(this.label8);
+			this.MappingPage.Controls.Add(this.label7);
+			this.MappingPage.Controls.Add(this.MappingBack);
+			this.MappingPage.Controls.Add(this.MappingNext);
 			this.MappingPage.Controls.Add(this.Mappings);
 			this.MappingPage.Controls.Add(this.RemoveMapping);
 			this.MappingPage.Controls.Add(this.AddMapping);
 			this.MappingPage.Controls.Add(this.MappingDestination);
 			this.MappingPage.Controls.Add(this.MappingSource);
-			this.MappingPage.Controls.Add(this.MappingBack);
-			this.MappingPage.Controls.Add(this.MappingNext);
 			this.MappingPage.Location = new System.Drawing.Point(4, 22);
 			this.MappingPage.Name = "MappingPage";
 			this.MappingPage.Size = new System.Drawing.Size(566, 324);
@@ -362,12 +441,67 @@
 			this.MappingPage.Text = "Mapping";
 			this.MappingPage.UseVisualStyleBackColor = true;
 			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label9.Location = new System.Drawing.Point(315, 20);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(66, 17);
+			this.label9.TabIndex = 69;
+			this.label9.Text = "mappings";
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label8.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label8.Location = new System.Drawing.Point(160, 20);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(72, 17);
+			this.label8.TabIndex = 68;
+			this.label8.Text = "destination";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label7.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label7.Location = new System.Drawing.Point(25, 20);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(47, 17);
+			this.label7.TabIndex = 67;
+			this.label7.Text = "source";
+			// 
+			// MappingBack
+			// 
+			this.MappingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.MappingBack.Location = new System.Drawing.Point(385, 269);
+			this.MappingBack.Name = "MappingBack";
+			this.MappingBack.Size = new System.Drawing.Size(75, 30);
+			this.MappingBack.TabIndex = 62;
+			this.MappingBack.Text = "Back";
+			this.MappingBack.UseVisualStyleBackColor = true;
+			this.MappingBack.Click += new System.EventHandler(this.MappingBack_Click);
+			// 
+			// MappingNext
+			// 
+			this.MappingNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.MappingNext.Location = new System.Drawing.Point(466, 269);
+			this.MappingNext.Name = "MappingNext";
+			this.MappingNext.Size = new System.Drawing.Size(75, 30);
+			this.MappingNext.TabIndex = 61;
+			this.MappingNext.Text = "Next";
+			this.MappingNext.UseVisualStyleBackColor = true;
+			this.MappingNext.Click += new System.EventHandler(this.MappingNext_Click);
+			// 
 			// Mappings
 			// 
 			this.Mappings.FormattingEnabled = true;
-			this.Mappings.Location = new System.Drawing.Point(318, 27);
+			this.Mappings.Location = new System.Drawing.Point(318, 40);
 			this.Mappings.Name = "Mappings";
-			this.Mappings.Size = new System.Drawing.Size(223, 173);
+			this.Mappings.Size = new System.Drawing.Size(223, 160);
 			this.Mappings.TabIndex = 60;
 			this.Mappings.SelectedIndexChanged += new System.EventHandler(this.Mappings_SelectedIndexChanged);
 			// 
@@ -395,44 +529,105 @@
 			// MappingDestination
 			// 
 			this.MappingDestination.FormattingEnabled = true;
-			this.MappingDestination.Location = new System.Drawing.Point(163, 27);
+			this.MappingDestination.Location = new System.Drawing.Point(163, 40);
 			this.MappingDestination.Name = "MappingDestination";
-			this.MappingDestination.Size = new System.Drawing.Size(129, 173);
+			this.MappingDestination.Size = new System.Drawing.Size(129, 160);
 			this.MappingDestination.TabIndex = 55;
 			// 
 			// MappingSource
 			// 
 			this.MappingSource.FormattingEnabled = true;
-			this.MappingSource.Location = new System.Drawing.Point(28, 27);
+			this.MappingSource.Location = new System.Drawing.Point(28, 40);
 			this.MappingSource.Name = "MappingSource";
-			this.MappingSource.Size = new System.Drawing.Size(129, 173);
+			this.MappingSource.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+			this.MappingSource.Size = new System.Drawing.Size(129, 160);
 			this.MappingSource.TabIndex = 54;
 			// 
-			// MappingBack
+			// ProcessorPage
 			// 
-			this.MappingBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.MappingBack.Location = new System.Drawing.Point(385, 269);
-			this.MappingBack.Name = "MappingBack";
-			this.MappingBack.Size = new System.Drawing.Size(75, 30);
-			this.MappingBack.TabIndex = 50;
-			this.MappingBack.Text = "Back";
-			this.MappingBack.UseVisualStyleBackColor = true;
-			this.MappingBack.Click += new System.EventHandler(this.MappingBack_Click);
+			this.ProcessorPage.Controls.Add(this.AddPreProcessor);
+			this.ProcessorPage.Controls.Add(this.RemovePreProcessor);
+			this.ProcessorPage.Controls.Add(this.label11);
+			this.ProcessorPage.Controls.Add(this.label10);
+			this.ProcessorPage.Controls.Add(this.ProcessorValue);
+			this.ProcessorPage.Controls.Add(this.PreProcessors);
+			this.ProcessorPage.Controls.Add(this.label2);
+			this.ProcessorPage.Controls.Add(this.label1);
+			this.ProcessorPage.Controls.Add(this.ProcessorMethod);
+			this.ProcessorPage.Controls.Add(this.ProcessorsBack);
+			this.ProcessorPage.Controls.Add(this.ProcessorsNext);
+			this.ProcessorPage.Controls.Add(this.ProcessorMappings);
+			this.ProcessorPage.Location = new System.Drawing.Point(4, 22);
+			this.ProcessorPage.Name = "ProcessorPage";
+			this.ProcessorPage.Size = new System.Drawing.Size(566, 324);
+			this.ProcessorPage.TabIndex = 4;
+			this.ProcessorPage.Text = "Processors";
+			this.ProcessorPage.UseVisualStyleBackColor = true;
 			// 
-			// MappingNext
+			// label2
 			// 
-			this.MappingNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.MappingNext.Enabled = false;
-			this.MappingNext.Location = new System.Drawing.Point(466, 269);
-			this.MappingNext.Name = "MappingNext";
-			this.MappingNext.Size = new System.Drawing.Size(75, 30);
-			this.MappingNext.TabIndex = 49;
-			this.MappingNext.Text = "Next";
-			this.MappingNext.UseVisualStyleBackColor = true;
-			this.MappingNext.Click += new System.EventHandler(this.MappingNext_Click);
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label2.Location = new System.Drawing.Point(25, 20);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(66, 17);
+			this.label2.TabIndex = 66;
+			this.label2.Text = "mappings";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label1.Location = new System.Drawing.Point(270, 20);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(53, 17);
+			this.label1.TabIndex = 65;
+			this.label1.Text = "method";
+			// 
+			// ProcessorMethod
+			// 
+			this.ProcessorMethod.FormattingEnabled = true;
+			this.ProcessorMethod.Location = new System.Drawing.Point(273, 40);
+			this.ProcessorMethod.Name = "ProcessorMethod";
+			this.ProcessorMethod.Size = new System.Drawing.Size(129, 108);
+			this.ProcessorMethod.TabIndex = 64;
+			// 
+			// ProcessorsBack
+			// 
+			this.ProcessorsBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.ProcessorsBack.Location = new System.Drawing.Point(385, 269);
+			this.ProcessorsBack.Name = "ProcessorsBack";
+			this.ProcessorsBack.Size = new System.Drawing.Size(75, 30);
+			this.ProcessorsBack.TabIndex = 63;
+			this.ProcessorsBack.Text = "Back";
+			this.ProcessorsBack.UseVisualStyleBackColor = true;
+			this.ProcessorsBack.Click += new System.EventHandler(this.ProcessorsBack_Click);
+			// 
+			// ProcessorsNext
+			// 
+			this.ProcessorsNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.ProcessorsNext.Location = new System.Drawing.Point(466, 269);
+			this.ProcessorsNext.Name = "ProcessorsNext";
+			this.ProcessorsNext.Size = new System.Drawing.Size(75, 30);
+			this.ProcessorsNext.TabIndex = 62;
+			this.ProcessorsNext.Text = "Next";
+			this.ProcessorsNext.UseVisualStyleBackColor = true;
+			this.ProcessorsNext.Click += new System.EventHandler(this.ProcessorsNext_Click);
+			// 
+			// ProcessorMappings
+			// 
+			this.ProcessorMappings.FormattingEnabled = true;
+			this.ProcessorMappings.Location = new System.Drawing.Point(28, 40);
+			this.ProcessorMappings.Name = "ProcessorMappings";
+			this.ProcessorMappings.Size = new System.Drawing.Size(223, 108);
+			this.ProcessorMappings.TabIndex = 61;
 			// 
 			// ProcessPage
 			// 
+			this.ProcessPage.Controls.Add(this.ProcessLabel);
+			this.ProcessPage.Controls.Add(this.ProcessBack);
 			this.ProcessPage.Controls.Add(this.ProcessTextBox);
 			this.ProcessPage.Controls.Add(this.ProgressBar);
 			this.ProcessPage.Controls.Add(this.Process);
@@ -443,6 +638,28 @@
 			this.ProcessPage.Text = "Process";
 			this.ProcessPage.UseVisualStyleBackColor = true;
 			// 
+			// ProcessLabel
+			// 
+			this.ProcessLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.ProcessLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ProcessLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.ProcessLabel.Location = new System.Drawing.Point(28, 245);
+			this.ProcessLabel.Name = "ProcessLabel";
+			this.ProcessLabel.Size = new System.Drawing.Size(513, 21);
+			this.ProcessLabel.TabIndex = 65;
+			this.ProcessLabel.Visible = false;
+			// 
+			// ProcessBack
+			// 
+			this.ProcessBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.ProcessBack.Location = new System.Drawing.Point(385, 269);
+			this.ProcessBack.Name = "ProcessBack";
+			this.ProcessBack.Size = new System.Drawing.Size(75, 30);
+			this.ProcessBack.TabIndex = 64;
+			this.ProcessBack.Text = "Back";
+			this.ProcessBack.UseVisualStyleBackColor = true;
+			this.ProcessBack.Click += new System.EventHandler(this.ProcessBack_Click);
+			// 
 			// ProcessTextBox
 			// 
 			this.ProcessTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -452,7 +669,7 @@
 			this.ProcessTextBox.Multiline = true;
 			this.ProcessTextBox.Name = "ProcessTextBox";
 			this.ProcessTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.ProcessTextBox.Size = new System.Drawing.Size(513, 211);
+			this.ProcessTextBox.Size = new System.Drawing.Size(513, 203);
 			this.ProcessTextBox.TabIndex = 52;
 			// 
 			// ProgressBar
@@ -461,7 +678,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ProgressBar.Location = new System.Drawing.Point(28, 269);
 			this.ProgressBar.Name = "ProgressBar";
-			this.ProgressBar.Size = new System.Drawing.Size(408, 30);
+			this.ProgressBar.Size = new System.Drawing.Size(339, 30);
 			this.ProgressBar.TabIndex = 51;
 			// 
 			// Process
@@ -474,6 +691,66 @@
 			this.Process.Text = "Process";
 			this.Process.UseVisualStyleBackColor = true;
 			this.Process.Click += new System.EventHandler(this.Process_Click);
+			// 
+			// PreProcessors
+			// 
+			this.PreProcessors.FormattingEnabled = true;
+			this.PreProcessors.Location = new System.Drawing.Point(28, 180);
+			this.PreProcessors.Name = "PreProcessors";
+			this.PreProcessors.Size = new System.Drawing.Size(513, 69);
+			this.PreProcessors.TabIndex = 67;
+			this.PreProcessors.SelectedIndexChanged += new System.EventHandler(this.PreProcessors_SelectedIndexChanged);
+			// 
+			// ProcessorValue
+			// 
+			this.ProcessorValue.Location = new System.Drawing.Point(424, 40);
+			this.ProcessorValue.Name = "ProcessorValue";
+			this.ProcessorValue.Size = new System.Drawing.Size(117, 20);
+			this.ProcessorValue.TabIndex = 68;
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label10.Location = new System.Drawing.Point(421, 20);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(38, 17);
+			this.label10.TabIndex = 69;
+			this.label10.Text = "value";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label11.Location = new System.Drawing.Point(25, 160);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(98, 17);
+			this.label11.TabIndex = 70;
+			this.label11.Text = "pre-processors";
+			// 
+			// RemovePreProcessor
+			// 
+			this.RemovePreProcessor.Enabled = false;
+			this.RemovePreProcessor.Location = new System.Drawing.Point(28, 255);
+			this.RemovePreProcessor.Name = "RemovePreProcessor";
+			this.RemovePreProcessor.Size = new System.Drawing.Size(100, 23);
+			this.RemovePreProcessor.TabIndex = 71;
+			this.RemovePreProcessor.Text = "Remove";
+			this.RemovePreProcessor.UseVisualStyleBackColor = true;
+			this.RemovePreProcessor.Click += new System.EventHandler(this.RemovePreProcessor_Click);
+			// 
+			// AddPreProcessor
+			// 
+			this.AddPreProcessor.Enabled = false;
+			this.AddPreProcessor.Location = new System.Drawing.Point(424, 125);
+			this.AddPreProcessor.Name = "AddPreProcessor";
+			this.AddPreProcessor.Size = new System.Drawing.Size(117, 23);
+			this.AddPreProcessor.TabIndex = 72;
+			this.AddPreProcessor.Text = "Add";
+			this.AddPreProcessor.UseVisualStyleBackColor = true;
+			this.AddPreProcessor.Click += new System.EventHandler(this.AddPreProcessor_Click);
 			// 
 			// MainForm
 			// 
@@ -495,6 +772,9 @@
 			this.DestinationPage.ResumeLayout(false);
 			this.DestinationPage.PerformLayout();
 			this.MappingPage.ResumeLayout(false);
+			this.MappingPage.PerformLayout();
+			this.ProcessorPage.ResumeLayout(false);
+			this.ProcessorPage.PerformLayout();
 			this.ProcessPage.ResumeLayout(false);
 			this.ProcessPage.PerformLayout();
 			this.ResumeLayout(false);
@@ -531,12 +811,34 @@
 		private System.Windows.Forms.Button AddMapping;
 		private System.Windows.Forms.ListBox MappingDestination;
 		private System.Windows.Forms.ListBox MappingSource;
-		private System.Windows.Forms.Button MappingBack;
-		private System.Windows.Forms.Button MappingNext;
 		private System.Windows.Forms.TabPage ProcessPage;
 		private System.Windows.Forms.Button Process;
 		private System.Windows.Forms.ProgressBar ProgressBar;
 		private System.Windows.Forms.TextBox ProcessTextBox;
+		private System.Windows.Forms.TabPage ProcessorPage;
+		private System.Windows.Forms.ListBox ProcessorMappings;
+		private System.Windows.Forms.Button MappingBack;
+		private System.Windows.Forms.Button MappingNext;
+		private System.Windows.Forms.Button ProcessorsBack;
+		private System.Windows.Forms.Button ProcessorsNext;
+		private System.Windows.Forms.Button ProcessBack;
+		private System.Windows.Forms.Label ProcessLabel;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ListBox ProcessorMethod;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.ListBox PreProcessors;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.TextBox ProcessorValue;
+		private System.Windows.Forms.Button AddPreProcessor;
+		private System.Windows.Forms.Button RemovePreProcessor;
+		private System.Windows.Forms.Label label11;
 	}
 }
 

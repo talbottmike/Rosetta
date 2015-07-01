@@ -16,6 +16,9 @@
 		TrimLeft,
 		TrimRight,
 		PadLeft,
-		PadRight
+		PadRight,
+		UpperCase,
+		LowerCase,
+		TitleCase
 	}
 }

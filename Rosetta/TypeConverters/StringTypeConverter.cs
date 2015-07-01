@@ -91,6 +91,12 @@ namespace Rosetta.TypeConverters
 				case ProcessMethod.TrimRight:
 					return input.TrimEnd();
 
+				case ProcessMethod.LowerCase:
+					return input.ToLower();
+
+				case ProcessMethod.UpperCase:
+					return input.ToUpper();
+
 				default:
 					throw new NotImplementedException();
 			}

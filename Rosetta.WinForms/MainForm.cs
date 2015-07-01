@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Rosetta.Data;
 using Rosetta.DataStores;
+using Rosetta.TypeConverters;
 
 #endregion
 
@@ -46,8 +47,15 @@ namespace Rosetta.WinForms
 
 		private void AddMapping_Click(object sender, EventArgs e)
 		{
-			Mappings.Items.Add(MappingSource.SelectedItem + "," + MappingDestination.SelectedItem);
+			var sources = string.Join(",", MappingSource.SelectedItems.Cast<string>());
+			Mappings.Items.Add("[" + sources + "]," + MappingDestination.SelectedItem);
+			ProcessorMappings.Items.Add("[" + sources + "]," + MappingDestination.SelectedItem);
 			UpdateControlState();
+		}
+
+		private void AddPreProcessor_Click(object sender, EventArgs e)
+		{
+			PreProcessors.Items.Add(ProcessorMappings.SelectedItem + "," + ProcessorMethod.SelectedItem + "," + ProcessorValue.Text);
 		}
 
 		private void AddSourceHeader_Click(object sender, EventArgs e)
@@ -116,6 +124,14 @@ namespace Rosetta.WinForms
 		{
 			Sources.Items.AddRange(_dataService.Stores.Select(x => new ListViewItem(x.DisplayName)).ToArray());
 			Destinations.Items.AddRange(_dataService.Stores.Select(x => new ListViewItem(x.DisplayName)).ToArray());
+			ProcessorMethod.Items.AddRange(new object[]
+			{
+				ProcessMethod.Trim.ToString(),
+				ProcessMethod.TrimLeft.ToString(),
+				ProcessMethod.TrimRight.ToString(),
+				ProcessMethod.LowerCase.ToString(),
+				ProcessMethod.UpperCase.ToString()
+			});
 		}
 
 		private void MappingBack_Click(object sender, EventArgs e)
@@ -125,7 +141,7 @@ namespace Rosetta.WinForms
 
 		private void MappingNext_Click(object sender, EventArgs e)
 		{
-			TabControl.SelectedTab = ProcessPage;
+			TabControl.SelectedTab = ProcessorPage;
 		}
 
 		private void Mappings_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,8 +149,15 @@ namespace Rosetta.WinForms
 			RemoveMapping.Enabled = Mappings.SelectedItems.Count > 0;
 		}
 
+		private void PreProcessors_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			RemovePreProcessor.Enabled = PreProcessors.SelectedItems.Count > 0;
+		}
+
 		private void Process_Click(object sender, EventArgs e)
 		{
+			UpdateProcess("Configuring...");
+
 			var sourceStore = (FileDataStore) _dataService.Stores.First(x => x.DisplayName == _sourceStore);
 			sourceStore.FilePath = _sourcePath;
 
@@ -143,23 +166,43 @@ namespace Rosetta.WinForms
 
 			foreach (string item in Mappings.Items)
 			{
-				var items = item.Split(',');
-				var sourceHeader = items[0];
+				var items = item.Split(new[] { "]," }, StringSplitOptions.None);
+				var sourceHeader = items[0].Substring(1);
 				var destinationHeader = items[1];
 
 				mappings.Add(new Mapping
 				{
 					DestinationHeader = destinationHeader,
-					SourceHeaders = new[] { sourceHeader },
+					SourceHeaders = sourceHeader.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries),
 					Type = "System.String"
 				});
 			}
 
+			UpdateProcess("Converting...");
 			var destination = Converter.Convert(source, mappings);
-			var destinationStore = (FileDataStore) _dataService.Stores.First(x => x.DisplayName == _destinationStore);
 
+			UpdateProcess("Storing...");
+			var destinationStore = (FileDataStore) _dataService.Stores.First(x => x.DisplayName == _destinationStore);
 			destinationStore.FilePath = _destinationPath;
 			destinationStore.Write(destination);
+
+			UpdateProcess("Done");
+			ProcessLabel.Text = string.Empty;
+		}
+
+		private void ProcessBack_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = ProcessorPage;
+		}
+
+		private void ProcessorsBack_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = MappingPage;
+		}
+
+		private void ProcessorsNext_Click(object sender, EventArgs e)
+		{
+			TabControl.SelectedTab = ProcessPage;
 		}
 
 		private void RemoveDestinationHeader_Click(object sender, EventArgs e)
@@ -180,8 +223,19 @@ namespace Rosetta.WinForms
 				return;
 			}
 
-			SourceHeaders.Items.Remove(SourceHeaders.SelectedItem);
+			ProcessorMappings.Items.Remove(Mappings.SelectedItem);
+			Mappings.Items.Remove(Mappings.SelectedItem);
 			UpdateControlState();
+		}
+
+		private void RemovePreProcessor_Click(object sender, EventArgs e)
+		{
+			if (PreProcessors.SelectedItems.Count <= 0)
+			{
+				return;
+			}
+
+			PreProcessors.Items.Remove(PreProcessors.SelectedItem);
 		}
 
 		private void RemoveSourceHeader_Click(object sender, EventArgs e)
@@ -288,6 +342,12 @@ namespace Rosetta.WinForms
 				MappingDestination.Items.Clear();
 				MappingDestination.Items.AddRange(DestinationHeaders.Items);
 			}
+		}
+
+		private void UpdateProcess(string message)
+		{
+			ProcessLabel.Text = message;
+			ProcessTextBox.Text += message + Environment.NewLine;
 		}
 
 		#endregion
