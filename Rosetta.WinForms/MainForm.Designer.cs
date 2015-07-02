@@ -33,6 +33,7 @@
 			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.TabControl = new Rosetta.WinForms.CustomTabControl();
 			this.SourcePage = new System.Windows.Forms.TabPage();
+			this.sourceIncludeHeaders = new System.Windows.Forms.CheckBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.SourceFileName = new System.Windows.Forms.Label();
@@ -56,6 +57,8 @@
 			this.DestinationNext = new System.Windows.Forms.Button();
 			this.Destinations = new System.Windows.Forms.ListView();
 			this.MappingPage = new System.Windows.Forms.TabPage();
+			this.MappingType = new System.Windows.Forms.ComboBox();
+			this.label12 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
@@ -85,8 +88,6 @@
 			this.ProcessTextBox = new System.Windows.Forms.TextBox();
 			this.ProgressBar = new System.Windows.Forms.ProgressBar();
 			this.Process = new System.Windows.Forms.Button();
-			this.label12 = new System.Windows.Forms.Label();
-			this.MappingType = new System.Windows.Forms.ComboBox();
 			this.panel1.SuspendLayout();
 			this.TabControl.SuspendLayout();
 			this.SourcePage.SuspendLayout();
@@ -140,6 +141,7 @@
 			// 
 			// SourcePage
 			// 
+			this.SourcePage.Controls.Add(this.sourceIncludeHeaders);
 			this.SourcePage.Controls.Add(this.label4);
 			this.SourcePage.Controls.Add(this.label3);
 			this.SourcePage.Controls.Add(this.SourceFileName);
@@ -157,6 +159,18 @@
 			this.SourcePage.TabIndex = 0;
 			this.SourcePage.Text = "Source";
 			this.SourcePage.UseVisualStyleBackColor = true;
+			// 
+			// sourceIncludeHeaders
+			// 
+			this.sourceIncludeHeaders.AutoSize = true;
+			this.sourceIncludeHeaders.Checked = true;
+			this.sourceIncludeHeaders.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.sourceIncludeHeaders.Location = new System.Drawing.Point(475, 236);
+			this.sourceIncludeHeaders.Name = "sourceIncludeHeaders";
+			this.sourceIncludeHeaders.Size = new System.Drawing.Size(66, 17);
+			this.sourceIncludeHeaders.TabIndex = 69;
+			this.sourceIncludeHeaders.Text = "Headers";
+			this.sourceIncludeHeaders.UseVisualStyleBackColor = true;
 			// 
 			// label4
 			// 
@@ -444,6 +458,42 @@
 			this.MappingPage.TabIndex = 2;
 			this.MappingPage.Text = "Mapping";
 			this.MappingPage.UseVisualStyleBackColor = true;
+			// 
+			// MappingType
+			// 
+			this.MappingType.FormattingEnabled = true;
+			this.MappingType.Items.AddRange(new object[] {
+            "System.Boolean",
+            "System.Byte",
+            "System.SByte",
+            "System.Int16",
+            "System.UInt16",
+            "System.Int32",
+            "System.UInt32",
+            "System.Int64",
+            "System.UInt64",
+            "System.Decimal",
+            "System.Double",
+            "System.Single",
+            "System.DateTime",
+            "System.Char",
+            "System.String"});
+			this.MappingType.Location = new System.Drawing.Point(28, 228);
+			this.MappingType.Name = "MappingType";
+			this.MappingType.Size = new System.Drawing.Size(264, 21);
+			this.MappingType.TabIndex = 71;
+			this.MappingType.Text = "System.String";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label12.Location = new System.Drawing.Point(25, 208);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(33, 17);
+			this.label12.TabIndex = 70;
+			this.label12.Text = "type";
 			// 
 			// label9
 			// 
@@ -763,29 +813,6 @@
 			this.Process.UseVisualStyleBackColor = true;
 			this.Process.Click += new System.EventHandler(this.Process_Click);
 			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label12.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label12.Location = new System.Drawing.Point(25, 208);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(33, 17);
-			this.label12.TabIndex = 70;
-			this.label12.Text = "type";
-			// 
-			// MappingType
-			// 
-			this.MappingType.FormattingEnabled = true;
-			this.MappingType.Items.AddRange(new object[] {
-            "System.String",
-            "System.Integer"});
-			this.MappingType.Location = new System.Drawing.Point(28, 228);
-			this.MappingType.Name = "MappingType";
-			this.MappingType.Size = new System.Drawing.Size(264, 21);
-			this.MappingType.TabIndex = 71;
-			this.MappingType.Text = "System.String";
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -875,6 +902,7 @@
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.ComboBox MappingType;
+		private System.Windows.Forms.CheckBox sourceIncludeHeaders;
 	}
 }
 

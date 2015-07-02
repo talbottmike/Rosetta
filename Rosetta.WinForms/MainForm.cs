@@ -56,7 +56,7 @@ namespace Rosetta.WinForms
 
 		private void AddPreProcessor_Click(object sender, EventArgs e)
 		{
-			PreProcessors.Items.Add(ProcessorMappings.SelectedItem + "," + ProcessorMethod.SelectedItem + "," + ProcessorValue.Text);
+			PreProcessors.Items.Add(ProcessorMappings.SelectedItem + "|" + ProcessorMethod.SelectedItem + "," + ProcessorValue.Text);
 		}
 
 		private void AddSourceHeader_Click(object sender, EventArgs e)
@@ -131,7 +131,9 @@ namespace Rosetta.WinForms
 				ProcessMethod.TrimLeft.ToString(),
 				ProcessMethod.TrimRight.ToString(),
 				ProcessMethod.LowerCase.ToString(),
-				ProcessMethod.UpperCase.ToString()
+				ProcessMethod.UpperCase.ToString(),
+				ProcessMethod.Add.ToString(),
+				ProcessMethod.Subtract.ToString()
 			});
 		}
 
@@ -165,12 +167,18 @@ namespace Rosetta.WinForms
 			var source = sourceStore.Read();
 			var mappings = new List<Mapping>();
 
+			if (sourceIncludeHeaders.Checked)
+			{
+				source.Rows.RemoveAt(0);
+			}
+
 			foreach (string item in Mappings.Items)
 			{
 				var items = item.Split(new[] { "]," }, StringSplitOptions.None);
 				var sourceHeader = items[0].Substring(1);
 				var destinationHeader = items[1].Split(',')[0];
 				var type = items[1].Split(',')[1];
+
 				var mapping = new Mapping
 				{
 					DestinationHeader = destinationHeader,
@@ -181,11 +189,16 @@ namespace Rosetta.WinForms
 				var processors = new List<ProcessSettings>();
 				foreach (string processorItem in PreProcessors.Items)
 				{
-					var processorSettingParts = processorItem.Replace(item, string.Empty).Split(',');
+					if (!processorItem.StartsWith(item))
+					{
+						continue;
+					}
+
+					var processorSettingParts = processorItem.Split('|')[1].Split(',');
 					processors.Add(new ProcessSettings
 					{
-						Method = (ProcessMethod) Enum.Parse(typeof (ProcessMethod), processorSettingParts[1]),
-						Value = processorSettingParts[2]
+						Method = (ProcessMethod) Enum.Parse(typeof (ProcessMethod), processorSettingParts[0]),
+						Value = processorSettingParts[1]
 					});
 				}
 

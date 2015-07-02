@@ -1,3 +1,4 @@
-﻿First Name,Last Name,Age
-John,Doe,23
-Jane,Doe,18
+﻿First Name,Last Name,Age,Height Feet,Height Inches
+John,Doe,23,5,11
+Jane,Doe,18,5,6
+Bob,Smith,44,6,1
