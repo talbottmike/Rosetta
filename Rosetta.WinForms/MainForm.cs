@@ -48,8 +48,9 @@ namespace Rosetta.WinForms
 		private void AddMapping_Click(object sender, EventArgs e)
 		{
 			var sources = string.Join(",", MappingSource.SelectedItems.Cast<string>());
-			Mappings.Items.Add("[" + sources + "]," + MappingDestination.SelectedItem);
-			ProcessorMappings.Items.Add("[" + sources + "]," + MappingDestination.SelectedItem);
+			var mapping = "[" + sources + "]," + MappingDestination.SelectedItem + "," + MappingType.Text;
+            Mappings.Items.Add(mapping);
+			ProcessorMappings.Items.Add(mapping);
 			UpdateControlState();
 		}
 
@@ -168,14 +169,28 @@ namespace Rosetta.WinForms
 			{
 				var items = item.Split(new[] { "]," }, StringSplitOptions.None);
 				var sourceHeader = items[0].Substring(1);
-				var destinationHeader = items[1];
-
-				mappings.Add(new Mapping
+				var destinationHeader = items[1].Split(',')[0];
+				var type = items[1].Split(',')[1];
+				var mapping = new Mapping
 				{
 					DestinationHeader = destinationHeader,
 					SourceHeaders = sourceHeader.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries),
-					Type = "System.String"
-				});
+					Type = type
+				};
+
+				var processors = new List<ProcessSettings>();
+				foreach (string processorItem in PreProcessors.Items)
+				{
+					var processorSettingParts = processorItem.Replace(item, string.Empty).Split(',');
+					processors.Add(new ProcessSettings
+					{
+						Method = (ProcessMethod) Enum.Parse(typeof (ProcessMethod), processorSettingParts[1]),
+						Value = processorSettingParts[2]
+					});
+				}
+
+				mapping.PreProcesses = processors.ToArray();
+				mappings.Add(mapping);
 			}
 
 			UpdateProcess("Converting...");
@@ -195,6 +210,16 @@ namespace Rosetta.WinForms
 			TabControl.SelectedTab = ProcessorPage;
 		}
 
+		private void ProcessorMappings_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
+		}
+
+		private void ProcessorMethod_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
+		}
+
 		private void ProcessorsBack_Click(object sender, EventArgs e)
 		{
 			TabControl.SelectedTab = MappingPage;
@@ -203,6 +228,11 @@ namespace Rosetta.WinForms
 		private void ProcessorsNext_Click(object sender, EventArgs e)
 		{
 			TabControl.SelectedTab = ProcessPage;
+		}
+
+		private void ProcessorValue_TextChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
 		}
 
 		private void RemoveDestinationHeader_Click(object sender, EventArgs e)
@@ -341,6 +371,10 @@ namespace Rosetta.WinForms
 				MappingSource.Items.AddRange(SourceHeaders.Items);
 				MappingDestination.Items.Clear();
 				MappingDestination.Items.AddRange(DestinationHeaders.Items);
+			}
+			else if (TabControl.SelectedTab == ProcessorPage)
+			{
+				AddPreProcessor.Enabled = ProcessorMappings.SelectedIndices.Count > 0 && ProcessorMethod.Items.Count > 0;
 			}
 		}
 

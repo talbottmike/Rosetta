@@ -67,6 +67,12 @@
 			this.MappingDestination = new System.Windows.Forms.ListBox();
 			this.MappingSource = new System.Windows.Forms.ListBox();
 			this.ProcessorPage = new System.Windows.Forms.TabPage();
+			this.AddPreProcessor = new System.Windows.Forms.Button();
+			this.RemovePreProcessor = new System.Windows.Forms.Button();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.ProcessorValue = new System.Windows.Forms.TextBox();
+			this.PreProcessors = new System.Windows.Forms.ListBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.ProcessorMethod = new System.Windows.Forms.ListBox();
@@ -79,12 +85,8 @@
 			this.ProcessTextBox = new System.Windows.Forms.TextBox();
 			this.ProgressBar = new System.Windows.Forms.ProgressBar();
 			this.Process = new System.Windows.Forms.Button();
-			this.PreProcessors = new System.Windows.Forms.ListBox();
-			this.ProcessorValue = new System.Windows.Forms.TextBox();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
-			this.RemovePreProcessor = new System.Windows.Forms.Button();
-			this.AddPreProcessor = new System.Windows.Forms.Button();
+			this.label12 = new System.Windows.Forms.Label();
+			this.MappingType = new System.Windows.Forms.ComboBox();
 			this.panel1.SuspendLayout();
 			this.TabControl.SuspendLayout();
 			this.SourcePage.SuspendLayout();
@@ -424,6 +426,8 @@
 			// 
 			// MappingPage
 			// 
+			this.MappingPage.Controls.Add(this.MappingType);
+			this.MappingPage.Controls.Add(this.label12);
 			this.MappingPage.Controls.Add(this.label9);
 			this.MappingPage.Controls.Add(this.label8);
 			this.MappingPage.Controls.Add(this.label7);
@@ -518,7 +522,7 @@
 			// 
 			// AddMapping
 			// 
-			this.AddMapping.Location = new System.Drawing.Point(28, 206);
+			this.AddMapping.Location = new System.Drawing.Point(318, 206);
 			this.AddMapping.Name = "AddMapping";
 			this.AddMapping.Size = new System.Drawing.Size(100, 23);
 			this.AddMapping.TabIndex = 56;
@@ -564,6 +568,71 @@
 			this.ProcessorPage.Text = "Processors";
 			this.ProcessorPage.UseVisualStyleBackColor = true;
 			// 
+			// AddPreProcessor
+			// 
+			this.AddPreProcessor.Enabled = false;
+			this.AddPreProcessor.Location = new System.Drawing.Point(424, 125);
+			this.AddPreProcessor.Name = "AddPreProcessor";
+			this.AddPreProcessor.Size = new System.Drawing.Size(117, 23);
+			this.AddPreProcessor.TabIndex = 72;
+			this.AddPreProcessor.Text = "Add";
+			this.AddPreProcessor.UseVisualStyleBackColor = true;
+			this.AddPreProcessor.Click += new System.EventHandler(this.AddPreProcessor_Click);
+			// 
+			// RemovePreProcessor
+			// 
+			this.RemovePreProcessor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.RemovePreProcessor.Enabled = false;
+			this.RemovePreProcessor.Location = new System.Drawing.Point(28, 255);
+			this.RemovePreProcessor.Name = "RemovePreProcessor";
+			this.RemovePreProcessor.Size = new System.Drawing.Size(100, 23);
+			this.RemovePreProcessor.TabIndex = 71;
+			this.RemovePreProcessor.Text = "Remove";
+			this.RemovePreProcessor.UseVisualStyleBackColor = true;
+			this.RemovePreProcessor.Click += new System.EventHandler(this.RemovePreProcessor_Click);
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label11.Location = new System.Drawing.Point(25, 160);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(98, 17);
+			this.label11.TabIndex = 70;
+			this.label11.Text = "pre-processors";
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label10.Location = new System.Drawing.Point(421, 20);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(38, 17);
+			this.label10.TabIndex = 69;
+			this.label10.Text = "value";
+			// 
+			// ProcessorValue
+			// 
+			this.ProcessorValue.Location = new System.Drawing.Point(424, 40);
+			this.ProcessorValue.Name = "ProcessorValue";
+			this.ProcessorValue.Size = new System.Drawing.Size(117, 20);
+			this.ProcessorValue.TabIndex = 68;
+			this.ProcessorValue.TextChanged += new System.EventHandler(this.ProcessorValue_TextChanged);
+			// 
+			// PreProcessors
+			// 
+			this.PreProcessors.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.PreProcessors.FormattingEnabled = true;
+			this.PreProcessors.Location = new System.Drawing.Point(28, 180);
+			this.PreProcessors.Name = "PreProcessors";
+			this.PreProcessors.Size = new System.Drawing.Size(513, 69);
+			this.PreProcessors.TabIndex = 67;
+			this.PreProcessors.SelectedIndexChanged += new System.EventHandler(this.PreProcessors_SelectedIndexChanged);
+			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -593,6 +662,7 @@
 			this.ProcessorMethod.Name = "ProcessorMethod";
 			this.ProcessorMethod.Size = new System.Drawing.Size(129, 108);
 			this.ProcessorMethod.TabIndex = 64;
+			this.ProcessorMethod.SelectedIndexChanged += new System.EventHandler(this.ProcessorMethod_SelectedIndexChanged);
 			// 
 			// ProcessorsBack
 			// 
@@ -623,6 +693,7 @@
 			this.ProcessorMappings.Name = "ProcessorMappings";
 			this.ProcessorMappings.Size = new System.Drawing.Size(223, 108);
 			this.ProcessorMappings.TabIndex = 61;
+			this.ProcessorMappings.SelectedIndexChanged += new System.EventHandler(this.ProcessorMappings_SelectedIndexChanged);
 			// 
 			// ProcessPage
 			// 
@@ -692,65 +763,28 @@
 			this.Process.UseVisualStyleBackColor = true;
 			this.Process.Click += new System.EventHandler(this.Process_Click);
 			// 
-			// PreProcessors
+			// label12
 			// 
-			this.PreProcessors.FormattingEnabled = true;
-			this.PreProcessors.Location = new System.Drawing.Point(28, 180);
-			this.PreProcessors.Name = "PreProcessors";
-			this.PreProcessors.Size = new System.Drawing.Size(513, 69);
-			this.PreProcessors.TabIndex = 67;
-			this.PreProcessors.SelectedIndexChanged += new System.EventHandler(this.PreProcessors_SelectedIndexChanged);
+			this.label12.AutoSize = true;
+			this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label12.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label12.Location = new System.Drawing.Point(25, 208);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(33, 17);
+			this.label12.TabIndex = 70;
+			this.label12.Text = "type";
 			// 
-			// ProcessorValue
+			// MappingType
 			// 
-			this.ProcessorValue.Location = new System.Drawing.Point(424, 40);
-			this.ProcessorValue.Name = "ProcessorValue";
-			this.ProcessorValue.Size = new System.Drawing.Size(117, 20);
-			this.ProcessorValue.TabIndex = 68;
-			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label10.Location = new System.Drawing.Point(421, 20);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(38, 17);
-			this.label10.TabIndex = 69;
-			this.label10.Text = "value";
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label11.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label11.Location = new System.Drawing.Point(25, 160);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(98, 17);
-			this.label11.TabIndex = 70;
-			this.label11.Text = "pre-processors";
-			// 
-			// RemovePreProcessor
-			// 
-			this.RemovePreProcessor.Enabled = false;
-			this.RemovePreProcessor.Location = new System.Drawing.Point(28, 255);
-			this.RemovePreProcessor.Name = "RemovePreProcessor";
-			this.RemovePreProcessor.Size = new System.Drawing.Size(100, 23);
-			this.RemovePreProcessor.TabIndex = 71;
-			this.RemovePreProcessor.Text = "Remove";
-			this.RemovePreProcessor.UseVisualStyleBackColor = true;
-			this.RemovePreProcessor.Click += new System.EventHandler(this.RemovePreProcessor_Click);
-			// 
-			// AddPreProcessor
-			// 
-			this.AddPreProcessor.Enabled = false;
-			this.AddPreProcessor.Location = new System.Drawing.Point(424, 125);
-			this.AddPreProcessor.Name = "AddPreProcessor";
-			this.AddPreProcessor.Size = new System.Drawing.Size(117, 23);
-			this.AddPreProcessor.TabIndex = 72;
-			this.AddPreProcessor.Text = "Add";
-			this.AddPreProcessor.UseVisualStyleBackColor = true;
-			this.AddPreProcessor.Click += new System.EventHandler(this.AddPreProcessor_Click);
+			this.MappingType.FormattingEnabled = true;
+			this.MappingType.Items.AddRange(new object[] {
+            "System.String",
+            "System.Integer"});
+			this.MappingType.Location = new System.Drawing.Point(28, 228);
+			this.MappingType.Name = "MappingType";
+			this.MappingType.Size = new System.Drawing.Size(264, 21);
+			this.MappingType.TabIndex = 71;
+			this.MappingType.Text = "System.String";
 			// 
 			// MainForm
 			// 
@@ -839,6 +873,8 @@
 		private System.Windows.Forms.Button AddPreProcessor;
 		private System.Windows.Forms.Button RemovePreProcessor;
 		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.ComboBox MappingType;
 	}
 }
 
