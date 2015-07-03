@@ -4,7 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Rosetta.Data;
+using Rosetta.Configuration;
+using Rosetta.DataStores;
 using Rosetta.Process;
 using Rosetta.Types;
 using Type = Rosetta.Types.Type;
@@ -51,19 +52,13 @@ namespace Rosetta
 
 		#region Methods
 
-		public static DataTable Convert(DataTable source, IEnumerable<Mapping> mappings)
+		public static void Convert(DataStore source, IEnumerable<Mapping> mappings, DataStore destination)
 		{
-			var response = new DataTable(source.TableName);
 			var mappingList = mappings as IList<Mapping> ?? mappings.ToList();
 
-			foreach (var mapping in mappingList)
+			foreach (var sourceRow in source.Read())
 			{
-				response.Columns.Add(mapping.DestinationHeader);
-			}
-
-			foreach (var sourceRow in source.Rows)
-			{
-				var row = response.NewRow();
+				var row = destination.NewRow();
 
 				foreach (var mapping in mappingList)
 				{
@@ -87,10 +82,8 @@ namespace Rosetta
 					row[mapping.DestinationHeader] = PostProcess(combined, mapping.Type, mapping.PostProcess);
 				}
 
-				response.Rows.Add(row);
+				destination.Write(row);
 			}
-
-			return response;
 		}
 
 		public static T Convert<T>(object input, string format = null)
@@ -105,6 +98,11 @@ namespace Rosetta
 
 		public static IList CreateList(string type)
 		{
+			if (string.IsNullOrWhiteSpace(type))
+			{
+				throw new ArgumentException("The type must be provided.", nameof(type));
+			}
+
 			var myType = System.Type.GetType(type);
 			var genericListType = typeof (List<>).MakeGenericType(myType);
 			return (IList) Activator.CreateInstance(genericListType);

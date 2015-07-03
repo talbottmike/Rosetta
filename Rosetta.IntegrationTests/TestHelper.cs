@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
 
-namespace Rosetta.UnitTests
+namespace Rosetta.IntegrationTests
 {
 	public static class TestHelper
 	{

@@ -35,18 +35,11 @@
 			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.TabControl = new Rosetta.WinForms.CustomTabControl();
 			this.SourcePage = new System.Windows.Forms.TabPage();
-			this.sourceIncludeHeaders = new System.Windows.Forms.CheckBox();
-			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.SourceFileName = new System.Windows.Forms.Label();
-			this.RemoveSourceHeader = new System.Windows.Forms.Button();
-			this.SourceHeader = new System.Windows.Forms.TextBox();
-			this.AddSourceHeader = new System.Windows.Forms.Button();
-			this.SourceHeaders = new System.Windows.Forms.ListBox();
-			this.SourceOpenFile = new System.Windows.Forms.Button();
 			this.SourceNext = new System.Windows.Forms.Button();
 			this.Sources = new System.Windows.Forms.ListView();
 			this.DestinationPage = new System.Windows.Forms.TabPage();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.DestinationFileName = new System.Windows.Forms.Label();
@@ -175,15 +168,7 @@
 			// 
 			// SourcePage
 			// 
-			this.SourcePage.Controls.Add(this.sourceIncludeHeaders);
-			this.SourcePage.Controls.Add(this.label4);
 			this.SourcePage.Controls.Add(this.label3);
-			this.SourcePage.Controls.Add(this.SourceFileName);
-			this.SourcePage.Controls.Add(this.RemoveSourceHeader);
-			this.SourcePage.Controls.Add(this.SourceHeader);
-			this.SourcePage.Controls.Add(this.AddSourceHeader);
-			this.SourcePage.Controls.Add(this.SourceHeaders);
-			this.SourcePage.Controls.Add(this.SourceOpenFile);
 			this.SourcePage.Controls.Add(this.SourceNext);
 			this.SourcePage.Controls.Add(this.Sources);
 			this.SourcePage.Location = new System.Drawing.Point(4, 22);
@@ -193,30 +178,6 @@
 			this.SourcePage.TabIndex = 0;
 			this.SourcePage.Text = "Source";
 			this.SourcePage.UseVisualStyleBackColor = true;
-			// 
-			// sourceIncludeHeaders
-			// 
-			this.sourceIncludeHeaders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.sourceIncludeHeaders.AutoSize = true;
-			this.sourceIncludeHeaders.Checked = true;
-			this.sourceIncludeHeaders.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.sourceIncludeHeaders.Location = new System.Drawing.Point(685, 379);
-			this.sourceIncludeHeaders.Name = "sourceIncludeHeaders";
-			this.sourceIncludeHeaders.Size = new System.Drawing.Size(66, 17);
-			this.sourceIncludeHeaders.TabIndex = 69;
-			this.sourceIncludeHeaders.Text = "Headers";
-			this.sourceIncludeHeaders.UseVisualStyleBackColor = true;
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label4.Location = new System.Drawing.Point(278, 20);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(55, 17);
-			this.label4.TabIndex = 68;
-			this.label4.Text = "headers";
 			// 
 			// label3
 			// 
@@ -228,79 +189,6 @@
 			this.label3.Size = new System.Drawing.Size(74, 17);
 			this.label3.TabIndex = 67;
 			this.label3.Text = "data stores";
-			// 
-			// SourceFileName
-			// 
-			this.SourceFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.SourceFileName.AutoSize = true;
-			this.SourceFileName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.SourceFileName.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.SourceFileName.Location = new System.Drawing.Point(136, 413);
-			this.SourceFileName.Name = "SourceFileName";
-			this.SourceFileName.Size = new System.Drawing.Size(71, 21);
-			this.SourceFileName.TabIndex = 53;
-			this.SourceFileName.Text = "Input.csv";
-			this.SourceFileName.Visible = false;
-			// 
-			// RemoveSourceHeader
-			// 
-			this.RemoveSourceHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.RemoveSourceHeader.Enabled = false;
-			this.RemoveSourceHeader.Location = new System.Drawing.Point(354, 375);
-			this.RemoveSourceHeader.Name = "RemoveSourceHeader";
-			this.RemoveSourceHeader.Size = new System.Drawing.Size(67, 23);
-			this.RemoveSourceHeader.TabIndex = 51;
-			this.RemoveSourceHeader.Text = "Remove";
-			this.RemoveSourceHeader.UseVisualStyleBackColor = true;
-			this.RemoveSourceHeader.Click += new System.EventHandler(this.RemoveSourceHeader_Click);
-			// 
-			// SourceHeader
-			// 
-			this.SourceHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.SourceHeader.Enabled = false;
-			this.SourceHeader.Location = new System.Drawing.Point(281, 349);
-			this.SourceHeader.Name = "SourceHeader";
-			this.SourceHeader.Size = new System.Drawing.Size(470, 20);
-			this.SourceHeader.TabIndex = 50;
-			this.SourceHeader.TextChanged += new System.EventHandler(this.SourceHeader_TextChanged);
-			// 
-			// AddSourceHeader
-			// 
-			this.AddSourceHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.AddSourceHeader.Enabled = false;
-			this.AddSourceHeader.Location = new System.Drawing.Point(281, 375);
-			this.AddSourceHeader.Name = "AddSourceHeader";
-			this.AddSourceHeader.Size = new System.Drawing.Size(67, 23);
-			this.AddSourceHeader.TabIndex = 49;
-			this.AddSourceHeader.Text = "Add";
-			this.AddSourceHeader.UseVisualStyleBackColor = true;
-			this.AddSourceHeader.Click += new System.EventHandler(this.AddSourceHeader_Click);
-			// 
-			// SourceHeaders
-			// 
-			this.SourceHeaders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.SourceHeaders.Enabled = false;
-			this.SourceHeaders.FormattingEnabled = true;
-			this.SourceHeaders.Location = new System.Drawing.Point(281, 40);
-			this.SourceHeaders.Name = "SourceHeaders";
-			this.SourceHeaders.Size = new System.Drawing.Size(470, 303);
-			this.SourceHeaders.TabIndex = 48;
-			this.SourceHeaders.SelectedIndexChanged += new System.EventHandler(this.SourceHeaders_SelectedIndexChanged);
-			// 
-			// SourceOpenFile
-			// 
-			this.SourceOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.SourceOpenFile.Enabled = false;
-			this.SourceOpenFile.Location = new System.Drawing.Point(28, 409);
-			this.SourceOpenFile.Name = "SourceOpenFile";
-			this.SourceOpenFile.Size = new System.Drawing.Size(98, 30);
-			this.SourceOpenFile.TabIndex = 4;
-			this.SourceOpenFile.Text = "Open File";
-			this.SourceOpenFile.UseVisualStyleBackColor = true;
-			this.SourceOpenFile.Click += new System.EventHandler(this.SourceOpenFile_Click);
 			// 
 			// SourceNext
 			// 
@@ -329,6 +217,7 @@
 			// 
 			// DestinationPage
 			// 
+			this.DestinationPage.Controls.Add(this.checkBox1);
 			this.DestinationPage.Controls.Add(this.label6);
 			this.DestinationPage.Controls.Add(this.label5);
 			this.DestinationPage.Controls.Add(this.DestinationFileName);
@@ -347,6 +236,19 @@
 			this.DestinationPage.TabIndex = 1;
 			this.DestinationPage.Text = "Destination";
 			this.DestinationPage.UseVisualStyleBackColor = true;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Checked = true;
+			this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBox1.Location = new System.Drawing.Point(685, 379);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(66, 17);
+			this.checkBox1.TabIndex = 70;
+			this.checkBox1.Text = "Headers";
+			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
 			// label6
 			// 
@@ -659,7 +561,7 @@
 			// AddPreProcessor
 			// 
 			this.AddPreProcessor.Enabled = false;
-			this.AddPreProcessor.Location = new System.Drawing.Point(651, 66);
+			this.AddPreProcessor.Location = new System.Drawing.Point(651, 125);
 			this.AddPreProcessor.Name = "AddPreProcessor";
 			this.AddPreProcessor.Size = new System.Drawing.Size(100, 23);
 			this.AddPreProcessor.TabIndex = 72;
@@ -885,7 +787,6 @@
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.OpenFileDialog CsvFileDialog;
 		private System.Windows.Forms.TabPage SourcePage;
-		private System.Windows.Forms.Button SourceOpenFile;
 		private System.Windows.Forms.Button SourceNext;
 		private System.Windows.Forms.ListView Sources;
 		private CustomTabControl TabControl;
@@ -894,15 +795,10 @@
 		private System.Windows.Forms.Button DestinationSelectFile;
 		private System.Windows.Forms.Button DestinationNext;
 		private System.Windows.Forms.ListView Destinations;
-		private System.Windows.Forms.Button RemoveSourceHeader;
-		private System.Windows.Forms.TextBox SourceHeader;
-		private System.Windows.Forms.Button AddSourceHeader;
-		private System.Windows.Forms.ListBox SourceHeaders;
 		private System.Windows.Forms.Button RemoveDestinationHeader;
 		private System.Windows.Forms.TextBox DestinationHeader;
 		private System.Windows.Forms.Button AddDestinationHeader;
 		private System.Windows.Forms.ListBox DestinationHeaders;
-		private System.Windows.Forms.Label SourceFileName;
 		private System.Windows.Forms.Label DestinationFileName;
 		private System.Windows.Forms.TabPage MappingPage;
 		private System.Windows.Forms.ListBox Mappings;
@@ -925,7 +821,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ListBox ProcessorMethod;
-		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label5;
@@ -940,9 +835,9 @@
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.ComboBox MappingType;
-		private System.Windows.Forms.CheckBox sourceIncludeHeaders;
 		private System.Windows.Forms.Button LoadButton;
 		private System.Windows.Forms.Button SaveButton;
+		private System.Windows.Forms.CheckBox checkBox1;
 	}
 }
 

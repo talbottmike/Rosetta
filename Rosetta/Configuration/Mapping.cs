@@ -4,7 +4,7 @@ using Rosetta.Process;
 
 #endregion
 
-namespace Rosetta.Data
+namespace Rosetta.Configuration
 {
 	public class Mapping
 	{

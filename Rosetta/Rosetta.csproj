@@ -41,20 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Combiner.cs" />
-    <Compile Include="DataService.cs" />
+    <Compile Include="Configuration\DataStoreColumn.cs" />
+    <Compile Include="Configuration\ColumnAlignment.cs" />
+    <Compile Include="Configuration\DataStoreConfiguration.cs" />
     <Compile Include="DataStores\FileDataStore.cs" />
-    <Compile Include="DataStores\JsonFileDataStore.cs" />
-    <Compile Include="DataStores\XmlFileDataStore.cs" />
-    <Compile Include="Data\CsvParser.cs" />
+    <Compile Include="DataStores\SqlDataStore.cs" />
+    <Compile Include="DataStores\FlatFileDataStore.cs" />
+    <Compile Include="DataStores\MemoryDataStore.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Serialize.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="DataStores\DataStore.cs" />
     <Compile Include="DataStores\CommaSeperatedFileDataStore.cs" />
-    <Compile Include="Data\DataTable.cs" />
     <Compile Include="CombineMethod.cs" />
     <Compile Include="Process\ITypeCombiner.cs" />
     <Compile Include="Process\ITypeConverter.cs" />
-    <Compile Include="Data\Mapping.cs" />
+    <Compile Include="Configuration\Mapping.cs" />
     <Compile Include="Process\ProcessMethod.cs" />
     <Compile Include="Process\ProcessSettings.cs" />
     <Compile Include="Types\BooleanType.cs" />

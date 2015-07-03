@@ -90,7 +90,7 @@ namespace Rosetta.Types
 				throw new ArgumentException("The type converter does not support this type.");
 			}
 
-			return methodInfo.Invoke(this, new [] { input, method, value });
+			return methodInfo.Invoke(this, new[] { input, method, value });
 		}
 
 		public object ConvertTo(object input, string type, string format = "")

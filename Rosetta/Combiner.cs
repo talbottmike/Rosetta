@@ -50,7 +50,7 @@ namespace Rosetta
 
 		public static T Combine<T>(IEnumerable<T> input, string type, CombineMethod method, T value)
 		{
-			return Providers[type].Combine<T>(input, method, value);
+			return Providers[type].Combine(input, method, value);
 		}
 
 		#endregion

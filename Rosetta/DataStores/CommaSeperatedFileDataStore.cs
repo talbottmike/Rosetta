@@ -1,9 +1,9 @@
 ﻿#region References
 
-using System.IO;
-using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Text;
-using Rosetta.Data;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -11,10 +11,23 @@ namespace Rosetta.DataStores
 {
 	public class CommaSeperatedFileDataStore : FileDataStore
 	{
+		#region Constants
+
+		private const char CommaCharacter = ',';
+		private const char QuoteCharacter = '"';
+
+		#endregion
+
+		#region Fields
+
+		public static string Name = "Comma Seperated File (csv)";
+
+		#endregion
+
 		#region Constructors
 
-		public CommaSeperatedFileDataStore()
-			: base("Comma Seperated File (csv)", "CSV|*.csv")
+		public CommaSeperatedFileDataStore(DataStoreConfiguration configuration)
+			: base(configuration, Name, "CSV|*.csv")
 		{
 		}
 
@@ -22,44 +35,264 @@ namespace Rosetta.DataStores
 
 		#region Methods
 
-		public override DataTable Read()
+		public override string ConvertRow(DataRow row)
 		{
-			var response = new DataTable(FilePath);
-
-			using (var reader = File.OpenText(FilePath))
+			if (row.Count != Configuration.Columns.Count)
 			{
-				var parser = new CsvParser();
-				var data = parser.Parse(reader);
-
-				for (var i = 0; i < data[0].Length; i++)
-				{
-					response.Columns.Add(data[0][i]);
-				}
-
-				for (var i = 0; i < data.Length; i++)
-				{
-					response.NewRow(data[i]);
-				}
+				throw new ArgumentException("The row does not match the column count.");
 			}
 
-			return response;
+			var builder = new StringBuilder(1024);
+
+			foreach (var item in row)
+			{
+				if (builder.Length > 0)
+				{
+					builder.Append(",");
+				}
+
+				if (!item.Value.Contains(","))
+				{
+					builder.Append(item.Value);
+					continue;
+				}
+
+				builder.AppendFormat("{0}{1}{0}", "\"", item.Value);
+			}
+
+			return builder.ToString();
 		}
 
-		public override void Write(DataTable table)
+		public override DataRow ParseRow(string data)
 		{
-			var builder = new StringBuilder();
-			var header = string.Join(",", table.Columns);
-			var firstLine = string.Join(",", table.Rows.First());
+			var values = ParseLine(data);
+			return NewRow(values);
+		}
 
-			builder.AppendLine(header);
+		private string[] ParseLine(string data)
+		{
+			var context = new ParserContext();
+			ParserState currentState = ParserState.LineStartState;
 
-			var start = header == firstLine ? 1 : 0;
-			for (var i = start; i < table.Rows.Count; i++)
+			foreach (var ch in data)
 			{
-				builder.AppendLine(string.Join(",", table.Rows[i].Values));
+				switch (ch)
+				{
+					case CommaCharacter:
+						currentState = currentState.Comma(context);
+						break;
+
+					case QuoteCharacter:
+						currentState = currentState.Quote(context);
+						break;
+
+					default:
+						currentState = currentState.AnyChar(ch, context);
+						break;
+				}
 			}
 
-			File.WriteAllText(FilePath, builder.ToString());
+			currentState.EndOfLine(context);
+			return context.Values.ToArray();
+		}
+
+		#endregion
+
+		#region Classes
+
+		private class LineStartState : ParserState
+		{
+			#region Methods
+
+			public override ParserState AnyChar(char ch, ParserContext context)
+			{
+				context.AddChar(ch);
+				return ValueState;
+			}
+
+			public override ParserState Comma(ParserContext context)
+			{
+				context.AddValue();
+				return ValueStartState;
+			}
+
+			public override ParserState EndOfLine(ParserContext context)
+			{
+				return LineStartState;
+			}
+
+			public override ParserState Quote(ParserContext context)
+			{
+				return QuotedValueState;
+			}
+
+			#endregion
+		}
+
+		private class ParserContext
+		{
+			#region Fields
+
+			private readonly StringBuilder _currentValue = new StringBuilder();
+
+			#endregion
+
+			#region Constructors
+
+			public ParserContext()
+			{
+				Values = new List<string>();
+			}
+
+			#endregion
+
+			#region Properties
+
+			public List<string> Values { get; }
+
+			#endregion
+
+			#region Methods
+
+			public void AddChar(char ch)
+			{
+				_currentValue.Append(ch);
+			}
+
+			public void AddValue()
+			{
+				Values.Add(_currentValue.ToString());
+				_currentValue.Remove(0, _currentValue.Length);
+			}
+
+			#endregion
+		}
+
+		private abstract class ParserState
+		{
+			#region Fields
+
+			public static readonly LineStartState LineStartState = new LineStartState();
+			public static readonly QuotedValueState QuotedValueState = new QuotedValueState();
+			public static readonly QuoteState QuoteState = new QuoteState();
+			public static readonly ValueStartState ValueStartState = new ValueStartState();
+			public static readonly ValueState ValueState = new ValueState();
+
+			#endregion
+
+			#region Methods
+
+			public abstract ParserState AnyChar(char ch, ParserContext context);
+			public abstract ParserState Comma(ParserContext context);
+			public abstract ParserState EndOfLine(ParserContext context);
+			public abstract ParserState Quote(ParserContext context);
+
+			#endregion
+		}
+
+		private class QuotedValueState : ParserState
+		{
+			#region Methods
+
+			public override ParserState AnyChar(char ch, ParserContext context)
+			{
+				context.AddChar(ch);
+				return QuotedValueState;
+			}
+
+			public override ParserState Comma(ParserContext context)
+			{
+				context.AddChar(CommaCharacter);
+				return QuotedValueState;
+			}
+
+			public override ParserState EndOfLine(ParserContext context)
+			{
+				return QuotedValueState;
+			}
+
+			public override ParserState Quote(ParserContext context)
+			{
+				return QuoteState;
+			}
+
+			#endregion
+		}
+
+		private class QuoteState : ParserState
+		{
+			#region Methods
+
+			public override ParserState AnyChar(char ch, ParserContext context)
+			{
+				//undefined, ignore "
+				context.AddChar(ch);
+				return QuotedValueState;
+			}
+
+			public override ParserState Comma(ParserContext context)
+			{
+				context.AddValue();
+				return ValueStartState;
+			}
+
+			public override ParserState EndOfLine(ParserContext context)
+			{
+				context.AddValue();
+				return LineStartState;
+			}
+
+			public override ParserState Quote(ParserContext context)
+			{
+				context.AddChar(QuoteCharacter);
+				return QuotedValueState;
+			}
+
+			#endregion
+		}
+
+		private class ValueStartState : LineStartState
+		{
+			#region Methods
+
+			public override ParserState EndOfLine(ParserContext context)
+			{
+				context.AddValue();
+				return LineStartState;
+			}
+
+			#endregion
+		}
+
+		private class ValueState : ParserState
+		{
+			#region Methods
+
+			public override ParserState AnyChar(char ch, ParserContext context)
+			{
+				context.AddChar(ch);
+				return ValueState;
+			}
+
+			public override ParserState Comma(ParserContext context)
+			{
+				context.AddValue();
+				return ValueStartState;
+			}
+
+			public override ParserState EndOfLine(ParserContext context)
+			{
+				context.AddValue();
+				return LineStartState;
+			}
+
+			public override ParserState Quote(ParserContext context)
+			{
+				context.AddChar(QuoteCharacter);
+				return ValueState;
+			}
+
+			#endregion
 		}
 
 		#endregion
