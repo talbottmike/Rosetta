@@ -1,10 +1,8 @@
 ﻿#region References
 
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Sockets;
 using Rosetta.Configuration;
 
 #endregion
@@ -47,7 +45,16 @@ namespace Rosetta.DataStores
 
 		public override void Write(DataRow row)
 		{
+			using (var connection = new SqlConnection(Configuration.ConnectionString))
+			{
+				var table = Configuration.Columns[0].Source;
+				var insert = "INSERT INTO [dbo].[" + table + "] (" + string.Join(",", Configuration.Columns.Select(x => "[" + x.Name + "]"))
+					+ ") VALUES (" + string.Join(",", Configuration.Columns.Select(x => "'" + row[x.Name] + "'")) + ")";
 
+				var command = new SqlCommand(insert, connection);
+				command.Connection.Open();
+				command.ExecuteNonQuery();
+			}
 		}
 
 		#endregion
