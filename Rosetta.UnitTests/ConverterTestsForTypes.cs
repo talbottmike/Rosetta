@@ -2,7 +2,7 @@
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rosetta.TypeConverters;
+using Rosetta.Types;
 
 #endregion
 
@@ -162,7 +162,7 @@ namespace Rosetta.UnitTests
 		[TestMethod]
 		public void TypeNames()
 		{
-			var actual = new DecimalTypeConverter().TypeNames;
+			var actual = new DecimalType().TypeNames;
 			TestHelper.AreEqual(new[] { "System.Decimal", "System.Single", "System.Double" }, actual);
 		}
 

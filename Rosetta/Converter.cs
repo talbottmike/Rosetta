@@ -5,8 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Rosetta.Data;
-using Rosetta.TypeCombiners;
-using Rosetta.TypeConverters;
+using Rosetta.Process;
+using Rosetta.Types;
+using Type = Rosetta.Types.Type;
 
 #endregion
 
@@ -21,14 +22,14 @@ namespace Rosetta
 
 		static Converter()
 		{
-			Providers = new Dictionary<string, TypeConverter>();
-			var providers = new TypeConverter[]
+			Providers = new Dictionary<string, Type>();
+			var providers = new Type[]
 			{
-				new BooleanTypeConverter(),
-				new DateTimeTypeConverter(),
-				new DecimalTypeConverter(),
-				new NumberTypeConverter(),
-				new StringTypeConverter()
+				new BooleanType(),
+				new DateTimeType(),
+				new DecimalType(),
+				new NumberType(),
+				new StringType()
 			};
 
 			foreach (var provider in providers)
@@ -44,7 +45,7 @@ namespace Rosetta
 
 		#region Properties
 
-		public static IDictionary<string, TypeConverter> Providers { get; set; }
+		public static IDictionary<string, Type> Providers { get; set; }
 
 		#endregion
 
@@ -82,9 +83,7 @@ namespace Rosetta
 						sourceValues.Add(value);
 					}
 
-					var combiner = mapping.Combiner ?? new StringTypeCombiner();
-					var combined = combiner.Combine(sourceValues);
-
+					var combined = Combiner.Combine(sourceValues, mapping.Type, mapping.CombineMethod, mapping.CombineValue);
 					row[mapping.DestinationHeader] = PostProcess(combined, mapping.Type, mapping.PostProcess);
 				}
 
@@ -94,19 +93,19 @@ namespace Rosetta
 			return response;
 		}
 
-		public static object Convert(object input, string type, string format = null)
-		{
-			return Providers[input.GetType().FullName].ConvertTo(input, type, format);
-		}
-
 		public static T Convert<T>(object input, string format = null)
 		{
 			return Providers[input.GetType().FullName].ConvertTo<T>(input, format);
 		}
 
+		public static object Convert(object input, string type, string format = null)
+		{
+			return Providers[input.GetType().FullName].ConvertTo(input, type, format);
+		}
+
 		public static IList CreateList(string type)
 		{
-			var myType = Type.GetType(type);
+			var myType = System.Type.GetType(type);
 			var genericListType = typeof (List<>).MakeGenericType(myType);
 			return (IList) Activator.CreateInstance(genericListType);
 		}

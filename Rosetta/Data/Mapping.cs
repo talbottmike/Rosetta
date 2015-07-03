@@ -1,7 +1,6 @@
 ﻿#region References
 
-using Rosetta.TypeCombiners;
-using Rosetta.TypeConverters;
+using Rosetta.Process;
 
 #endregion
 
@@ -11,7 +10,8 @@ namespace Rosetta.Data
 	{
 		#region Properties
 
-		public TypeCombiner Combiner { get; set; }
+		public CombineMethod CombineMethod { get; set; }
+		public object CombineValue { get; set; }
 		public string DestinationHeader { get; set; }
 		public ProcessSettings PostProcess { get; set; }
 		public ProcessSettings[] PreProcesses { get; set; }

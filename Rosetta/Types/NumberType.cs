@@ -5,14 +5,39 @@
 #region References
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Rosetta.Process;
 
 #endregion
 
-namespace Rosetta.TypeConverters
+namespace Rosetta.Types
 {
-	public class NumberTypeConverter : TypeConverter, ITypeConverter<byte>, ITypeConverter<sbyte>, ITypeConverter<short>, ITypeConverter<ushort>, ITypeConverter<int>, ITypeConverter<uint>, ITypeConverter<long>, ITypeConverter<ulong>
+	public class NumberType : Type, ITypeConverter<byte>, ITypeConverter<sbyte>, ITypeConverter<short>, ITypeConverter<ushort>, ITypeConverter<int>, ITypeConverter<uint>, ITypeConverter<long>, ITypeConverter<ulong>, ITypeCombiner<int>
 	{
 		#region Methods
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public int Combine(IEnumerable<int> items, CombineMethod method, int delimiter)
+		{
+			switch (method)
+			{
+				case CombineMethod.Sum:
+					return items.Sum(x => x);
+
+				case CombineMethod.Join:
+					return int.Parse(string.Join("", items.Select(x => x.ToString())));
+
+				default:
+					throw new NotImplementedException();
+			}
+		}
 
 		/// <summary>
 		/// Convert the input to a specific type with optional formatting.
@@ -285,7 +310,7 @@ namespace Rosetta.TypeConverters
 		/// <returns> </returns>
 		int ITypeConverter<int>.Parse(string input)
 		{
-			return int.Parse(input);
+			return string.IsNullOrWhiteSpace(input) ? 0 : int.Parse(input);
 		}
 
 		#endregion

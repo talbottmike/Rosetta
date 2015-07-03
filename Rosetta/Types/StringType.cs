@@ -3,14 +3,39 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rosetta.Process;
 
 #endregion
 
-namespace Rosetta.TypeConverters
+namespace Rosetta.Types
 {
-	public class StringTypeConverter : TypeConverter, ITypeConverter<string>, ITypeConverter<char>
+	public class StringType : Type, ITypeConverter<string>, ITypeConverter<char>, ITypeCombiner<string>, ITypeCombiner<char>
 	{
 		#region Methods
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public string Combine(IEnumerable<string> items, CombineMethod method, string delimiter)
+		{
+			return string.Join(delimiter ?? "", items);
+		}
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public char Combine(IEnumerable<char> items, CombineMethod method, char delimiter)
+		{
+			throw new NotImplementedException();
+		}
 
 		/// <summary>
 		/// Convert the input to a specific type with optional formatting.

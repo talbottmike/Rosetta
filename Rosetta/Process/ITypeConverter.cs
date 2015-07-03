@@ -1,4 +1,8 @@
-namespace Rosetta.TypeConverters
+#region References
+
+#endregion
+
+namespace Rosetta.Process
 {
 	public interface ITypeConverter<TType>
 	{

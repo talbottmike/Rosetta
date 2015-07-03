@@ -1,4 +1,4 @@
-﻿namespace Rosetta.TypeConverters
+﻿namespace Rosetta.Process
 {
 	public class ProcessSettings
 	{

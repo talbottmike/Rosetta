@@ -3,8 +3,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rosetta.Data;
-using Rosetta.TypeCombiners;
-using Rosetta.TypeConverters;
+using Rosetta.Process;
 
 #endregion
 
@@ -73,7 +72,7 @@ namespace Rosetta.UnitTests
 				{
 					DestinationHeader = "Height In Inches",
 					SourceHeaders = new[] { "Height Inches", "Height Feet" },
-					Combiner = new NumberTypeCombiner(),
+					CombineMethod = CombineMethod.Sum,
 					Type = "System.Int32",
 					PreProcesses = new[] { new ProcessSettings { Method = ProcessMethod.Multiply, Value = "12", Filter = "Height Feet" } }
 				}
@@ -101,7 +100,7 @@ namespace Rosetta.UnitTests
 					DestinationHeader = "Name",
 					SourceHeaders = new[] { "First Name", "Last Name" },
 					Type = "System.String",
-					Combiner = new StringTypeCombiner(delimeter: " ")
+					CombineValue = " "
 				}
 			};
 
@@ -127,7 +126,7 @@ namespace Rosetta.UnitTests
 					DestinationHeader = "Name",
 					SourceHeaders = new[] { "First Name", "Last Name" },
 					Type = "System.String",
-					Combiner = new StringTypeCombiner(delimeter: " ")
+					CombineValue = " "
 				}
 			};
 
@@ -153,7 +152,7 @@ namespace Rosetta.UnitTests
 					DestinationHeader = "Name",
 					SourceHeaders = new[] { "First Name", "Last Name" },
 					Type = "System.String",
-					Combiner = new StringTypeCombiner(delimeter: " "),
+					CombineValue = " ",
 					PreProcesses = new[]
 					{
 						new ProcessSettings { Method = ProcessMethod.Trim, Filter = "First" },

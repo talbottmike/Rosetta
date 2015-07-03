@@ -5,12 +5,13 @@
 #region References
 
 using System;
+using Rosetta.Process;
 
 #endregion
 
-namespace Rosetta.TypeConverters
+namespace Rosetta.Types
 {
-	public class DecimalTypeConverter : TypeConverter, ITypeConverter<decimal>, ITypeConverter<float>, ITypeConverter<double>
+	public class DecimalType : Type, ITypeConverter<decimal>, ITypeConverter<float>, ITypeConverter<double>
 	{
 		#region Methods
 
