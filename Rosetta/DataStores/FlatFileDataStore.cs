@@ -1,6 +1,5 @@
 ﻿#region References
 
-using System;
 using System.Text;
 using Rosetta.Configuration;
 
@@ -12,14 +11,14 @@ namespace Rosetta.DataStores
 	{
 		#region Fields
 
-		public static string Name = "Flat Files";
+		public static string Filter = "Flat Files|*.*";
 
 		#endregion
 
 		#region Constructors
 
 		public FlatFileDataStore(DataStoreConfiguration configuration)
-			: base(configuration, Name, "All|*.*")
+			: base(configuration)
 		{
 		}
 

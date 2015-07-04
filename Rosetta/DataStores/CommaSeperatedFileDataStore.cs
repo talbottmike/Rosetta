@@ -20,14 +20,14 @@ namespace Rosetta.DataStores
 
 		#region Fields
 
-		public static string Name = "Comma Seperated File (csv)";
+		public static string Filter = "Comma Seperated File (csv)|*.csv";
 
 		#endregion
 
 		#region Constructors
 
 		public CommaSeperatedFileDataStore(DataStoreConfiguration configuration)
-			: base(configuration, Name, "CSV|*.csv")
+			: base(configuration)
 		{
 		}
 

@@ -45,17 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CommaSeperatedFileDataStoreConfigurationControl.cs">
+    <Compile Include="DataSourceConfigurationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CommaSeperatedFileDataStoreConfigurationControl.Designer.cs">
-      <DependentUpon>CommaSeperatedFileDataStoreConfigurationControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GenericDataStoreConfigurationControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\GenericDataStoreConfigurationControl.Designer.cs">
-      <DependentUpon>GenericDataStoreConfigurationControl.cs</DependentUpon>
+    <Compile Include="DataSourceConfigurationControl.Designer.cs">
+      <DependentUpon>DataSourceConfigurationControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -63,7 +57,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomTabControl.cs">
+    <Compile Include="CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -72,11 +66,8 @@
     <Content Include="Sample Data\People.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Controls\CommaSeperatedFileDataStoreConfigurationControl.resx">
-      <DependentUpon>CommaSeperatedFileDataStoreConfigurationControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\GenericDataStoreConfigurationControl.resx">
-      <DependentUpon>GenericDataStoreConfigurationControl.cs</DependentUpon>
+    <EmbeddedResource Include="DataSourceConfigurationControl.resx">
+      <DependentUpon>DataSourceConfigurationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

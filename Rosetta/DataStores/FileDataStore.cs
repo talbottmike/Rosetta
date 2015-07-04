@@ -12,26 +12,10 @@ namespace Rosetta.DataStores
 	{
 		#region Constructors
 
-		protected FileDataStore(DataStoreConfiguration configuration, string displayName, string filter)
+		protected FileDataStore(DataStoreConfiguration configuration)
 			: base(configuration)
 		{
-			DisplayName = displayName;
-			Filter = filter;
 		}
-
-		#endregion
-
-		#region Properties
-
-		/// <summary>
-		/// This is the display name used when creating open / save dialogs.
-		/// </summary>
-		public string DisplayName { get; set; }
-
-		/// <summary>
-		/// This is the extension filter user when creating open / save dialogs.
-		/// </summary>
-		public string Filter { get; set; }
 
 		#endregion
 

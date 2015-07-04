@@ -1,6 +1,7 @@
 ﻿#region References
 
 using System.Collections.Generic;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -8,19 +9,26 @@ namespace Rosetta.WinForms
 {
 	public class Settings
 	{
+		#region Constructors
+
+		public Settings()
+		{
+			DestinationStore = string.Empty;
+			DestinationStoreConfiguration = new DataStoreConfiguration();
+			Mappings = new List<Mapping>();
+			SourceStore = string.Empty;
+			SourceStoreConfiguration = new DataStoreConfiguration();
+		}
+
+		#endregion
+
 		#region Properties
 
-		public ICollection<string> DestinationHeaders { get; set; }
-		public string DestinationPath { get; set; }
-		public string DestinationSource { get; set; }
-		public ICollection<string> MappingDestination { get; set; }
-		public ICollection<string> Mappings { get; set; }
-		public ICollection<string> MappingSource { get; set; }
-		public ICollection<string> PreProcessors { get; set; }
-		public ICollection<string> ProcessorMappings { get; set; }
-		public string SelectedSource { get; set; }
-		public ICollection<string> SourceHeaders { get; set; }
-		public string SourcePath { get; set; }
+		public string DestinationStore { get; set; }
+		public DataStoreConfiguration DestinationStoreConfiguration { get; set; }
+		public ICollection<Mapping> Mappings { get; set; }
+		public string SourceStore { get; set; }
+		public DataStoreConfiguration SourceStoreConfiguration { get; set; }
 
 		#endregion
 	}
