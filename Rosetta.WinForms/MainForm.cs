@@ -2,8 +2,12 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using Rosetta.Configuration;
 using Rosetta.DataStores;
+using Rosetta.Extensions;
+using Rosetta.Process;
 
 #endregion
 
@@ -39,10 +43,45 @@ namespace Rosetta.WinForms
 
 		#region Methods
 
+		private void AddMappingClick(object sender, EventArgs e)
+		{
+			_settings.Mappings.Add(new Mapping
+			{
+				DestinationHeader = MappingDestination.Text,
+				SourceHeaders = MappingSource.SelectedItems.Cast<string>().ToList(),
+				Type = MappingType.Text
+			});
+
+			ApplySettings();
+		}
+
+		private void AddPreProcessorClick(object sender, EventArgs e)
+		{
+			var mapping = _settings.Mappings[ProcessorMappings.SelectedIndex];
+			mapping.PreProcesses.Add(new ProcessSettings
+			{
+				Filter = string.Empty,
+				Method = (ProcessMethod) Enum.Parse(typeof(ProcessMethod), ProcessorMethod.Text),
+				Value = ProcessorValue.Text
+			});
+
+			ApplySettings();
+		}
+
 		private void ApplySettings()
 		{
-			Sources.SelectedValue = _settings.SourceStore;
-			Destinations.SelectedValue = _settings.DestinationStore;
+			Sources.SelectedValue = _settings.SourceStoreConfiguration.StoreFullName;
+			SourceConfiguration.LoadConfiguration(_settings.SourceStoreConfiguration, true);
+			Destinations.SelectedValue = _settings.DestinationStoreConfiguration.StoreFullName;
+			DestinationConfiguration.LoadConfiguration(_settings.DestinationStoreConfiguration, false);
+			MappingSource.LoadItems(_settings.SourceStoreConfiguration.Columns.Select(x => x.Name));
+			MappingDestination.LoadItems(_settings.DestinationStoreConfiguration.Columns.Select(x => x.Name));
+			Mappings.LoadItems(_settings.Mappings.Select(x => "[" + string.Join(",", x.SourceHeaders) + "]," + x.DestinationHeader));
+			ProcessorMappings.LoadItems(_settings.Mappings.Select(x => "[" + string.Join(",", x.SourceHeaders) + "]," + x.DestinationHeader));
+			ProcessorMethod.LoadItems(Enum.GetNames(typeof (ProcessMethod)));
+			PreProcessors.LoadItems(_settings.Mappings.SelectMany(x => x.PreProcesses.Select(y => "[" + string.Join(",", x.SourceHeaders) + "]," + x.DestinationHeader + "," + y.Method + "," + y.Filter + "," + y.Value )));
+
+			UpdateControlState();
 		}
 
 		private void BackButtonClick(object sender, EventArgs e)
@@ -59,30 +98,49 @@ namespace Rosetta.WinForms
 			{
 				TabControl.SelectedTab = ConfigureDestinationPage;
 			}
-			else if (sender == ProcessBack)
+			else if (sender == ProcessorsBack)
 			{
 				TabControl.SelectedTab = MappingPage;
+			}
+			else if (sender == ProcessBack)
+			{
+				TabControl.SelectedTab = ProcessorPage;
 			}
 
 			Header.Text = TabControl.SelectedTab.Text;
 		}
 
+		private string GetStoreFilter(string typeFullName)
+		{
+			switch (typeFullName)
+			{
+				case "Rosetta.DataStores.CommaSeperatedFileDataStore":
+					return CommaSeperatedFileDataStore.Filter;
+
+				case "Rosetta.DataStores.FlatFileDataStore":
+					return FlatFileDataStore.Filter;
+
+				default:
+					return string.Empty;
+			}
+		}
+
 		private void ListBoxSelectedIndexChanged(object sender, EventArgs e)
 		{
 			var control = (ListBox) sender;
-			var dataStore = control.SelectedValue.ToString();
+			var dataStore = (control.SelectedValue ?? control.SelectedItem).ToString();
 
 			if (control == Sources)
 			{
-				_settings.SourceStore = dataStore;
-				SourceConfiguration.SetStoreType(_settings.SourceStore, true);
-				SourceConfiguration.LoadConfiguration(_settings.SourceStoreConfiguration);
+				_settings.SourceStoreConfiguration.StoreFullName = dataStore;
+				_settings.SourceStoreConfiguration.Filter = GetStoreFilter(dataStore);
+				SourceConfiguration.LoadConfiguration(_settings.SourceStoreConfiguration, true);
 			}
 			else if (control == Destinations)
 			{
-				_settings.DestinationStore = dataStore;
-				DestinationConfiguration.SetStoreType(_settings.DestinationStore, false);
-				DestinationConfiguration.LoadConfiguration(_settings.DestinationStoreConfiguration);
+				_settings.DestinationStoreConfiguration.StoreFullName = dataStore;
+				_settings.DestinationStoreConfiguration.Filter = GetStoreFilter(dataStore);
+				DestinationConfiguration.LoadConfiguration(_settings.DestinationStoreConfiguration, false);
 			}
 
 			UpdateControlState();
@@ -103,7 +161,6 @@ namespace Rosetta.WinForms
 				var data = File.ReadAllText(dialog.FileName);
 				_settings = Serializer.Deserialize<Settings>(data);
 				ApplySettings();
-				UpdateControlState();
 			}
 		}
 
@@ -142,9 +199,18 @@ namespace Rosetta.WinForms
 			}
 
 			Header.Text = TabControl.SelectedTab.Text;
+			ApplySettings();
 		}
 
 		private void ProcessButtonClick(object sender, EventArgs e)
+		{
+		}
+
+		private void RemoveMappingClick(object sender, EventArgs e)
+		{
+		}
+
+		private void RemovePreProcessorClick(object sender, EventArgs e)
 		{
 		}
 
@@ -165,9 +231,16 @@ namespace Rosetta.WinForms
 			}
 		}
 
+		private void TextBoxTextChanged(object sender, EventArgs e)
+		{
+			UpdateControlState();
+		}
+
 		private void UpdateControlState()
 		{
 			DataStoresNext.Enabled = Sources.SelectedItems.Count > 0 && Destinations.SelectedItems.Count > 0;
+			AddMapping.Enabled = MappingSource.SelectedItems.Count > 0 && MappingDestination.SelectedItems.Count > 0;
+			RemoveMapping.Enabled = Mappings.SelectedItems.Count > 0;
 		}
 
 		#endregion

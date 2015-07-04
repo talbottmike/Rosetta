@@ -1,6 +1,5 @@
 ﻿#region References
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +16,7 @@ namespace Rosetta.Configuration
 			Columns = new List<DataStoreColumn>();
 			ConnectionString = string.Empty;
 			Filter = string.Empty;
+			StoreFullName = string.Empty;
 		}
 
 		#endregion
@@ -26,7 +26,7 @@ namespace Rosetta.Configuration
 		/// <summary>
 		/// The column settings for the data store.
 		/// </summary>
-		public IList<DataStoreColumn> Columns { get; set; }
+		public List<DataStoreColumn> Columns { get; set; }
 
 		/// <summary>
 		/// The connection string to access the data store.
@@ -37,6 +37,11 @@ namespace Rosetta.Configuration
 		/// The filter for this data store.
 		/// </summary>
 		public string Filter { get; set; }
+
+		/// <summary>
+		/// The type this configuration is for.
+		/// </summary>
+		public string StoreFullName { get; set; }
 
 		#endregion
 

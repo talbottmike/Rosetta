@@ -9,9 +9,9 @@ namespace Rosetta.DataStores
 {
 	public class FlatFileDataStore : FileDataStore
 	{
-		#region Fields
+		#region Constants
 
-		public static string Filter = "Flat Files|*.*";
+		public const string Filter = "Flat Files|*.*";
 
 		#endregion
 
@@ -40,11 +40,11 @@ namespace Rosetta.DataStores
 
 				while (value.Length < column.Length)
 				{
-					value = column.Alignment == ColumnAlignment.Left 
-						? value + column.PaddingCharacter 
+					value = column.Alignment == ColumnAlignment.Left
+						? value + column.PaddingCharacter
 						: column.PaddingCharacter + value;
 				}
-				
+
 				builder.Append(value);
 			}
 

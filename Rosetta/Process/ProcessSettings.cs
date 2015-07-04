@@ -2,6 +2,17 @@
 {
 	public class ProcessSettings
 	{
+		#region Constructors
+
+		public ProcessSettings()
+		{
+			Filter = string.Empty;
+			Method = ProcessMethod.Trim;
+			Value = string.Empty;
+		}
+
+		#endregion
+
 		#region Properties
 
 		public string Filter { get; set; }

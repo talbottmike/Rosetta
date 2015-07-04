@@ -13,10 +13,8 @@ namespace Rosetta.WinForms
 
 		public Settings()
 		{
-			DestinationStore = string.Empty;
 			DestinationStoreConfiguration = new DataStoreConfiguration();
 			Mappings = new List<Mapping>();
-			SourceStore = string.Empty;
 			SourceStoreConfiguration = new DataStoreConfiguration();
 		}
 
@@ -24,10 +22,8 @@ namespace Rosetta.WinForms
 
 		#region Properties
 
-		public string DestinationStore { get; set; }
 		public DataStoreConfiguration DestinationStoreConfiguration { get; set; }
-		public ICollection<Mapping> Mappings { get; set; }
-		public string SourceStore { get; set; }
+		public List<Mapping> Mappings { get; set; }
 		public DataStoreConfiguration SourceStoreConfiguration { get; set; }
 
 		#endregion

@@ -13,14 +13,9 @@ namespace Rosetta.DataStores
 	{
 		#region Constants
 
+		public const string Filter = "Comma Seperated File (csv)|*.csv";
 		private const char CommaCharacter = ',';
 		private const char QuoteCharacter = '"';
-
-		#endregion
-
-		#region Fields
-
-		public static string Filter = "Comma Seperated File (csv)|*.csv";
 
 		#endregion
 

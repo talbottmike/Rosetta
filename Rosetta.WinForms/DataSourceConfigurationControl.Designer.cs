@@ -29,13 +29,15 @@
 		private void InitializeComponent()
 		{
 			this.HeaderPanel = new System.Windows.Forms.Panel();
+			this.LoadHeaders = new System.Windows.Forms.Button();
+			this.Headers = new System.Windows.Forms.ListBox();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.AlignmentPanel = new System.Windows.Forms.Panel();
 			this.AlignmentRight = new System.Windows.Forms.RadioButton();
 			this.AlignmentLeft = new System.Windows.Forms.RadioButton();
 			this.label6 = new System.Windows.Forms.Label();
 			this.LengthPanel = new System.Windows.Forms.Panel();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.HeaderLength = new System.Windows.Forms.NumericUpDown();
 			this.label7 = new System.Windows.Forms.Label();
 			this.PadCharacterPanel = new System.Windows.Forms.Panel();
 			this.PadCharacter = new System.Windows.Forms.TextBox();
@@ -45,23 +47,22 @@
 			this.HeaderName = new System.Windows.Forms.TextBox();
 			this.HeaderNameLabel = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.Sources = new System.Windows.Forms.ListView();
 			this.FilePanel = new System.Windows.Forms.Panel();
-			this.ButtonSave = new System.Windows.Forms.Button();
 			this.FileName = new System.Windows.Forms.Label();
 			this.FileConnectionString = new System.Windows.Forms.Label();
 			this.ButtonLoad = new System.Windows.Forms.Button();
+			this.ButtonSave = new System.Windows.Forms.Button();
 			this.SqlPanel = new System.Windows.Forms.Panel();
+			this.SqlLoadTables = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
-			this.listView1 = new System.Windows.Forms.ListView();
-			this.button1 = new System.Windows.Forms.Button();
 			this.SqlConnectionString = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
+			this.SqlTables = new System.Windows.Forms.ListBox();
 			this.HeaderPanel.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.AlignmentPanel.SuspendLayout();
 			this.LengthPanel.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.HeaderLength)).BeginInit();
 			this.PadCharacterPanel.SuspendLayout();
 			this.FilePanel.SuspendLayout();
 			this.SqlPanel.SuspendLayout();
@@ -69,17 +70,40 @@
 			// 
 			// HeaderPanel
 			// 
+			this.HeaderPanel.Controls.Add(this.LoadHeaders);
+			this.HeaderPanel.Controls.Add(this.Headers);
 			this.HeaderPanel.Controls.Add(this.flowLayoutPanel1);
 			this.HeaderPanel.Controls.Add(this.RemoveHeader);
 			this.HeaderPanel.Controls.Add(this.HeaderName);
 			this.HeaderPanel.Controls.Add(this.HeaderNameLabel);
 			this.HeaderPanel.Controls.Add(this.label3);
-			this.HeaderPanel.Controls.Add(this.Sources);
 			this.HeaderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.HeaderPanel.Location = new System.Drawing.Point(239, 82);
 			this.HeaderPanel.Name = "HeaderPanel";
 			this.HeaderPanel.Size = new System.Drawing.Size(531, 389);
 			this.HeaderPanel.TabIndex = 0;
+			// 
+			// LoadHeaders
+			// 
+			this.LoadHeaders.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.LoadHeaders.Location = new System.Drawing.Point(25, 346);
+			this.LoadHeaders.Name = "LoadHeaders";
+			this.LoadHeaders.Size = new System.Drawing.Size(100, 23);
+			this.LoadHeaders.TabIndex = 87;
+			this.LoadHeaders.Text = "Load";
+			this.LoadHeaders.UseVisualStyleBackColor = true;
+			this.LoadHeaders.Click += new System.EventHandler(this.LoadHeadersClick);
+			// 
+			// Headers
+			// 
+			this.Headers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.Headers.FormattingEnabled = true;
+			this.Headers.Location = new System.Drawing.Point(25, 37);
+			this.Headers.Name = "Headers";
+			this.Headers.Size = new System.Drawing.Size(209, 303);
+			this.Headers.TabIndex = 86;
+			this.Headers.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// flowLayoutPanel1
 			// 
@@ -142,7 +166,7 @@
 			// 
 			// LengthPanel
 			// 
-			this.LengthPanel.Controls.Add(this.numericUpDown1);
+			this.LengthPanel.Controls.Add(this.HeaderLength);
 			this.LengthPanel.Controls.Add(this.label7);
 			this.LengthPanel.Location = new System.Drawing.Point(0, 56);
 			this.LengthPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -150,12 +174,12 @@
 			this.LengthPanel.Size = new System.Drawing.Size(209, 56);
 			this.LengthPanel.TabIndex = 1;
 			// 
-			// numericUpDown1
+			// HeaderLength
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(0, 20);
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(209, 20);
-			this.numericUpDown1.TabIndex = 80;
+			this.HeaderLength.Location = new System.Drawing.Point(0, 20);
+			this.HeaderLength.Name = "HeaderLength";
+			this.HeaderLength.Size = new System.Drawing.Size(209, 20);
+			this.HeaderLength.TabIndex = 80;
 			// 
 			// label7
 			// 
@@ -185,6 +209,7 @@
 			this.PadCharacter.Name = "PadCharacter";
 			this.PadCharacter.Size = new System.Drawing.Size(209, 20);
 			this.PadCharacter.TabIndex = 80;
+			this.PadCharacter.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
 			// 
 			// label8
 			// 
@@ -200,7 +225,6 @@
 			// AddHeader
 			// 
 			this.AddHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.AddHeader.Enabled = false;
 			this.AddHeader.Location = new System.Drawing.Point(109, 168);
 			this.AddHeader.Margin = new System.Windows.Forms.Padding(0);
 			this.AddHeader.Name = "AddHeader";
@@ -208,17 +232,18 @@
 			this.AddHeader.TabIndex = 80;
 			this.AddHeader.Text = "Add";
 			this.AddHeader.UseVisualStyleBackColor = true;
+			this.AddHeader.Click += new System.EventHandler(this.AddHeaderClick);
 			// 
 			// RemoveHeader
 			// 
 			this.RemoveHeader.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.RemoveHeader.Enabled = false;
-			this.RemoveHeader.Location = new System.Drawing.Point(134, 353);
+			this.RemoveHeader.Location = new System.Drawing.Point(134, 346);
 			this.RemoveHeader.Name = "RemoveHeader";
 			this.RemoveHeader.Size = new System.Drawing.Size(100, 23);
 			this.RemoveHeader.TabIndex = 79;
 			this.RemoveHeader.Text = "Remove";
 			this.RemoveHeader.UseVisualStyleBackColor = true;
+			this.RemoveHeader.Click += new System.EventHandler(this.RemoveHeaderClick);
 			// 
 			// HeaderName
 			// 
@@ -226,6 +251,7 @@
 			this.HeaderName.Name = "HeaderName";
 			this.HeaderName.Size = new System.Drawing.Size(209, 20);
 			this.HeaderName.TabIndex = 78;
+			this.HeaderName.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
 			// 
 			// HeaderNameLabel
 			// 
@@ -249,18 +275,6 @@
 			this.label3.TabIndex = 76;
 			this.label3.Text = "headers";
 			// 
-			// Sources
-			// 
-			this.Sources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.Sources.HideSelection = false;
-			this.Sources.Location = new System.Drawing.Point(25, 37);
-			this.Sources.Name = "Sources";
-			this.Sources.Size = new System.Drawing.Size(209, 310);
-			this.Sources.TabIndex = 75;
-			this.Sources.UseCompatibleStateImageBehavior = false;
-			this.Sources.View = System.Windows.Forms.View.List;
-			// 
 			// FilePanel
 			// 
 			this.FilePanel.Controls.Add(this.FileName);
@@ -273,21 +287,6 @@
 			this.FilePanel.Size = new System.Drawing.Size(770, 82);
 			this.FilePanel.TabIndex = 2;
 			this.FilePanel.Visible = false;
-			// 
-			// ButtonSave
-			// 
-			this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.ButtonSave.BackColor = System.Drawing.SystemColors.Highlight;
-			this.ButtonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.ButtonSave.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ButtonSave.ForeColor = System.Drawing.SystemColors.HighlightText;
-			this.ButtonSave.Location = new System.Drawing.Point(14, 16);
-			this.ButtonSave.Name = "ButtonSave";
-			this.ButtonSave.Size = new System.Drawing.Size(75, 50);
-			this.ButtonSave.TabIndex = 3;
-			this.ButtonSave.Text = "";
-			this.ButtonSave.UseVisualStyleBackColor = false;
-			this.ButtonSave.Click += new System.EventHandler(this.ButtonSaveClick);
 			// 
 			// FileName
 			// 
@@ -324,13 +323,28 @@
 			this.ButtonLoad.UseVisualStyleBackColor = false;
 			this.ButtonLoad.Click += new System.EventHandler(this.ButtonLoadClick);
 			// 
+			// ButtonSave
+			// 
+			this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ButtonSave.BackColor = System.Drawing.SystemColors.Highlight;
+			this.ButtonSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.ButtonSave.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ButtonSave.ForeColor = System.Drawing.SystemColors.HighlightText;
+			this.ButtonSave.Location = new System.Drawing.Point(14, 16);
+			this.ButtonSave.Name = "ButtonSave";
+			this.ButtonSave.Size = new System.Drawing.Size(75, 50);
+			this.ButtonSave.TabIndex = 3;
+			this.ButtonSave.Text = "";
+			this.ButtonSave.UseVisualStyleBackColor = false;
+			this.ButtonSave.Click += new System.EventHandler(this.ButtonSaveClick);
+			// 
 			// SqlPanel
 			// 
+			this.SqlPanel.Controls.Add(this.SqlLoadTables);
 			this.SqlPanel.Controls.Add(this.label5);
-			this.SqlPanel.Controls.Add(this.listView1);
-			this.SqlPanel.Controls.Add(this.button1);
 			this.SqlPanel.Controls.Add(this.SqlConnectionString);
 			this.SqlPanel.Controls.Add(this.label4);
+			this.SqlPanel.Controls.Add(this.SqlTables);
 			this.SqlPanel.Dock = System.Windows.Forms.DockStyle.Left;
 			this.SqlPanel.Location = new System.Drawing.Point(0, 82);
 			this.SqlPanel.Name = "SqlPanel";
@@ -338,38 +352,27 @@
 			this.SqlPanel.TabIndex = 3;
 			this.SqlPanel.Visible = false;
 			// 
+			// SqlLoadTables
+			// 
+			this.SqlLoadTables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.SqlLoadTables.Location = new System.Drawing.Point(24, 346);
+			this.SqlLoadTables.Name = "SqlLoadTables";
+			this.SqlLoadTables.Size = new System.Drawing.Size(100, 23);
+			this.SqlLoadTables.TabIndex = 84;
+			this.SqlLoadTables.Text = "Load";
+			this.SqlLoadTables.UseVisualStyleBackColor = true;
+			this.SqlLoadTables.Click += new System.EventHandler(this.SqlLoadTablesClick);
+			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
 			this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label5.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label5.Location = new System.Drawing.Point(22, 94);
+			this.label5.Location = new System.Drawing.Point(22, 69);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(43, 17);
 			this.label5.TabIndex = 83;
 			this.label5.Text = "tables";
-			// 
-			// listView1
-			// 
-			this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(25, 114);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(209, 233);
-			this.listView1.TabIndex = 82;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			this.listView1.View = System.Windows.Forms.View.List;
-			// 
-			// button1
-			// 
-			this.button1.Enabled = false;
-			this.button1.Location = new System.Drawing.Point(134, 63);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(100, 23);
-			this.button1.TabIndex = 81;
-			this.button1.Text = "connect";
-			this.button1.UseVisualStyleBackColor = true;
 			// 
 			// SqlConnectionString
 			// 
@@ -377,6 +380,7 @@
 			this.SqlConnectionString.Name = "SqlConnectionString";
 			this.SqlConnectionString.Size = new System.Drawing.Size(209, 20);
 			this.SqlConnectionString.TabIndex = 80;
+			this.SqlConnectionString.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
 			// 
 			// label4
 			// 
@@ -388,6 +392,17 @@
 			this.label4.Size = new System.Drawing.Size(108, 17);
 			this.label4.TabIndex = 79;
 			this.label4.Text = "connection string";
+			// 
+			// SqlTables
+			// 
+			this.SqlTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.SqlTables.FormattingEnabled = true;
+			this.SqlTables.Location = new System.Drawing.Point(24, 89);
+			this.SqlTables.Name = "SqlTables";
+			this.SqlTables.Size = new System.Drawing.Size(209, 251);
+			this.SqlTables.TabIndex = 85;
+			this.SqlTables.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// DataSourceConfigurationControl
 			// 
@@ -406,7 +421,7 @@
 			this.AlignmentPanel.PerformLayout();
 			this.LengthPanel.ResumeLayout(false);
 			this.LengthPanel.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.HeaderLength)).EndInit();
 			this.PadCharacterPanel.ResumeLayout(false);
 			this.PadCharacterPanel.PerformLayout();
 			this.FilePanel.ResumeLayout(false);
@@ -425,15 +440,12 @@
 		private System.Windows.Forms.TextBox HeaderName;
 		private System.Windows.Forms.Label HeaderNameLabel;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ListView Sources;
 		private System.Windows.Forms.Panel FilePanel;
 		private System.Windows.Forms.Panel SqlPanel;
 		private System.Windows.Forms.Button ButtonSave;
 		private System.Windows.Forms.Label FileName;
 		private System.Windows.Forms.Label FileConnectionString;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.ListView listView1;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.TextBox SqlConnectionString;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -443,10 +455,14 @@
 		private System.Windows.Forms.RadioButton AlignmentLeft;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private System.Windows.Forms.NumericUpDown HeaderLength;
 		private System.Windows.Forms.Panel PadCharacterPanel;
 		private System.Windows.Forms.TextBox PadCharacter;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.Button ButtonLoad;
+		private System.Windows.Forms.Button SqlLoadTables;
+		private System.Windows.Forms.ListBox Headers;
+		private System.Windows.Forms.ListBox SqlTables;
+		private System.Windows.Forms.Button LoadHeaders;
 	}
 }

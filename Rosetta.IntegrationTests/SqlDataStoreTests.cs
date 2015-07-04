@@ -1,5 +1,6 @@
 ﻿#region References
 
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,7 +28,7 @@ namespace Rosetta.IntegrationTests
 		{
 			var configuration = new DataStoreConfiguration();
 			configuration.ConnectionString = _connectionString;
-			configuration.Columns = new[]
+			configuration.Columns = new List<DataStoreColumn>
 			{
 				new DataStoreColumn { Name = "First Name", Source = "People" },
 				new DataStoreColumn { Name = "Last Name", Source = "People" },
@@ -53,7 +54,7 @@ namespace Rosetta.IntegrationTests
 		{
 			var configuration = new DataStoreConfiguration();
 			configuration.ConnectionString = _connectionString;
-			configuration.Columns = new[]
+			configuration.Columns = new List<DataStoreColumn>
 			{
 				new DataStoreColumn { Name = "First Name", Source = "People" },
 				new DataStoreColumn { Name = "Last Name", Source = "People" },

@@ -443,6 +443,7 @@
 			this.Mappings.Name = "Mappings";
 			this.Mappings.Size = new System.Drawing.Size(312, 238);
 			this.Mappings.TabIndex = 9;
+			this.Mappings.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// RemoveMapping
 			// 
@@ -453,6 +454,7 @@
 			this.RemoveMapping.TabIndex = 10;
 			this.RemoveMapping.Text = "Remove";
 			this.RemoveMapping.UseVisualStyleBackColor = true;
+			this.RemoveMapping.Click += new System.EventHandler(this.RemoveMappingClick);
 			// 
 			// AddMapping
 			// 
@@ -462,6 +464,7 @@
 			this.AddMapping.TabIndex = 6;
 			this.AddMapping.Text = "Add";
 			this.AddMapping.UseVisualStyleBackColor = true;
+			this.AddMapping.Click += new System.EventHandler(this.AddMappingClick);
 			// 
 			// MappingDestination
 			// 
@@ -470,6 +473,7 @@
 			this.MappingDestination.Name = "MappingDestination";
 			this.MappingDestination.Size = new System.Drawing.Size(180, 355);
 			this.MappingDestination.TabIndex = 3;
+			this.MappingDestination.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// MappingSource
 			// 
@@ -479,6 +483,7 @@
 			this.MappingSource.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
 			this.MappingSource.Size = new System.Drawing.Size(180, 355);
 			this.MappingSource.TabIndex = 1;
+			this.MappingSource.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// ProcessorPage
 			// 
@@ -510,6 +515,7 @@
 			this.AddPreProcessor.TabIndex = 6;
 			this.AddPreProcessor.Text = "Add";
 			this.AddPreProcessor.UseVisualStyleBackColor = true;
+			this.AddPreProcessor.Click += new System.EventHandler(this.AddPreProcessorClick);
 			// 
 			// RemovePreProcessor
 			// 
@@ -521,6 +527,7 @@
 			this.RemovePreProcessor.TabIndex = 9;
 			this.RemovePreProcessor.Text = "Remove";
 			this.RemovePreProcessor.UseVisualStyleBackColor = true;
+			this.RemovePreProcessor.Click += new System.EventHandler(this.RemovePreProcessorClick);
 			// 
 			// label11
 			// 
@@ -550,6 +557,7 @@
 			this.ProcessorValue.Name = "ProcessorValue";
 			this.ProcessorValue.Size = new System.Drawing.Size(156, 20);
 			this.ProcessorValue.TabIndex = 5;
+			this.ProcessorValue.TextChanged += new System.EventHandler(this.TextBoxTextChanged);
 			// 
 			// PreProcessors
 			// 
@@ -561,6 +569,7 @@
 			this.PreProcessors.Name = "PreProcessors";
 			this.PreProcessors.Size = new System.Drawing.Size(723, 212);
 			this.PreProcessors.TabIndex = 8;
+			this.PreProcessors.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// label2
 			// 
@@ -591,6 +600,7 @@
 			this.ProcessorMethod.Name = "ProcessorMethod";
 			this.ProcessorMethod.Size = new System.Drawing.Size(223, 108);
 			this.ProcessorMethod.TabIndex = 3;
+			this.ProcessorMethod.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// ProcessorsBack
 			// 
@@ -621,6 +631,7 @@
 			this.ProcessorMappings.Name = "ProcessorMappings";
 			this.ProcessorMappings.Size = new System.Drawing.Size(312, 108);
 			this.ProcessorMappings.TabIndex = 1;
+			this.ProcessorMappings.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
 			// ProcessPage
 			// 

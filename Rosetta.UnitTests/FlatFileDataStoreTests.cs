@@ -1,5 +1,6 @@
 ﻿#region References
 
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rosetta.Configuration;
 using Rosetta.DataStores;
@@ -18,7 +19,7 @@ namespace Rosetta.UnitTests
 		{
 			var configuration = new DataStoreConfiguration
 			{
-				Columns = new[]
+				Columns = new List<DataStoreColumn>
 				{
 					new DataStoreColumn { Name = "Name", Length = 12 },
 					new DataStoreColumn { Name = "Age", Length = 2 }
@@ -37,7 +38,7 @@ namespace Rosetta.UnitTests
 		{
 			var configuration = new DataStoreConfiguration
 			{
-				Columns = new[]
+				Columns = new List<DataStoreColumn>
 				{
 					new DataStoreColumn { Name = "Name", Length = 12 },
 					new DataStoreColumn { Name = "Age", Length = 2 },

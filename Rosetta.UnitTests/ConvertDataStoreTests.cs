@@ -25,7 +25,7 @@ namespace Rosetta.UnitTests
 
 			var mappings = new List<Mapping>
 			{
-				new Mapping { DestinationHeader = "Name", SourceHeaders = new[] { "First Name" }, Type = "System.String" }
+				new Mapping { DestinationHeader = "Name", SourceHeaders = new List<string> { "First Name" }, Type = "System.String" }
 			};
 
 			configuration = DataStoreConfiguration.FromColumns("Name");
@@ -52,7 +52,7 @@ namespace Rosetta.UnitTests
 				new Mapping
 				{
 					DestinationHeader = "Name",
-					SourceHeaders = new[] { "First Name", "Last Name" },
+					SourceHeaders = new List<string> { "First Name", "Last Name" },
 					Type = "System.String"
 				}
 			};
@@ -80,10 +80,10 @@ namespace Rosetta.UnitTests
 				new Mapping
 				{
 					DestinationHeader = "Height In Inches",
-					SourceHeaders = new[] { "Height Inches", "Height Feet" },
+					SourceHeaders = new List<string> { "Height Inches", "Height Feet" },
 					CombineMethod = CombineMethod.Sum,
 					Type = "System.Int32",
-					PreProcesses = new[] { new ProcessSettings { Method = ProcessMethod.Multiply, Value = "12", Filter = "Height Feet" } }
+					PreProcesses = new List<ProcessSettings> { new ProcessSettings { Method = ProcessMethod.Multiply, Value = "12", Filter = "Height Feet" } }
 				}
 			};
 
@@ -110,7 +110,7 @@ namespace Rosetta.UnitTests
 				new Mapping
 				{
 					DestinationHeader = "Name",
-					SourceHeaders = new[] { "First Name", "Last Name" },
+					SourceHeaders = new List<string> { "First Name", "Last Name" },
 					Type = "System.String",
 					CombineMethod = CombineMethod.Join,
 					CombineValue = " "
@@ -140,11 +140,11 @@ namespace Rosetta.UnitTests
 				new Mapping
 				{
 					DestinationHeader = "Name",
-					SourceHeaders = new[] { "First Name", "Last Name" },
+					SourceHeaders = new List<string> { "First Name", "Last Name" },
 					Type = "System.String",
 					CombineMethod = CombineMethod.Join,
 					CombineValue = " ",
-					PreProcesses = new[]
+					PreProcesses = new List<ProcessSettings>
 					{
 						new ProcessSettings { Method = ProcessMethod.Trim, Filter = "First" },
 						new ProcessSettings { Method = ProcessMethod.TrimLeft, Filter = "Last" },
@@ -176,7 +176,7 @@ namespace Rosetta.UnitTests
 				new Mapping
 				{
 					DestinationHeader = "Name",
-					SourceHeaders = new[] { "First Name", "Last Name" },
+					SourceHeaders = new List<string> { "First Name", "Last Name" },
 					Type = "System.String",
 					CombineValue = " "
 				}

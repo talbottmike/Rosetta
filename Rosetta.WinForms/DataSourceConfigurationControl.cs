@@ -1,9 +1,12 @@
 ﻿#region References
 
 using System;
+using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Rosetta.Configuration;
+using Rosetta.Extensions;
 
 #endregion
 
@@ -14,7 +17,6 @@ namespace Rosetta.WinForms
 		#region Fields
 
 		private DataStoreConfiguration _configuration;
-		private string _fullName;
 		private bool _isSource;
 
 		#endregion
@@ -24,45 +26,105 @@ namespace Rosetta.WinForms
 		public DataSourceConfigurationControl()
 		{
 			InitializeComponent();
+			_configuration = new DataStoreConfiguration();
 		}
 
 		#endregion
 
 		#region Methods
 
-		public void LoadConfiguration(DataStoreConfiguration configuration)
+		public void LoadConfiguration(DataStoreConfiguration configuration, bool isSource)
 		{
 			_configuration = configuration;
-			SqlConnectionString.Text = _configuration.ConnectionString;
-			FileConnectionString.Text = _configuration.ConnectionString;
+			InitializeControls(isSource);
+			ApplyConfiguration();
+			UpdateControlState();
 		}
 
-		public DataStoreConfiguration ReadConfiguration()
+		private void AddHeaderClick(object sender, EventArgs e)
 		{
-			var response = _configuration;
+			_configuration.Columns.Add(new DataStoreColumn
+			{
+				Alignment = AlignmentLeft.Checked ? ColumnAlignment.Left : ColumnAlignment.Right,
+				Length = (int) HeaderLength.Value,
+				Name = HeaderName.Text,
+				PaddingCharacter = PadCharacter.Text.Length > 0 ? PadCharacter.Text.First() : ' ',
+				Source = string.Empty
+			});
 
-			switch (_fullName)
+			HeaderName.Clear();
+			ApplyConfiguration();
+		}
+
+		private void ApplyConfiguration()
+		{
+			switch (_configuration.StoreFullName)
 			{
 				case "Rosetta.DataStores.CommaSeperatedFileDataStore":
 				case "Rosetta.DataStores.FlatFileDataStore":
-					response.ConnectionString = FileConnectionString.Text;
+					FileConnectionString.Text = _configuration.ConnectionString;
+					FileName.Text = string.IsNullOrWhiteSpace(_configuration.ConnectionString)
+						? "Select File" : Path.GetFileName(FileConnectionString.Text);
 					break;
 
 				case "Rosetta.DataStores.SqlDataStore":
-					response.ConnectionString = SqlConnectionString.Text;
+					SqlConnectionString.Text = string.IsNullOrWhiteSpace(_configuration.ConnectionString)
+						? "Data Source=localhost;Initial Catalog=Rosetta;Integrated Security=True;"
+						: _configuration.ConnectionString;
+					SqlTables.LoadItems(_configuration.Columns.Select(x => x.Source).Distinct().Where(x => x.Length > 0));
 					break;
 			}
 
-			return response;
+			Headers.LoadItems(_configuration.Columns.Select(x => x.Name));
+
+			UpdateControlState();
 		}
 
-		public void SetStoreType(string fullName, bool isSource)
+		private void ButtonLoadClick(object sender, EventArgs e)
 		{
-			_fullName = fullName;
+			using (var dialog = new OpenFileDialog())
+			{
+				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+				dialog.Filter = _configuration.Filter;
+
+				if (dialog.ShowDialog(this) != DialogResult.OK)
+				{
+					return;
+				}
+
+				_configuration.ConnectionString = dialog.FileName;
+				ApplyConfiguration();
+			}
+		}
+
+		private void ButtonSaveClick(object sender, EventArgs e)
+		{
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+				dialog.Filter = _configuration.Filter;
+
+				if (dialog.ShowDialog(this) != DialogResult.OK)
+				{
+					return;
+				}
+
+				_configuration.ConnectionString = dialog.FileName;
+				ApplyConfiguration();
+			}
+		}
+
+		private void DataSourceConfigurationControl_Load(object sender, EventArgs e)
+		{
+		}
+
+		private void InitializeControls(bool isSource)
+		{
 			_isSource = isSource;
 
 			ButtonLoad.Visible = _isSource;
 			ButtonSave.Visible = !_isSource;
+			LoadHeaders.Visible = _isSource;
 
 			FilePanel.Visible = false;
 			SqlPanel.Visible = false;
@@ -74,7 +136,7 @@ namespace Rosetta.WinForms
 			RemoveHeader.Visible = false;
 			AddHeader.Visible = false;
 
-			switch (_fullName)
+			switch (_configuration.StoreFullName)
 			{
 				case "Rosetta.DataStores.CommaSeperatedFileDataStore":
 					FilePanel.Visible = true;
@@ -98,42 +160,90 @@ namespace Rosetta.WinForms
 			}
 		}
 
-		private void ButtonLoadClick(object sender, EventArgs e)
+		private void ListBoxSelectedIndexChanged(object sender, EventArgs e)
 		{
-			using (var dialog = new OpenFileDialog())
+			UpdateControlState();
+		}
+
+		private void LoadHeadersClick(object sender, EventArgs e)
+		{
+			switch (_configuration.StoreFullName)
 			{
-				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-				dialog.Filter = _configuration.Filter;
-
-				if (dialog.ShowDialog(this) != DialogResult.OK)
-				{
-					return;
-				}
-
-				FileConnectionString.Text = dialog.FileName;
-				FileName.Text = Path.GetFileName(FileConnectionString.Text);
+				case "Rosetta.DataStores.SqlDataStore":
+					LoadHeadersFromSqlTable(SqlTables.SelectedItem.ToString());
+					break;
 			}
 		}
 
-		private void ButtonSaveClick(object sender, EventArgs e)
+		private void LoadHeadersFromSqlTable(string table)
 		{
-			using (var dialog = new SaveFileDialog())
+			using (var connection = new SqlConnection(SqlConnectionString.Text))
 			{
-				dialog.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-				dialog.Filter = _configuration.Filter;
+				var command = new SqlCommand("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName", connection);
+				command.Connection.Open();
+				command.Parameters.AddWithValue("@TableName", table);
+				var reader = command.ExecuteReader();
 
-				if (dialog.ShowDialog(this) != DialogResult.OK)
+				_configuration.Columns.Clear();
+
+				while (reader.Read())
 				{
-					return;
+					_configuration.Columns.Add(new DataStoreColumn { Name = reader["COLUMN_NAME"].ToString(), Source = table });
 				}
+			}
 
-				FileConnectionString.Text = dialog.FileName;
-				FileName.Text = Path.GetFileName(FileConnectionString.Text);
+			ApplyConfiguration();
+		}
+
+		private void RemoveHeaderClick(object sender, EventArgs e)
+		{
+			var column = _configuration.Columns.FirstOrDefault(x => x.Name == Headers.SelectedItem.ToString());
+			if (column == null)
+			{
+				return;
+			}
+
+			Headers.Items.Remove(column.Name);
+			_configuration.Columns.Remove(column);
+
+			ApplyConfiguration();
+		}
+
+		private void SqlLoadTablesClick(object sender, EventArgs e)
+		{
+			using (var connection = new SqlConnection(SqlConnectionString.Text))
+			{
+				var command = new SqlCommand("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES", connection);
+				command.Connection.Open();
+				var reader = command.ExecuteReader();
+
+				SqlTables.Items.Clear();
+
+				while (reader.Read())
+				{
+					SqlTables.Items.Add(reader["TABLE_NAME"].ToString());
+				}
 			}
 		}
 
-		private void DataSourceConfigurationControl_Load(object sender, EventArgs e)
+		private void TextBoxTextChanged(object sender, EventArgs e)
 		{
+			var textBox = (TextBox) sender;
+
+			if (textBox == SqlConnectionString && _configuration.StoreFullName == "Rosetta.DataStores.SqlDataStore")
+			{
+				_configuration.ConnectionString = textBox.Text;
+			}
+
+			ApplyConfiguration();
+		}
+
+		private void UpdateControlState()
+		{
+			SqlLoadTables.Enabled = SqlConnectionString.Text.Length > 0;
+			LoadHeaders.Visible = SqlTables.SelectedItems.Count > 0;
+			AddHeader.Enabled = !string.IsNullOrWhiteSpace(AddHeader.Text);
+			RemoveHeader.Enabled = Headers.SelectedIndices.Count > 0;
 		}
 
 		#endregion
