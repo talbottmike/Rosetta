@@ -32,9 +32,9 @@ namespace Rosetta.Types
 		/// <param name="method"> The method used to combine the items. </param>
 		/// <param name="delimiter"> The delimiter used when combining the item. </param>
 		/// <returns> The items in a combined format. </returns>
-		public char Combine(IEnumerable<char> items, CombineMethod method, char delimiter)
+		public char Combine(IEnumerable<char> items, CombineMethod method, string delimiter)
 		{
-			throw new NotImplementedException();
+			return items.FirstOrDefault();
 		}
 
 		/// <summary>

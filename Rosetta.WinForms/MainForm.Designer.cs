@@ -62,6 +62,8 @@
 			this.MappingDestination = new System.Windows.Forms.ListBox();
 			this.MappingSource = new System.Windows.Forms.ListBox();
 			this.ProcessorPage = new System.Windows.Forms.TabPage();
+			this.label4 = new System.Windows.Forms.Label();
+			this.ProcessorFilter = new System.Windows.Forms.TextBox();
 			this.AddPreProcessor = new System.Windows.Forms.Button();
 			this.RemovePreProcessor = new System.Windows.Forms.Button();
 			this.label11 = new System.Windows.Forms.Label();
@@ -487,6 +489,8 @@
 			// 
 			// ProcessorPage
 			// 
+			this.ProcessorPage.Controls.Add(this.label4);
+			this.ProcessorPage.Controls.Add(this.ProcessorFilter);
 			this.ProcessorPage.Controls.Add(this.AddPreProcessor);
 			this.ProcessorPage.Controls.Add(this.RemovePreProcessor);
 			this.ProcessorPage.Controls.Add(this.label11);
@@ -506,10 +510,28 @@
 			this.ProcessorPage.Text = "Processors";
 			this.ProcessorPage.UseVisualStyleBackColor = true;
 			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label4.Location = new System.Drawing.Point(592, 67);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(34, 17);
+			this.label4.TabIndex = 12;
+			this.label4.Text = "filter";
+			// 
+			// ProcessorFilter
+			// 
+			this.ProcessorFilter.Location = new System.Drawing.Point(595, 87);
+			this.ProcessorFilter.Name = "ProcessorFilter";
+			this.ProcessorFilter.Size = new System.Drawing.Size(156, 20);
+			this.ProcessorFilter.TabIndex = 13;
+			// 
 			// AddPreProcessor
 			// 
 			this.AddPreProcessor.Enabled = false;
-			this.AddPreProcessor.Location = new System.Drawing.Point(651, 66);
+			this.AddPreProcessor.Location = new System.Drawing.Point(651, 125);
 			this.AddPreProcessor.Name = "AddPreProcessor";
 			this.AddPreProcessor.Size = new System.Drawing.Size(100, 23);
 			this.AddPreProcessor.TabIndex = 6;
@@ -783,6 +805,8 @@
 		private DataSourceConfigurationControl DestinationConfiguration;
 		private System.Windows.Forms.ListBox Sources;
 		private System.Windows.Forms.ListBox Destinations;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox ProcessorFilter;
 	}
 }
 

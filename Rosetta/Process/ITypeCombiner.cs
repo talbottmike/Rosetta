@@ -17,7 +17,7 @@ namespace Rosetta.Process
 		/// <param name="method"> The method used to combine the items. </param>
 		/// <param name="delimiter"> The delimiter used when combining the item. </param>
 		/// <returns> The items in a combined format. </returns>
-		T Combine(IEnumerable<T> items, CombineMethod method, T delimiter);
+		T Combine(IEnumerable<T> items, CombineMethod method, string delimiter);
 
 		#endregion
 	}

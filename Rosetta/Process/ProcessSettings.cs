@@ -18,6 +18,7 @@
 		public string Filter { get; set; }
 		public ProcessMethod Method { get; set; }
 		public string Value { get; set; }
+		public string DisplayName => $"{Filter},{Method},{Value}";
 
 		#endregion
 	}

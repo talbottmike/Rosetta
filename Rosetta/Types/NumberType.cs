@@ -24,7 +24,7 @@ namespace Rosetta.Types
 		/// <param name="method"> The method used to combine the items. </param>
 		/// <param name="delimiter"> The delimiter used when combining the item. </param>
 		/// <returns> The items in a combined format. </returns>
-		public int Combine(IEnumerable<int> items, CombineMethod method, int delimiter)
+		public int Combine(IEnumerable<int> items, CombineMethod method, string delimiter)
 		{
 			switch (method)
 			{
