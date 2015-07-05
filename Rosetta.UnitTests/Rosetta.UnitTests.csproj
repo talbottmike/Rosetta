@@ -68,6 +68,9 @@
     <Compile Include="TestHelper.cs" />
     <Compile Include="ConvertDataStoreTests.cs" />
     <Compile Include="CommaSeperatedFileDataStoreTests.cs" />
+    <Compile Include="Types\Int16ConverterTests.cs" />
+    <Compile Include="Types\Int64ConverterTests.cs" />
+    <Compile Include="Types\UInt16ConverterTests.cs" />
     <Compile Include="Types\UInt32ConverterTests.cs" />
     <Compile Include="Types\Int32ConverterTests.cs" />
     <Compile Include="Types\TimeSpanTypeTests.cs" />

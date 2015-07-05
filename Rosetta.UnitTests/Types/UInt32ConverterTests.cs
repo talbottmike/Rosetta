@@ -29,21 +29,21 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromDateTime()
 		{
-			TestHelper.AreEqual(uint.MaxValue, Converter.Convert<uint>(DateTime.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(DateTime.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(DateTime.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDecimal()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>((decimal) uint.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>((decimal) uint.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>((decimal) uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDouble()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>((double) uint.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>((double) uint.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>((double) uint.MinValue));
 		}
 
@@ -57,14 +57,14 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromInt32()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>(uint.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(uint.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt64()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>((long) uint.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>((long) uint.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>((long) uint.MinValue));
 		}
 
@@ -85,14 +85,14 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromString()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>(uint.MaxValue.ToString()));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(uint.MaxValue.ToString()));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(uint.MinValue.ToString()));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>(TimeSpan.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(TimeSpan.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(TimeSpan.MinValue));
 		}
 
@@ -106,21 +106,21 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromUInt32()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>(uint.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(uint.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt64()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Convert<uint>(ulong.MaxValue));
+			TestHelper.AreEqual(65535, Converter.Convert<uint>(ulong.MaxValue));
 			TestHelper.AreEqual(0, Converter.Convert<uint>(ulong.MinValue));
 		}
 
 		[TestMethod]
 		public void Parse()
 		{
-			TestHelper.AreEqual(4294967295, Converter.Parse<uint>("4294967295"));
+			TestHelper.AreEqual(65535, Converter.Parse<uint>("65535"));
 		}
 
 		#endregion

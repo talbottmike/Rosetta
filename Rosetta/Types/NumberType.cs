@@ -506,7 +506,7 @@ namespace Rosetta.Types
 				return ushort.MinValue;
 			}
 
-			if (value > uint.MaxValue)
+			if (value > ushort.MaxValue)
 			{
 				return ushort.MaxValue;
 			}
@@ -543,7 +543,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		ulong ITypeConverter<ulong>.Parse(string input)
 		{
-			return ulong.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < ulong.MinValue)
+			{
+				return ulong.MinValue;
+			}
+
+			if (value > ulong.MaxValue)
+			{
+				return ulong.MaxValue;
+			}
+
+			return (ulong) value;
 		}
 
 		/// <summary>
@@ -597,7 +609,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		long ITypeConverter<long>.Parse(string input)
 		{
-			return long.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < long.MinValue)
+			{
+				return long.MinValue;
+			}
+
+			if (value > long.MaxValue)
+			{
+				return long.MaxValue;
+			}
+
+			return (long) value;
 		}
 
 		/// <summary>

@@ -29,7 +29,7 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromDateTime()
 		{
-			Assert.AreEqual(int.MaxValue, Converter.Convert<int>(DateTime.MaxValue));
+			Assert.AreEqual(2147483647, Converter.Convert<int>(DateTime.MaxValue));
 			Assert.AreEqual(0, Converter.Convert<int>(DateTime.MinValue));
 		}
 
