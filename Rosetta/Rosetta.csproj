@@ -50,6 +50,7 @@
     <Compile Include="DataStores\FlatFileDataStore.cs" />
     <Compile Include="DataStores\MemoryDataStore.cs" />
     <Compile Include="Extensions\ComboBoxExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ListBoxExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Serialize.cs" />

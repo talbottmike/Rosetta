@@ -49,6 +49,24 @@ namespace Rosetta.IntegrationTests
 			TestHelper.AreEqual(expected, actual);
 		}
 
+		[TestInitialize]
+		public void TestInitialize()
+		{
+			using (var connection = new SqlConnection(_connectionString.Replace("Database=Rosetta", "Database=master")))
+			{
+				var command = new SqlCommand(Resources.CreateDatabase, connection);
+				command.Connection.Open();
+				command.ExecuteNonQuery();
+			}
+
+			using (var connection = new SqlConnection(_connectionString))
+			{
+				var command = new SqlCommand(Resources.CreateTablePeople, connection);
+				command.Connection.Open();
+				command.ExecuteNonQuery();
+			}
+		}
+
 		[TestMethod]
 		public void WriteToTable()
 		{
@@ -73,24 +91,6 @@ namespace Rosetta.IntegrationTests
 			var expected = memoryStore.Read().ToList();
 
 			TestHelper.AreEqual(expected, actual);
-		}
-
-		[TestInitialize]
-		public void TestInitialize()
-		{
-			using (var connection = new SqlConnection(_connectionString.Replace("Database=Rosetta", "Database=master")))
-			{
-				var command = new SqlCommand(Resources.CreateDatabase, connection);
-				command.Connection.Open();
-				command.ExecuteNonQuery();
-			}
-
-			using (var connection = new SqlConnection(_connectionString))
-			{
-				var command = new SqlCommand(Resources.CreateTablePeople, connection);
-				command.Connection.Open();
-				command.ExecuteNonQuery();
-			}
 		}
 
 		private void RunSql(string sql)

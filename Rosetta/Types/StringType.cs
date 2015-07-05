@@ -9,7 +9,9 @@ using Rosetta.Process;
 
 namespace Rosetta.Types
 {
-	public class StringType : Type, ITypeConverter<string>, ITypeConverter<char>, ITypeCombiner<string>, ITypeCombiner<char>
+	public class StringType : Type,
+		ITypeConverter<string>, ITypeCombiner<string>,
+		ITypeConverter<char>, ITypeCombiner<char>
 	{
 		#region Methods
 
@@ -129,7 +131,7 @@ namespace Rosetta.Types
 
 		public char Process(char input, ProcessSettings settings)
 		{
-			throw new NotImplementedException();
+			return input;
 		}
 
 		/// <summary>

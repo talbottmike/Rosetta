@@ -5,15 +5,86 @@
 #region References
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Rosetta.Process;
 
 #endregion
 
 namespace Rosetta.Types
 {
-	public class DecimalType : Type, ITypeConverter<decimal>, ITypeConverter<float>, ITypeConverter<double>
+	public class DecimalType : Type,
+		ITypeConverter<decimal>, ITypeCombiner<decimal>,
+		ITypeConverter<float>, ITypeCombiner<float>,
+		ITypeConverter<double>, ITypeCombiner<double>
 	{
 		#region Methods
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public decimal Combine(IEnumerable<decimal> items, CombineMethod method, string delimiter)
+		{
+			switch (method)
+			{
+				case CombineMethod.Sum:
+					return items.Sum();
+
+				case CombineMethod.Join:
+					return decimal.Parse(string.Join("", items.Select(x => x.ToString())));
+
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public float Combine(IEnumerable<float> items, CombineMethod method, string delimiter)
+		{
+			switch (method)
+			{
+				case CombineMethod.Sum:
+					return items.Sum();
+
+				case CombineMethod.Join:
+					return float.Parse(string.Join("", items.Select(x => x.ToString())));
+
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		/// <summary>
+		/// Combines the list of items using the provided method.
+		/// </summary>
+		/// <param name="items"> The items to be combined. </param>
+		/// <param name="method"> The method used to combine the items. </param>
+		/// <param name="delimiter"> The delimiter used when combining the item. </param>
+		/// <returns> The items in a combined format. </returns>
+		public double Combine(IEnumerable<double> items, CombineMethod method, string delimiter)
+		{
+			switch (method)
+			{
+				case CombineMethod.Sum:
+					return items.Sum();
+
+				case CombineMethod.Join:
+					return double.Parse(string.Join("", items.Select(x => x.ToString())));
+
+				default:
+					throw new NotImplementedException();
+			}
+		}
 
 		/// <summary>
 		/// Convert the input to a specific type with optional formatting.
@@ -50,17 +121,33 @@ namespace Rosetta.Types
 
 		public decimal Process(decimal input, ProcessSettings settings)
 		{
-			throw new NotImplementedException();
+			switch (settings.Method)
+			{
+				case ProcessMethod.Add:
+					return input + Converter.Convert<decimal>(settings.Value);
+
+				case ProcessMethod.Divide:
+					return input / Converter.Convert<decimal>(settings.Value);
+
+				case ProcessMethod.Multiply:
+					return input * Converter.Convert<decimal>(settings.Value);
+
+				case ProcessMethod.Subtract:
+					return input - Converter.Convert<decimal>(settings.Value);
+
+				default:
+					throw new NotImplementedException();
+			}
 		}
 
 		public float Process(float input, ProcessSettings settings)
 		{
-			throw new NotImplementedException();
+			return (float) Process((decimal) input, settings);
 		}
 
 		public double Process(double input, ProcessSettings settings)
 		{
-			throw new NotImplementedException();
+			return (double) Process((decimal) input, settings);
 		}
 
 		private static T Convert<T>(decimal input, string format)

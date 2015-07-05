@@ -47,7 +47,7 @@ namespace Rosetta.WinForms
 		{
 			_settings.Mappings.Add(new Mapping
 			{
-				CombineMethod = (CombineMethod) Enum.Parse(typeof(CombineMethod), MappingCombineMethod.Text),
+				CombineMethod = (CombineMethod) Enum.Parse(typeof (CombineMethod), MappingCombineMethod.Text),
 				CombineValue = MappingCombineValue.Text,
 				DestinationHeader = MappingDestination.Text,
 				SourceHeaders = MappingSource.SelectedItems.Cast<string>().ToList(),

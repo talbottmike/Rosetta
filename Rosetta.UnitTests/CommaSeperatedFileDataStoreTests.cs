@@ -27,18 +27,6 @@ namespace Rosetta.UnitTests
 		}
 
 		[TestMethod]
-		public void ConvertRowWithPlainText()
-		{
-			var configuration = DataStoreConfiguration.FromColumns("First Name", "Last Name", "Age");
-			var store = new CommaSeperatedFileDataStore(configuration);
-			var row = store.NewRow("John", "Doe", "23");
-			var expected = "John,Doe,23";
-			var actual = store.ConvertRow(row);
-
-			Assert.AreEqual(expected, actual);
-		}
-
-		[TestMethod]
 		public void ConvertRowWithNotEnoughColumns()
 		{
 			var configuration = DataStoreConfiguration.FromColumns("First Name", "Last Name", "Age");
@@ -48,6 +36,18 @@ namespace Rosetta.UnitTests
 			store.Configuration.Columns.RemoveAt(2);
 
 			TestHelper.ExpectedException<ArgumentException>(() => store.ConvertRow(row), "The row does not match the column count.");
+		}
+
+		[TestMethod]
+		public void ConvertRowWithPlainText()
+		{
+			var configuration = DataStoreConfiguration.FromColumns("First Name", "Last Name", "Age");
+			var store = new CommaSeperatedFileDataStore(configuration);
+			var row = store.NewRow("John", "Doe", "23");
+			var expected = "John,Doe,23";
+			var actual = store.ConvertRow(row);
+
+			Assert.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -63,18 +63,6 @@ namespace Rosetta.UnitTests
 		}
 
 		[TestMethod]
-		public void ParseRowWithPlainText()
-		{
-			var configuration = DataStoreConfiguration.FromColumns("First Name", "Last Name", "Age");
-			var store = new CommaSeperatedFileDataStore(configuration);
-
-			var expected = store.NewRow("John", "Doe", "23");
-			var actual = store.ParseRow("John,Doe,23");
-
-			TestHelper.AreEqual(expected, actual);
-		}
-
-		[TestMethod]
 		public void ParseRowWithCommaText()
 		{
 			var configuration = DataStoreConfiguration.FromColumns("Name", "Age");
@@ -82,6 +70,18 @@ namespace Rosetta.UnitTests
 
 			var expected = store.NewRow("John, Doe", "23");
 			var actual = store.ParseRow("\"John, Doe\",23");
+
+			TestHelper.AreEqual(expected, actual);
+		}
+
+		[TestMethod]
+		public void ParseRowWithPlainText()
+		{
+			var configuration = DataStoreConfiguration.FromColumns("First Name", "Last Name", "Age");
+			var store = new CommaSeperatedFileDataStore(configuration);
+
+			var expected = store.NewRow("John", "Doe", "23");
+			var actual = store.ParseRow("John,Doe,23");
 
 			TestHelper.AreEqual(expected, actual);
 		}

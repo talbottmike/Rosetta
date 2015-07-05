@@ -32,6 +32,10 @@ namespace Rosetta.DataStores
 
 		#region Methods
 
+		public virtual void Initialize()
+		{
+		}
+
 		public DataRow NewRow()
 		{
 			var response = new DataRow();
@@ -59,10 +63,6 @@ namespace Rosetta.DataStores
 			}
 
 			return row;
-		}
-
-		public virtual void Initialize()
-		{
 		}
 
 		public abstract IEnumerable<DataRow> Read();
