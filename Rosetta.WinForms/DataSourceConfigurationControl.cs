@@ -53,6 +53,8 @@ namespace Rosetta.WinForms
 			});
 
 			HeaderName.Clear();
+			HeaderLength.Value = 0;
+			PadCharacter.Text = string.Empty;
 			ApplyConfiguration();
 		}
 

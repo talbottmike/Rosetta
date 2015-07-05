@@ -32,7 +32,6 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.LoadButton = new System.Windows.Forms.Button();
 			this.SaveButton = new System.Windows.Forms.Button();
-			this.CsvFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.TabControl = new Rosetta.WinForms.CustomTabControl();
 			this.DataStoresPage = new System.Windows.Forms.TabPage();
 			this.Sources = new System.Windows.Forms.ListBox();
@@ -148,12 +147,6 @@
 			this.SaveButton.Text = "";
 			this.SaveButton.UseVisualStyleBackColor = false;
 			this.SaveButton.Click += new System.EventHandler(this.SaveButtonClick);
-			// 
-			// CsvFileDialog
-			// 
-			this.CsvFileDialog.DefaultExt = "*.csv";
-			this.CsvFileDialog.FileName = "CsvFileDialog";
-			this.CsvFileDialog.Filter = "CSV (csv)|*.csv";
 			// 
 			// TabControl
 			// 
@@ -800,7 +793,6 @@
 		#endregion
 		private System.Windows.Forms.Label Header;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.OpenFileDialog CsvFileDialog;
 		private CustomTabControl TabControl;
 		private System.Windows.Forms.TabPage ConfigureDestinationPage;
 		private System.Windows.Forms.Button ConfigureDestinationBack;
