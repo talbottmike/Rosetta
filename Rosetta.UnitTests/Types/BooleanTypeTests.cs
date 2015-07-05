@@ -50,9 +50,9 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromDecimal()
 		{
-			Assert.AreEqual(true, Converter.Convert<bool>(decimal.MaxValue));
+			Assert.AreEqual(true, Converter.Convert<bool>(int.MaxValue));
 			Assert.AreEqual(false, Converter.Convert<bool>(0));
-			Assert.AreEqual(false, Converter.Convert<bool>(decimal.MinValue));
+			Assert.AreEqual(false, Converter.Convert<bool>(int.MinValue));
 		}
 
 		[TestMethod]

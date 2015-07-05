@@ -412,7 +412,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out int value)
 		{
-			throw new NotImplementedException();
+			return int.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -423,7 +423,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out uint value)
 		{
-			throw new NotImplementedException();
+			return uint.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -434,7 +434,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out long value)
 		{
-			throw new NotImplementedException();
+			return long.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -445,7 +445,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out ulong value)
 		{
-			throw new NotImplementedException();
+			return ulong.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -456,7 +456,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out byte value)
 		{
-			throw new NotImplementedException();
+			return byte.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -467,7 +467,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out sbyte value)
 		{
-			throw new NotImplementedException();
+			return sbyte.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -478,7 +478,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out short value)
 		{
-			throw new NotImplementedException();
+			return short.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -489,7 +489,7 @@ namespace Rosetta.Types
 		/// <returns> True if parse was successful; false if otherwise. </returns>
 		public bool TryParse(string input, out ushort value)
 		{
-			throw new NotImplementedException();
+			return ushort.TryParse(input, out value);
 		}
 
 		/// <summary>
@@ -499,7 +499,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		ushort ITypeConverter<ushort>.Parse(string input)
 		{
-			return ushort.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < ushort.MinValue)
+			{
+				return ushort.MinValue;
+			}
+
+			if (value > uint.MaxValue)
+			{
+				return ushort.MaxValue;
+			}
+
+			return (ushort) value;
 		}
 
 		/// <summary>
@@ -509,7 +521,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		short ITypeConverter<short>.Parse(string input)
 		{
-			return short.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < short.MinValue)
+			{
+				return short.MinValue;
+			}
+
+			if (value > short.MaxValue)
+			{
+				return short.MaxValue;
+			}
+
+			return (short) value;
 		}
 
 		/// <summary>
@@ -529,7 +553,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		sbyte ITypeConverter<sbyte>.Parse(string input)
 		{
-			return sbyte.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < sbyte.MinValue)
+			{
+				return sbyte.MinValue;
+			}
+
+			if (value > sbyte.MaxValue)
+			{
+				return sbyte.MaxValue;
+			}
+
+			return (sbyte) value;
 		}
 
 		/// <summary>
@@ -539,7 +575,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		byte ITypeConverter<byte>.Parse(string input)
 		{
-			return byte.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < byte.MinValue)
+			{
+				return byte.MinValue;
+			}
+
+			if (value > byte.MaxValue)
+			{
+				return byte.MaxValue;
+			}
+
+			return (byte) value;
 		}
 
 		/// <summary>
@@ -559,7 +607,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		uint ITypeConverter<uint>.Parse(string input)
 		{
-			return uint.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < uint.MinValue)
+			{
+				return uint.MinValue;
+			}
+
+			if (value > uint.MaxValue)
+			{
+				return uint.MaxValue;
+			}
+
+			return (uint) value;
 		}
 
 		/// <summary>
@@ -569,7 +629,19 @@ namespace Rosetta.Types
 		/// <returns> </returns>
 		int ITypeConverter<int>.Parse(string input)
 		{
-			return string.IsNullOrWhiteSpace(input) ? 0 : int.Parse(input);
+			var value = decimal.Parse(input);
+
+			if (value < int.MinValue)
+			{
+				return int.MinValue;
+			}
+
+			if (value > int.MaxValue)
+			{
+				return int.MaxValue;
+			}
+
+			return (int) value;
 		}
 
 		#endregion
