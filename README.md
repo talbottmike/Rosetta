@@ -5,14 +5,36 @@ Data conversion tool to convert and transform any data type to any other type. M
 This data "a", "b", "c" could be transformed to "abc", "a, b, and c", "a b c", "616263" (bytes), and many more.
 This data 1, 2, 3 could be transformed to 123, 6, "1,2,3", "123", and many more.
 
+##### What about more complex examples?
+
+I have a person CSV data file that I need to import into my SQL data store. The file contains their height in two columns of "Height Feet" and "Height Inches". An example would be [John Doe, 5, 11] where John Doe is 5 feet and 11 inches tall. However we want to store the person height as just inches. This means we'll want to multiple the feet data with 12 before we sum but the two columns. You can add a mapping of the two fields with a single pre-processor of [Multiple] with a value of "12" and a filter of "Height Feet" so the filter only runs on the single column. Once all pre-processor have ran you then sum of the values and store them as "Height"
+
+CSV -> "First Name", "Last Name", "Height Feet", "Height Inches"
+
+Mappings
+
+- ["First Name", "Last Name"] -> "Name"
+	- Combine = Join
+	- Delimiter = ' '
+- ["Height Feet", "Height Inches"] -> "Height"
+	- Combine = Sum
+	- Pre-Processor
+		- Multiply with 12 on "Height Feet"
+
+Example
+
+[John, Doe, 5, 11] would convert into [John Doe, 66]
+
 # Workflow
 
+The source and destination item is just an array of strings. The collection is order based on the columns of the data store. If the data store has 6 columns then each item will contain 6 strings of data in a collection. When we write the data row we'll give the destination a data row containing an entry for each column in the destination data store.
+
 - Read Source Item
--- ForEach Mapping
---- Convert Each Column to Destination Type
---- Run Pre-Processor(s)
---- Combine columns into single result
---- Run Post-Processor
+- ForEach Mapping
+  - Convert Each Column to Destination Type
+  - Run Pre-Processor(s)
+  - Combine columns into single result
+  - Run Post-Processor
 - Write Destination Item
 
 # Supported Types
@@ -48,6 +70,12 @@ This data 1, 2, 3 could be transformed to 123, 6, "1,2,3", "123", and many more.
 - System.DateTime
 - System.TimeSpan
 
+
+# In progress...
+
+I'm still trying to document all the possible formatting string to be use when parsing and converting. Many formatting is supported but document it will take some time. 
+
+Writing more test and coming up with all possible scenarios to test. This obviously is the biggest issue with any conversion tool. How do you handle "X" scenario? I don't know because I had never considered that! If you do have a scenario that doesn't work then just let us know. We'll add support then Rosetta will support it!
 
 # vNext?
 All of these items are just ideas that may or may not come in the future. These are ideas that I've either ran into or think someone could need.
