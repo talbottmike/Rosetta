@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rosetta.Process;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -90,7 +90,34 @@ namespace Rosetta.Types
 		/// <returns> The new object converted to. </returns>
 		public T ConvertTo<T>(decimal input, string format = null)
 		{
-			return Convert<T>(input, format);
+			var type = typeof (T).FullName;
+
+			switch (type)
+			{
+				case "System.Boolean":
+					return Converter.Parse<T>((input > 0).ToString());
+
+				case "System.DateTime":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Byte":
+				case "System.SByte":
+				case "System.Int16":
+				case "System.UInt16":
+				case "System.Int32":
+				case "System.UInt32":
+				case "System.Int64":
+				case "System.UInt64":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Decimal":
+				case "System.Double":
+				case "System.Single":
+					return Converter.Parse<T>(input.ToString(format ?? "G"));
+
+				default:
+					return Converter.Parse<T>(input.ToString(format));
+			}
 		}
 
 		/// <summary>
@@ -101,7 +128,34 @@ namespace Rosetta.Types
 		/// <returns> The new object converted to. </returns>
 		public T ConvertTo<T>(float input, string format = null)
 		{
-			return Convert<T>((decimal) input, format);
+			var type = typeof (T).FullName;
+
+			switch (type)
+			{
+				case "System.Boolean":
+					return Converter.Parse<T>((input > 0).ToString());
+
+				case "System.DateTime":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Byte":
+				case "System.SByte":
+				case "System.Int16":
+				case "System.UInt16":
+				case "System.Int32":
+				case "System.UInt32":
+				case "System.Int64":
+				case "System.UInt64":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Decimal":
+				case "System.Double":
+				case "System.Single":
+					return Converter.Parse<T>(input.ToString(format ?? "F16"));
+
+				default:
+					return Converter.Parse<T>(input.ToString(format));
+			}
 		}
 
 		/// <summary>
@@ -112,7 +166,34 @@ namespace Rosetta.Types
 		/// <returns> The new object converted to. </returns>
 		public T ConvertTo<T>(double input, string format = null)
 		{
-			return Convert<T>((decimal) input, format);
+			var type = typeof (T).FullName;
+
+			switch (type)
+			{
+				case "System.Boolean":
+					return Converter.Parse<T>((input > 0).ToString());
+
+				case "System.DateTime":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Byte":
+				case "System.SByte":
+				case "System.Int16":
+				case "System.UInt16":
+				case "System.Int32":
+				case "System.UInt32":
+				case "System.Int64":
+				case "System.UInt64":
+					return Converter.Parse<T>(input.ToString(format ?? "0"));
+
+				case "System.Decimal":
+				case "System.Double":
+				case "System.Single":
+					return Converter.Parse<T>(input.ToString(format ?? "F16"));
+
+				default:
+					return Converter.Parse<T>(input.ToString(format));
+			}
 		}
 
 		public decimal Process(decimal input, ProcessSettings settings)
@@ -146,38 +227,37 @@ namespace Rosetta.Types
 			return (double) Process((decimal) input, settings);
 		}
 
-		private static T Convert<T>(decimal input, string format)
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out decimal value)
 		{
-			var type = typeof (T).FullName;
+			return decimal.TryParse(input, out value);
+		}
 
-			switch (type)
-			{
-				case "System.Boolean":
-					return Converter.Parse<T>((input > 0).ToString());
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out float value)
+		{
+			return float.TryParse(input, out value);
+		}
 
-				case "System.DateTime":
-					return Converter.Parse<T>(input.ToString(format ?? "0"));
-
-				case "System.Byte":
-				case "System.SByte":
-				case "System.Int16":
-				case "System.UInt16":
-				case "System.Int32":
-				case "System.UInt32":
-				case "System.Int64":
-				case "System.UInt64":
-					return Converter.Parse<T>(input.ToString(format ?? "0"));
-
-				case "System.Decimal":
-				case "System.Double":
-				case "System.Single":
-				case "System.Char":
-				case "System.String":
-					return Converter.Parse<T>(input.ToString(format));
-
-				default:
-					return Converter.Parse<T>(input.ToString(format));
-			}
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out double value)
+		{
+			return double.TryParse(input, out value);
 		}
 
 		/// <summary>

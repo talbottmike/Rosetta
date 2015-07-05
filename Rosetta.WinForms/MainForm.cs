@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using Rosetta.Configuration;
 using Rosetta.DataStores;
 using Rosetta.Extensions;
-using Rosetta.Process;
 
 #endregion
 

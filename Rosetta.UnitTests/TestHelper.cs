@@ -12,6 +12,24 @@ namespace Rosetta.UnitTests
 	{
 		#region Methods
 
+		public static void AreEqual(double expected, double actual)
+		{
+			var difference = Math.Abs(expected - actual);
+			if (difference > double.Epsilon)
+			{
+				Assert.Fail("Expected [" + expected + "] but was [" + actual + "].");
+			}
+		}
+
+		public static void AreEqual(float expected, float actual)
+		{
+			var difference = Math.Abs(expected - actual);
+			if (difference > float.Epsilon)
+			{
+				Assert.Fail("Expected [" + expected + "] but was [" + actual + "].");
+			}
+		}
+
 		public static void AreEqual<T>(T expected, T actual)
 		{
 			var compareObjects = new CompareLogic();

@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rosetta.Process;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -54,7 +54,21 @@ namespace Rosetta.Types
 			switch (type)
 			{
 				case "System.Boolean":
-					return Converter.Parse<T>(input.ToString());
+					DateTime formatValue;
+					long formatNumberValue;
+					var result = false;
+
+					if (DateTime.TryParse(format, out formatValue))
+					{
+						result = input == formatValue;
+					}
+					else if (long.TryParse(format, out formatNumberValue))
+					{
+						formatValue = new DateTime(formatNumberValue);
+						result = input == formatValue;
+					}
+
+					return Converter.Parse<T>(result.ToString());
 
 				case "System.Byte":
 				case "System.SByte":
@@ -76,7 +90,7 @@ namespace Rosetta.Types
 					return Converter.Parse<T>(input.ToString());
 
 				case "System.DateTime":
-					throw new NotSupportedException("This conversion is not supported.");
+					return Converter.Parse<T>(input.Ticks.ToString());
 
 				default:
 					return Converter.Parse<T>(input.ToString());
@@ -96,7 +110,8 @@ namespace Rosetta.Types
 			switch (type)
 			{
 				case "System.Boolean":
-					return Converter.Parse<T>(input.ToString());
+					TimeSpan formatValue;
+					return Converter.Parse<T>((Converter.TryParse(format, out formatValue) && input == formatValue).ToString());
 
 				case "System.Byte":
 				case "System.SByte":
@@ -118,7 +133,7 @@ namespace Rosetta.Types
 					return Converter.Parse<T>(input.ToString());
 
 				case "System.DateTime":
-					throw new NotSupportedException("This conversion is not supported.");
+					return Converter.Parse<T>(input.Ticks.ToString());
 
 				default:
 					return Converter.Parse<T>(input.ToString());
@@ -152,6 +167,42 @@ namespace Rosetta.Types
 		public DateTime Process(DateTime input, ProcessSettings settings)
 		{
 			return input;
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out TimeSpan value)
+		{
+			long ticks;
+			if (long.TryParse(input, out ticks))
+			{
+				value = new TimeSpan(ticks);
+				return true;
+			}
+
+			return TimeSpan.TryParse(input, out value);
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out DateTime value)
+		{
+			long ticks;
+			if (long.TryParse(input, out ticks))
+			{
+				value = new DateTime(ticks);
+				return true;
+			}
+
+			return DateTime.TryParse(input, out value);
 		}
 
 		/// <summary>

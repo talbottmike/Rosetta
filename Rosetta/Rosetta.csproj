@@ -58,11 +58,11 @@
     <Compile Include="DataStores\DataStore.cs" />
     <Compile Include="DataStores\CommaSeperatedFileDataStore.cs" />
     <Compile Include="CombineMethod.cs" />
-    <Compile Include="Process\ITypeCombiner.cs" />
-    <Compile Include="Process\ITypeConverter.cs" />
+    <Compile Include="ITypeCombiner.cs" />
+    <Compile Include="ITypeConverter.cs" />
     <Compile Include="Configuration\Mapping.cs" />
-    <Compile Include="Process\ProcessMethod.cs" />
-    <Compile Include="Process\ProcessSettings.cs" />
+    <Compile Include="Configuration\ProcessMethod.cs" />
+    <Compile Include="Configuration\ProcessSettings.cs" />
     <Compile Include="Types\BooleanType.cs" />
     <Compile Include="Types\DateTimeType.cs" />
     <Compile Include="Types\DecimalType.cs" />

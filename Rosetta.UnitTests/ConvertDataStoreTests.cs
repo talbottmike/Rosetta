@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rosetta.Configuration;
 using Rosetta.DataStores;
-using Rosetta.Process;
 
 #endregion
 

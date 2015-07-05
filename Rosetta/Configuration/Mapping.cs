@@ -1,7 +1,6 @@
 ﻿#region References
 
 using System.Collections.Generic;
-using Rosetta.Process;
 
 #endregion
 

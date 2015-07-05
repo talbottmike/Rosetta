@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
-using Rosetta.Process;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -186,6 +186,34 @@ namespace Rosetta.Types
 			}
 
 			return method.Invoke(this, new[] { value, settings });
+		}
+
+		/// <summary>
+		/// Parses the object from a string.
+		/// </summary>
+		/// <param name="input"> </param>
+		/// <param name="value"> </param>
+		/// <returns> </returns>
+		public bool TryParse<T>(string input, out T value)
+		{
+			var valueType = typeof (T);
+			var methods = GetType().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			var method = methods.Where(x => x.Name.Equals("TryParse")).FirstOrDefault(x =>
+			{
+				var parameterInfos = x.GetParameters();
+				return parameterInfos.Count() == 2 && parameterInfos[1].ParameterType.FullName == valueType.FullName + "&";
+			});
+
+			if (method == null)
+			{
+				throw new ArgumentException("The type converter does not support this type.");
+			}
+
+			var parameters = new[] { input, Activator.CreateInstance(valueType) };
+			var result = method.Invoke(this, parameters);
+			value = (T) parameters[1];
+
+			return (bool) result;
 		}
 
 		#endregion

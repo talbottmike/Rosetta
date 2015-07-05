@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rosetta.Process;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -47,7 +47,27 @@ namespace Rosetta.Types
 		/// <returns> The new object converted to. </returns>
 		public T ConvertTo<T>(string input, string format = null)
 		{
-			return Converter.Parse<T>(input);
+			var type = typeof (T).FullName;
+			var trueValues = new List<string> { "True", "true", "T", "t", "1" };
+
+			if (format != null)
+			{
+				trueValues.AddRange(format.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+				trueValues = trueValues.Distinct().ToList();
+			}
+
+			switch (type)
+			{
+				case "System.Boolean":
+					return Converter.Parse<T>(trueValues.Contains(input).ToString());
+
+				case "System.DateTime":
+				case "System.TimeSpan":
+					return Converter.Parse<T>(input);
+
+				default:
+					return Converter.Parse<T>(input);
+			}
 		}
 
 		/// <summary>
@@ -59,18 +79,18 @@ namespace Rosetta.Types
 		public T ConvertTo<T>(char input, string format = null)
 		{
 			var type = typeof (T).FullName;
-			var trueCharacters = new List<char> { 'T', '1' };
+			var trueValues = new List<char> { 'T', 't', '1' };
 
 			if (format != null)
 			{
-				trueCharacters.AddRange(format.ToCharArray());
-				trueCharacters = trueCharacters.Distinct().ToList();
+				trueValues.AddRange(format.ToCharArray());
+				trueValues = trueValues.Distinct().ToList();
 			}
 
 			switch (type)
 			{
 				case "System.Boolean":
-					return Converter.Parse<T>(trueCharacters.Contains(input).ToString());
+					return Converter.Parse<T>(trueValues.Contains(input).ToString());
 
 				case "System.Byte":
 				case "System.SByte":
@@ -132,6 +152,28 @@ namespace Rosetta.Types
 		public char Process(char input, ProcessSettings settings)
 		{
 			return input;
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out string value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out char value)
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

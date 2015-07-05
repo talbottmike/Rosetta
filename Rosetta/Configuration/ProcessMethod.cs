@@ -1,4 +1,4 @@
-﻿namespace Rosetta.Process
+﻿namespace Rosetta.Configuration
 {
 	public enum ProcessMethod
 	{

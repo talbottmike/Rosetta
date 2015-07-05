@@ -3,8 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rosetta.Configuration;
 using Rosetta.Extensions;
-using Rosetta.Process;
 
 #endregion
 
@@ -402,6 +402,94 @@ namespace Rosetta.Types
 		public ushort Process(ushort input, ProcessSettings settings)
 		{
 			return (ushort) Process((ulong) input, settings);
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out int value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out uint value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out long value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out ulong value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out byte value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out sbyte value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out short value)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out ushort value)
+		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>

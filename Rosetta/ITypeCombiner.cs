@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace Rosetta.Process
+namespace Rosetta
 {
 	public interface ITypeCombiner<T>
 	{

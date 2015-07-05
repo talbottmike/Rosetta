@@ -2,7 +2,13 @@
 
 #endregion
 
-namespace Rosetta.Process
+#region References
+
+using Rosetta.Configuration;
+
+#endregion
+
+namespace Rosetta
 {
 	public interface ITypeConverter<TType>
 	{
@@ -19,7 +25,7 @@ namespace Rosetta.Process
 		/// <summary>
 		/// Parses the object from a string.
 		/// </summary>
-		/// <param name="input"> </param>
+		/// <param name="input"> The input to parse. </param>
 		/// <returns> </returns>
 		TType Parse(string input);
 
@@ -30,6 +36,14 @@ namespace Rosetta.Process
 		/// <param name="settings"> The settings to configure the process. </param>
 		/// <returns> The result of the type processing. </returns>
 		TType Process(TType input, ProcessSettings settings);
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		bool TryParse(string input, out TType value);
 
 		#endregion
 	}

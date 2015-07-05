@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rosetta.Process;
+using Rosetta.Configuration;
 
 #endregion
 
@@ -101,6 +101,17 @@ namespace Rosetta.Types
 				default:
 					throw new NotSupportedException("This method is not supported.");
 			}
+		}
+
+		/// <summary>
+		/// Try to parses the object from a string.
+		/// </summary>
+		/// <param name="input"> The input to parse. </param>
+		/// <param name="value"> The value if the parse was successful. </param>
+		/// <returns> True if parse was successful; false if otherwise. </returns>
+		public bool TryParse(string input, out bool value)
+		{
+			throw new NotImplementedException();
 		}
 
 		#endregion

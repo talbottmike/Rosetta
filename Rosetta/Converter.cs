@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Rosetta.Configuration;
 using Rosetta.DataStores;
-using Rosetta.Process;
 using Rosetta.Types;
 using Type = Rosetta.Types.Type;
 
@@ -118,6 +117,18 @@ namespace Rosetta
 			}
 
 			return (T) Providers[type.FullName].Parse(type.FullName, input);
+		}
+
+		public static bool TryParse<T>(string input, out T value)
+		{
+			var type = typeof (T);
+
+			if (!Providers.ContainsKey(type.FullName))
+			{
+				throw new ArgumentException("This type is not supported.", nameof(type));
+			}
+
+			return Providers[type.FullName].TryParse(input, out value);
 		}
 
 		private static string PostProcess(object value, string type, ProcessSettings settings)

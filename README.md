@@ -86,3 +86,29 @@ All of these items are just ideas that may or may not come in the future. These 
 -- Possible you want to output all People and their addresses (1 to Many). You don't mind duplicating the person per each address that they are related to.
 - Multiple destinations. What if you need to split one row into multiple tables. Let's say you have three rows of people that have all the same "Person" data but each row also has a unique address. How would you be able to group on the person data then have a sub collection of addresses?
 - Support for other data types type when converting.
+
+
+# Coversions
+
+Be sure to check out the format string section for each type.
+
+### Boolean
+
+- **Boolean**
+ 	- [true] = true
+	- [false] = false
+- **Decimals** (Decimal,Double,Single)
+	- [Greater than 0] = true
+	- [Less than or equal to 0] = false
+- **Numbers** (Byte,SByte,Int16,UInt16,Int32,UInt32,Int64,UInt64)
+	- [Greater than 0] = true
+	- [Less than or equal to 0] = false
+- **Char**
+	- [T, t, 1, "Format String Characters"] = true
+	- [Any other value] = false
+- **String**
+	- [True, T, true, t, 1, "Format String"] = true
+	- [Any other value] = false
+- **DateTime** (DateTime, TimeSpan)
+	- [Equals Format String] = true
+	- [Any other value] = false
