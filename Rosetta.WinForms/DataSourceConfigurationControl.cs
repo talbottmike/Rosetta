@@ -136,27 +136,25 @@ namespace Rosetta.WinForms
 			RemoveHeader.Visible = false;
 			AddHeader.Visible = false;
 
-			switch (_configuration.StoreFullName)
+			if (_configuration.StoreFullName == "Rosetta.DataStores.CommaSeperatedFileDataStore" || _configuration.StoreFullName == "Rosetta.DataStores.FlatFileDataStore")
 			{
-				case "Rosetta.DataStores.CommaSeperatedFileDataStore":
-					FilePanel.Visible = true;
-					HeaderNameLabel.Visible = true;
-					HeaderName.Visible = true;
-					AddHeader.Visible = true;
-					RemoveHeader.Visible = true;
-					break;
+				FilePanel.Visible = true;
+				HeaderNameLabel.Visible = true;
+				HeaderName.Visible = true;
+				AddHeader.Visible = true;
+				RemoveHeader.Visible = true;
+			}
 
-				case "Rosetta.DataStores.FlatFileDataStore":
-					FilePanel.Visible = true;
-					HeaderNameLabel.Visible = true;
-					HeaderName.Visible = true;
-					AddHeader.Visible = true;
-					RemoveHeader.Visible = true;
-					break;
+			if (_configuration.StoreFullName == "Rosetta.DataStores.FlatFileDataStore")
+			{
+				AlignmentPanel.Visible = true;
+				LengthPanel.Visible = true;
+				PadCharacterPanel.Visible = true;
+			}
 
-				case "Rosetta.DataStores.SqlDataStore":
-					SqlPanel.Visible = true;
-					break;
+			if (_configuration.StoreFullName == "Rosetta.DataStores.SqlDataStore")
+			{
+				SqlPanel.Visible = true;
 			}
 		}
 
