@@ -61,26 +61,27 @@
   <ItemGroup>
     <Compile Include="Configuration\MappingTests.cs" />
     <Compile Include="Configuration\ProcessSettingsTests.cs" />
-    <Compile Include="Types\BooleanTypeTests.cs" />
     <Compile Include="FlatFileDataStoreTests.cs" />
     <Compile Include="MemoryDataStoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="ConvertDataStoreTests.cs" />
     <Compile Include="CommaSeperatedFileDataStoreTests.cs" />
-    <Compile Include="Types\Int16ConverterTests.cs" />
-    <Compile Include="Types\Int64ConverterTests.cs" />
-    <Compile Include="Types\UInt16ConverterTests.cs" />
-    <Compile Include="Types\UInt32ConverterTests.cs" />
-    <Compile Include="Types\Int32ConverterTests.cs" />
-    <Compile Include="Types\TimeSpanTypeTests.cs" />
+    <Compile Include="Types\BooleanTypeTests.cs" />
     <Compile Include="Types\DateTimeTypeTests.cs" />
-    <Compile Include="Types\IConverterTests.cs" />
-    <Compile Include="Types\SingleConverterTests.cs" />
-    <Compile Include="Types\DoubleConverterTests.cs" />
     <Compile Include="Types\DecimalConverterTests.cs" />
+    <Compile Include="Types\DoubleConverterTests.cs" />
+    <Compile Include="Types\IConverterTests.cs" />
+    <Compile Include="Types\Int16ConverterTests.cs" />
+    <Compile Include="Types\Int32ConverterTests.cs" />
+    <Compile Include="Types\Int64ConverterTests.cs" />
+    <Compile Include="Types\SingleConverterTests.cs" />
     <Compile Include="Types\StringTypeTests.cs" />
+    <Compile Include="Types\TimeSpanTypeTests.cs" />
     <Compile Include="Types\TypeTests.cs" />
+    <Compile Include="Types\UInt16ConverterTests.cs" />
+    <Compile Include="Types\UInt64ConverterTests.cs" />
+    <Compile Include="Types\UInt32ConverterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rosetta\Rosetta.csproj">
