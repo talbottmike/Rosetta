@@ -13,7 +13,7 @@ namespace Rosetta.Configuration
 
 		public Mapping()
 		{
-			CombineMethod = CombineMethod.None;
+			CombineMethod = CombineMethod.Join;
 			CombineValue = string.Empty;
 			DestinationHeader = string.Empty;
 			PreProcesses = new List<ProcessSettings>();
@@ -28,7 +28,7 @@ namespace Rosetta.Configuration
 		public CombineMethod CombineMethod { get; set; }
 		public object CombineValue { get; set; }
 		public string DestinationHeader { get; set; }
-		public string DisplayName => $"[{string.Join(",", SourceHeaders)}],{DestinationHeader}";
+		public string DisplayName => $"[{string.Join(",", SourceHeaders)}],{DestinationHeader},{CombineMethod},{CombineValue},{Type}";
 		public ProcessSettings PostProcess { get; set; }
 		public List<ProcessSettings> PreProcesses { get; set; }
 		public List<string> SourceHeaders { get; set; }

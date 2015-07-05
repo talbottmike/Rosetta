@@ -49,6 +49,10 @@
 			this.ConfigureDestinationBack = new System.Windows.Forms.Button();
 			this.ConfigureDestinationNext = new System.Windows.Forms.Button();
 			this.MappingPage = new System.Windows.Forms.TabPage();
+			this.MappingCombineMethod = new System.Windows.Forms.ComboBox();
+			this.label13 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.MappingCombineValue = new System.Windows.Forms.TextBox();
 			this.MappingType = new System.Windows.Forms.ComboBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
@@ -328,6 +332,10 @@
 			// 
 			// MappingPage
 			// 
+			this.MappingPage.Controls.Add(this.MappingCombineMethod);
+			this.MappingPage.Controls.Add(this.label13);
+			this.MappingPage.Controls.Add(this.label6);
+			this.MappingPage.Controls.Add(this.MappingCombineValue);
 			this.MappingPage.Controls.Add(this.MappingType);
 			this.MappingPage.Controls.Add(this.label12);
 			this.MappingPage.Controls.Add(this.label9);
@@ -346,6 +354,43 @@
 			this.MappingPage.TabIndex = 2;
 			this.MappingPage.Text = "Mapping";
 			this.MappingPage.UseVisualStyleBackColor = true;
+			// 
+			// MappingCombineMethod
+			// 
+			this.MappingCombineMethod.FormattingEnabled = true;
+			this.MappingCombineMethod.Location = new System.Drawing.Point(439, 85);
+			this.MappingCombineMethod.Name = "MappingCombineMethod";
+			this.MappingCombineMethod.Size = new System.Drawing.Size(312, 21);
+			this.MappingCombineMethod.TabIndex = 21;
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label13.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label13.Location = new System.Drawing.Point(436, 110);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(59, 17);
+			this.label13.TabIndex = 20;
+			this.label13.Text = "delimiter";
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.ForeColor = System.Drawing.SystemColors.Highlight;
+			this.label6.Location = new System.Drawing.Point(436, 65);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(58, 17);
+			this.label6.TabIndex = 18;
+			this.label6.Text = "combine";
+			// 
+			// MappingCombineValue
+			// 
+			this.MappingCombineValue.Location = new System.Drawing.Point(439, 130);
+			this.MappingCombineValue.Name = "MappingCombineValue";
+			this.MappingCombineValue.Size = new System.Drawing.Size(312, 20);
+			this.MappingCombineValue.TabIndex = 19;
 			// 
 			// MappingType
 			// 
@@ -388,7 +433,7 @@
 			this.label9.AutoSize = true;
 			this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label9.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label9.Location = new System.Drawing.Point(436, 98);
+			this.label9.Location = new System.Drawing.Point(436, 176);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(66, 17);
 			this.label9.TabIndex = 7;
@@ -441,9 +486,9 @@
 			// Mappings
 			// 
 			this.Mappings.FormattingEnabled = true;
-			this.Mappings.Location = new System.Drawing.Point(438, 118);
+			this.Mappings.Location = new System.Drawing.Point(439, 196);
 			this.Mappings.Name = "Mappings";
-			this.Mappings.Size = new System.Drawing.Size(312, 238);
+			this.Mappings.Size = new System.Drawing.Size(312, 160);
 			this.Mappings.TabIndex = 9;
 			this.Mappings.SelectedIndexChanged += new System.EventHandler(this.ListBoxSelectedIndexChanged);
 			// 
@@ -460,7 +505,7 @@
 			// 
 			// AddMapping
 			// 
-			this.AddMapping.Location = new System.Drawing.Point(651, 67);
+			this.AddMapping.Location = new System.Drawing.Point(651, 156);
 			this.AddMapping.Name = "AddMapping";
 			this.AddMapping.Size = new System.Drawing.Size(100, 23);
 			this.AddMapping.TabIndex = 6;
@@ -515,7 +560,7 @@
 			this.label4.AutoSize = true;
 			this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label4.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label4.Location = new System.Drawing.Point(592, 67);
+			this.label4.Location = new System.Drawing.Point(592, 70);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(34, 17);
 			this.label4.TabIndex = 12;
@@ -523,7 +568,7 @@
 			// 
 			// ProcessorFilter
 			// 
-			this.ProcessorFilter.Location = new System.Drawing.Point(595, 87);
+			this.ProcessorFilter.Location = new System.Drawing.Point(595, 90);
 			this.ProcessorFilter.Name = "ProcessorFilter";
 			this.ProcessorFilter.Size = new System.Drawing.Size(156, 20);
 			this.ProcessorFilter.TabIndex = 13;
@@ -807,6 +852,10 @@
 		private System.Windows.Forms.ListBox Destinations;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox ProcessorFilter;
+		private System.Windows.Forms.ComboBox MappingCombineMethod;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox MappingCombineValue;
 	}
 }
 

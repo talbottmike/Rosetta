@@ -55,6 +55,12 @@ namespace Rosetta.DataStores
 				builder.AppendFormat("{0}{1}{0}", "\"", item.Value);
 			}
 
+			if (builder[builder.Length - 1] == ',')
+			{
+				// Remove the last comma.
+				builder.Remove(builder.Length - 1, 1);
+			}
+
 			return builder.ToString();
 		}
 

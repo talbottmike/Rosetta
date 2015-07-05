@@ -21,6 +21,15 @@ namespace Rosetta.DataStores
 
 		#region Methods
 
+		public override void Initialize()
+		{
+			using (var stream = File.Open(Configuration.ConnectionString, FileMode.Create))
+			{
+				stream.SetLength(0);
+				stream.Flush();
+			}
+		}
+		
 		public abstract string ConvertRow(DataRow row);
 		public abstract DataRow ParseRow(string data);
 

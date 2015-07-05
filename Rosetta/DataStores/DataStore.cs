@@ -61,6 +61,10 @@ namespace Rosetta.DataStores
 			return row;
 		}
 
+		public virtual void Initialize()
+		{
+		}
+
 		public abstract IEnumerable<DataRow> Read();
 		public abstract void Write(DataRow row);
 

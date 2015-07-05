@@ -3,7 +3,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using Rosetta.Configuration;
 using Rosetta.DataStores;
@@ -48,6 +47,8 @@ namespace Rosetta.WinForms
 		{
 			_settings.Mappings.Add(new Mapping
 			{
+				CombineMethod = (CombineMethod) Enum.Parse(typeof(CombineMethod), MappingCombineMethod.Text),
+				CombineValue = MappingCombineValue.Text,
 				DestinationHeader = MappingDestination.Text,
 				SourceHeaders = MappingSource.SelectedItems.Cast<string>().ToList(),
 				Type = MappingType.Text
@@ -62,7 +63,7 @@ namespace Rosetta.WinForms
 			mapping.PreProcesses.Add(new ProcessSettings
 			{
 				Filter = ProcessorFilter.Text,
-				Method = (ProcessMethod) Enum.Parse(typeof(ProcessMethod), ProcessorMethod.Text),
+				Method = (ProcessMethod) Enum.Parse(typeof (ProcessMethod), ProcessorMethod.Text),
 				Value = ProcessorValue.Text
 			});
 
@@ -80,8 +81,7 @@ namespace Rosetta.WinForms
 			MappingDestination.LoadItems(_settings.DestinationStoreConfiguration.Columns.Select(x => x.Name));
 			Mappings.LoadItems(_settings.Mappings.Select(x => x.DisplayName));
 			ProcessorMappings.LoadItems(_settings.Mappings.Select(x => x.DisplayName));
-			ProcessorMethod.LoadItems(Enum.GetNames(typeof (ProcessMethod)));
-			PreProcessors.LoadItems(_settings.Mappings.SelectMany(x => x.PreProcesses.Select(y => x.DisplayName + "|" + y.DisplayName )));
+			PreProcessors.LoadItems(_settings.Mappings.SelectMany(x => x.PreProcesses.Select(y => x.DisplayName + "|" + y.DisplayName)));
 
 			UpdateControlState();
 		}
@@ -110,6 +110,24 @@ namespace Rosetta.WinForms
 			}
 
 			Header.Text = TabControl.SelectedTab.Text;
+		}
+
+		private DataStore GetDataStore(DataStoreConfiguration configuration)
+		{
+			var dataStoreType = Type.GetType(configuration.StoreFullName + ",Rosetta");
+			if (dataStoreType == null)
+			{
+				throw new ArgumentException("Failed to find type for data store.");
+			}
+
+			var dataStore = Activator.CreateInstance(dataStoreType, configuration) as DataStore;
+			if (dataStore == null)
+			{
+				throw new ArgumentException("Failed to create an instance of the data store.");
+			}
+
+			dataStore.Initialize();
+			return dataStore;
 		}
 
 		private string GetStoreFilter(string typeFullName)
@@ -178,6 +196,10 @@ namespace Rosetta.WinForms
 			Destinations.DataSource = _dataStores.Clone();
 			Destinations.DisplayMember = "Name";
 			Destinations.ValueMember = "FullName";
+
+			ProcessorMethod.LoadItems(Enum.GetNames(typeof (ProcessMethod)));
+			MappingCombineMethod.LoadItems(Enum.GetNames(typeof (CombineMethod)));
+			MappingCombineMethod.SelectedIndex = 0;
 		}
 
 		private void NextButtonClick(object sender, EventArgs e)
@@ -212,24 +234,11 @@ namespace Rosetta.WinForms
 			var sourceDataStore = GetDataStore(_settings.SourceStoreConfiguration);
 			var destinationStore = GetDataStore(_settings.DestinationStoreConfiguration);
 
+			UpdateProcess("Starting conversion...");
 			Converter.Convert(sourceDataStore, _settings.Mappings, destinationStore);
-		}
 
-		private DataStore GetDataStore(DataStoreConfiguration configuration)
-		{
-			var dataStoreType = Type.GetType(configuration.StoreFullName + ",Rosetta");
-			if (dataStoreType == null)
-			{
-				throw new ArgumentException("Failed to find type for data store.");
-			}
-
-			var dataStore = Activator.CreateInstance(dataStoreType, configuration) as DataStore;
-			if (dataStore == null)
-			{
-				throw new ArgumentException("Failed to create an instance of the data store.");
-			}
-
-			return dataStore;
+			UpdateProcess("Done.");
+			ProcessLabel.Text = string.Empty;
 		}
 
 		private void RemoveMappingClick(object sender, EventArgs e)
@@ -243,13 +252,8 @@ namespace Rosetta.WinForms
 			if (mapping != null)
 			{
 				_settings.Mappings.Remove(mapping);
+				ApplySettings();
 			}
-		}
-
-		private void UpdateProcess(string message)
-		{
-			ProcessLabel.Text = message;
-			ProcessTextBox.Text += message + Environment.NewLine;
 		}
 
 		private void RemovePreProcessorClick(object sender, EventArgs e)
@@ -296,6 +300,12 @@ namespace Rosetta.WinForms
 			RemoveMapping.Enabled = Mappings.SelectedItems.Count > 0;
 			AddPreProcessor.Enabled = ProcessorMappings.SelectedItems.Count > 0 && ProcessorMethod.SelectedItems.Count > 0;
 			RemovePreProcessor.Enabled = PreProcessors.SelectedItems.Count > 0;
+		}
+
+		private void UpdateProcess(string message)
+		{
+			ProcessLabel.Text = message;
+			ProcessTextBox.Text += message + Environment.NewLine;
 		}
 
 		#endregion
