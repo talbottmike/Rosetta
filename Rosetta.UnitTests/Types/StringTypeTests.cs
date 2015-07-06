@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Rosetta.UnitTests.Types
 {
 	[TestClass]
-	public class StringTypeTests : IConverterTests
+	public class StringTypeTests : IConverterTests, IParseTests
 	{
 		#region Methods
 
@@ -114,6 +114,11 @@ namespace Rosetta.UnitTests.Types
 		{
 			Assert.AreEqual("18446744073709551615", Converter.Convert<string>(ulong.MaxValue));
 			Assert.AreEqual("0", Converter.Convert<string>(ulong.MinValue));
+		}
+
+		public void Parse()
+		{
+			Assert.AreEqual("Testing", Converter.Parse<string>("Testing"));
 		}
 
 		#endregion

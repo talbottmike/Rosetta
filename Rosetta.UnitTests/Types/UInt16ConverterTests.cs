@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Rosetta.UnitTests.Types
 {
 	[TestClass]
-	public class UInt16ConverterTests : IConverterTests
+	public class UInt16ConverterTests : IConverterTests, IParseTests
 	{
 		#region Methods
 
