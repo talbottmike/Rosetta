@@ -120,7 +120,10 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void Parse()
 		{
+			Assert.AreEqual(255, Converter.Parse<byte>("256"));
 			Assert.AreEqual(255, Converter.Parse<byte>("255"));
+			Assert.AreEqual(0, Converter.Parse<byte>("0"));
+			Assert.AreEqual(0, Converter.Parse<byte>("-1"));
 		}
 
 		#endregion

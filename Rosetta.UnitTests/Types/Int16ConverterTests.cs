@@ -120,7 +120,11 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void Parse()
 		{
+			Assert.AreEqual(32767, Converter.Parse<short>("32768"));
 			Assert.AreEqual(32767, Converter.Parse<short>("32767"));
+			Assert.AreEqual(0, Converter.Parse<short>("0"));
+			Assert.AreEqual(-32768, Converter.Parse<short>("-32768"));
+			Assert.AreEqual(-32768, Converter.Parse<short>("-32769"));
 		}
 
 		#endregion
