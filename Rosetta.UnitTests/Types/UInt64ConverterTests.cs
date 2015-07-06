@@ -13,6 +13,13 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(1, Converter.Convert<ulong>(true));
+			TestHelper.AreEqual(0, Converter.Convert<ulong>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
 			TestHelper.AreEqual(255, Converter.Convert<ulong>(byte.MaxValue));

@@ -60,7 +60,10 @@ namespace Rosetta.Types
 					return Converter.Parse<T>(input.ToString());
 
 				case "System.DateTime":
-					throw new NotSupportedException("This conversion is not supported.");
+					return Converter.Parse<T>((input ? DateTime.MaxValue.Ticks : DateTime.MinValue.Ticks).ToString());
+
+				case "System.TimeSpan":
+					return Converter.Parse<T>((input ? TimeSpan.MaxValue.Ticks : TimeSpan.MinValue.Ticks).ToString());
 
 				default:
 					return Converter.Parse<T>(input.ToString());

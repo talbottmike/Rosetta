@@ -4,6 +4,7 @@
 	{
 		#region Methods
 
+		void ConvertFromBoolean();
 		void ConvertFromByte();
 		void ConvertFromChar();
 		void ConvertFromDateTime();

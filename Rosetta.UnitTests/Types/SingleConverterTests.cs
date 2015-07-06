@@ -13,26 +13,33 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(1, Converter.Convert<float>(true));
+			TestHelper.AreEqual(0, Converter.Convert<float>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
-			Assert.AreEqual(255, Converter.Convert<float>(byte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(byte.MinValue));
+			TestHelper.AreEqual(255, Converter.Convert<float>(byte.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(byte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromChar()
 		{
-			Assert.AreEqual(255, Converter.Convert<float>(char.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(char.MinValue));
+			TestHelper.AreEqual(255, Converter.Convert<float>(char.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(char.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDateTime()
 		{
 			var now = DateTime.Now;
-			Assert.AreEqual(now.Ticks, Converter.Convert<float>(now));
-			Assert.AreEqual(3155378975999999999, Converter.Convert<float>(DateTime.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(DateTime.MinValue));
+			TestHelper.AreEqual(now.Ticks, Converter.Convert<float>(now));
+			TestHelper.AreEqual(3155378975999999999, Converter.Convert<float>(DateTime.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(DateTime.MinValue));
 		}
 
 		[TestMethod]
@@ -54,29 +61,29 @@ namespace Rosetta.UnitTests.Types
 		[TestMethod]
 		public void ConvertFromInt16()
 		{
-			Assert.AreEqual(32767, Converter.Convert<float>(short.MaxValue));
-			Assert.AreEqual(-32768, Converter.Convert<float>(short.MinValue));
+			TestHelper.AreEqual(32767, Converter.Convert<float>(short.MaxValue));
+			TestHelper.AreEqual(-32768, Converter.Convert<float>(short.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt32()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<float>(int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<float>(int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<float>(int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<float>(int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt64()
 		{
-			Assert.AreEqual(9223372036854775807, Converter.Convert<float>(long.MaxValue));
-			Assert.AreEqual(-9223372036854775808, Converter.Convert<float>(long.MinValue));
+			TestHelper.AreEqual(9223372036854775807, Converter.Convert<float>(long.MaxValue));
+			TestHelper.AreEqual(-9223372036854775808, Converter.Convert<float>(long.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromSByte()
 		{
-			Assert.AreEqual(127, Converter.Convert<float>(sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<float>(sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<float>(sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<float>(sbyte.MinValue));
 		}
 
 		[TestMethod]
@@ -90,38 +97,38 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromString()
 		{
 			var value = float.Parse("3.402823E+38");
-			Assert.AreEqual(value, Converter.Convert<float>(value.ToString()));
-			Assert.AreEqual(value * -1, Converter.Convert<float>((value * -1).ToString()));
+			TestHelper.AreEqual(value, Converter.Convert<float>(value.ToString()));
+			TestHelper.AreEqual(value * -1, Converter.Convert<float>((value * -1).ToString()));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
 			var now = DateTime.Now.TimeOfDay;
-			Assert.AreEqual(now.Ticks, Converter.Convert<float>(now));
-			Assert.AreEqual(9223372036854775807, Converter.Convert<float>(TimeSpan.MaxValue));
-			Assert.AreEqual(-9223372036854775808, Converter.Convert<float>(TimeSpan.MinValue));
+			TestHelper.AreEqual(now.Ticks, Converter.Convert<float>(now));
+			TestHelper.AreEqual(9223372036854775807, Converter.Convert<float>(TimeSpan.MaxValue));
+			TestHelper.AreEqual(-9223372036854775808, Converter.Convert<float>(TimeSpan.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt16()
 		{
-			Assert.AreEqual(65535, Converter.Convert<float>(ushort.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(ushort.MinValue));
+			TestHelper.AreEqual(65535, Converter.Convert<float>(ushort.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(ushort.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt32()
 		{
-			Assert.AreEqual(4294967295, Converter.Convert<float>(uint.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(uint.MinValue));
+			TestHelper.AreEqual(4294967295, Converter.Convert<float>(uint.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt64()
 		{
-			Assert.AreEqual(18446744073709551615, Converter.Convert<float>(ulong.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<float>(ulong.MinValue));
+			TestHelper.AreEqual(18446744073709551615, Converter.Convert<float>(ulong.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<float>(ulong.MinValue));
 		}
 
 		[TestMethod]

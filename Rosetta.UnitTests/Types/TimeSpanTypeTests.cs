@@ -13,11 +13,18 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(TimeSpan.MaxValue, Converter.Convert<TimeSpan>(true));
+			TestHelper.AreEqual(TimeSpan.MinValue, Converter.Convert<TimeSpan>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
 			var expected = new TimeSpan(byte.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((byte) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -31,7 +38,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = DateTime.Now.TimeOfDay;
 			var actual = Converter.Convert<TimeSpan>(expected);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -39,7 +46,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = DateTime.Now.TimeOfDay;
 			var actual = Converter.Convert<TimeSpan>((decimal) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -48,7 +55,7 @@ namespace Rosetta.UnitTests.Types
 			var value = 65535d;
 			var expected = new TimeSpan((long) value);
 			var actual = Converter.Convert<TimeSpan>(value);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -56,7 +63,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(short.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((short) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -64,7 +71,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(int.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((int) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -72,7 +79,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(long.MaxValue / 4);
 			var actual = Converter.Convert<TimeSpan>(expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -80,7 +87,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(byte.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((byte) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -89,21 +96,21 @@ namespace Rosetta.UnitTests.Types
 			var value = 65535f;
 			var expected = new TimeSpan((long) value);
 			var actual = Converter.Convert<TimeSpan>(value);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void ConvertFromString()
 		{
 			var expected = new TimeSpan(1, 12, 55, 42, 251);
-			Assert.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
+			TestHelper.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
 			var expected = new TimeSpan(1, 12, 55, 42, 251);
-			Assert.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
+			TestHelper.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
 		}
 
 		[TestMethod]
@@ -111,7 +118,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(ushort.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((ushort) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -119,7 +126,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(uint.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((uint) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -127,15 +134,15 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new TimeSpan(int.MaxValue / 2);
 			var actual = Converter.Convert<TimeSpan>((ulong) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void Parse()
 		{
 			var expected = new TimeSpan(1, 11, 54, 10, 250);
-			Assert.AreEqual(expected, Converter.Parse<TimeSpan>(expected.ToString()));
-			Assert.AreEqual(expected, Converter.Parse<TimeSpan>(expected.Ticks.ToString()));
+			TestHelper.AreEqual(expected, Converter.Parse<TimeSpan>(expected.ToString()));
+			TestHelper.AreEqual(expected, Converter.Parse<TimeSpan>(expected.Ticks.ToString()));
 		}
 
 		#endregion

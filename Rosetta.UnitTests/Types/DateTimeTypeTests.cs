@@ -13,11 +13,18 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(DateTime.MaxValue, Converter.Convert<DateTime>(true));
+			TestHelper.AreEqual(DateTime.MinValue, Converter.Convert<DateTime>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
 			var expected = new DateTime(byte.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((byte) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -31,7 +38,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = DateTime.Now;
 			var actual = Converter.Convert<DateTime>(expected);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -39,7 +46,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = DateTime.Now;
 			var actual = Converter.Convert<DateTime>((decimal) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -48,7 +55,7 @@ namespace Rosetta.UnitTests.Types
 			var value = 65535d;
 			var expected = new DateTime((long) value);
 			var actual = Converter.Convert<DateTime>(value);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -56,7 +63,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(short.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((short) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -64,7 +71,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(int.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((int) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -72,7 +79,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(long.MaxValue / 4);
 			var actual = Converter.Convert<DateTime>(expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -80,7 +87,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(byte.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((byte) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -89,21 +96,21 @@ namespace Rosetta.UnitTests.Types
 			var value = 65535f;
 			var expected = new DateTime((long) value);
 			var actual = Converter.Convert<DateTime>(value);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void ConvertFromString()
 		{
 			var expected = new DateTime(2015, 07, 05);
-			Assert.AreEqual(expected, Converter.Convert<DateTime>("2015/07/05"));
+			TestHelper.AreEqual(expected, Converter.Convert<DateTime>("2015/07/05"));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
 			var expected = new TimeSpan(1, 12, 55, 42, 251);
-			Assert.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
+			TestHelper.AreEqual(expected, Converter.Convert<TimeSpan>("1.12:55:42.251"));
 		}
 
 		[TestMethod]
@@ -111,7 +118,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(ushort.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((ushort) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -119,7 +126,7 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(uint.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((uint) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
@@ -127,15 +134,15 @@ namespace Rosetta.UnitTests.Types
 		{
 			var expected = new DateTime(int.MaxValue / 2);
 			var actual = Converter.Convert<DateTime>((ulong) expected.Ticks);
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]
 		public void Parse()
 		{
 			var expected = new DateTime(2015, 06, 27, 11, 54, 10);
-			Assert.AreEqual(expected, Converter.Parse<DateTime>(expected.ToString()));
-			Assert.AreEqual(expected, Converter.Parse<DateTime>(expected.Ticks.ToString()));
+			TestHelper.AreEqual(expected, Converter.Parse<DateTime>(expected.ToString()));
+			TestHelper.AreEqual(expected, Converter.Parse<DateTime>(expected.Ticks.ToString()));
 		}
 
 		#endregion

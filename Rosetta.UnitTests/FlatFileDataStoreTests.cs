@@ -33,7 +33,7 @@ namespace Rosetta.UnitTests
 			var expected = "John Doe    23    123.459915";
 			var actual = store.ConvertRow(row);
 
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		[TestMethod]

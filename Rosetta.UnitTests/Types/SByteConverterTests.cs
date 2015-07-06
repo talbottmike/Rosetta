@@ -13,118 +13,125 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(1, Converter.Convert<sbyte>(true));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(byte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(byte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(byte.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(byte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromChar()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(char.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(char.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(char.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(char.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDateTime()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(DateTime.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(DateTime.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(DateTime.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(DateTime.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDecimal()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>((decimal) sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>((decimal) sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>((decimal) sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>((decimal) sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDouble()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>((double) sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>((double) sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>((double) sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>((double) sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt16()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(short.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>(short.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(short.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>(short.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt32()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(int.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>(int.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(int.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>(int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt64()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>((long) sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>((long) sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>((long) sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>((long) sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromSByte()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>(sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>(sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromSingle()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>((float) sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>((float) sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>((float) sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>((float) sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromString()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(int.MaxValue.ToString()));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>(int.MinValue.ToString()));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(int.MaxValue.ToString()));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>(int.MinValue.ToString()));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(TimeSpan.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<sbyte>(TimeSpan.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(TimeSpan.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<sbyte>(TimeSpan.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt16()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(ushort.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(ushort.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(ushort.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(ushort.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt32()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(uint.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(uint.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(uint.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt64()
 		{
-			Assert.AreEqual(127, Converter.Convert<sbyte>(ulong.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<sbyte>(ulong.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<sbyte>(ulong.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<sbyte>(ulong.MinValue));
 		}
 
 		[TestMethod]
 		public void Parse()
 		{
-			Assert.AreEqual(127, Converter.Parse<sbyte>("128"));
-			Assert.AreEqual(127, Converter.Parse<sbyte>("127"));
-			Assert.AreEqual(0, Converter.Parse<sbyte>("0"));
-			Assert.AreEqual(-128, Converter.Parse<sbyte>("-128"));
-			Assert.AreEqual(-128, Converter.Parse<sbyte>("-129"));
+			TestHelper.AreEqual(127, Converter.Parse<sbyte>("128"));
+			TestHelper.AreEqual(127, Converter.Parse<sbyte>("127"));
+			TestHelper.AreEqual(0, Converter.Parse<sbyte>("0"));
+			TestHelper.AreEqual(-128, Converter.Parse<sbyte>("-128"));
+			TestHelper.AreEqual(-128, Converter.Parse<sbyte>("-129"));
 		}
 
 		#endregion

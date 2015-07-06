@@ -13,118 +13,125 @@ namespace Rosetta.UnitTests.Types
 		#region Methods
 
 		[TestMethod]
+		public void ConvertFromBoolean()
+		{
+			TestHelper.AreEqual(1, Converter.Convert<int>(true));
+			TestHelper.AreEqual(0, Converter.Convert<int>(false));
+		}
+
+		[TestMethod]
 		public void ConvertFromByte()
 		{
-			Assert.AreEqual(255, Converter.Convert<int>(byte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(byte.MinValue));
+			TestHelper.AreEqual(255, Converter.Convert<int>(byte.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(byte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromChar()
 		{
-			Assert.AreEqual(255, Converter.Convert<int>(char.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(char.MinValue));
+			TestHelper.AreEqual(255, Converter.Convert<int>(char.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(char.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDateTime()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(DateTime.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(DateTime.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(DateTime.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(DateTime.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDecimal()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>((decimal) int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>((decimal) int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>((decimal) int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>((decimal) int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromDouble()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>((double) int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>((double) int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>((double) int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>((double) int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt16()
 		{
-			Assert.AreEqual(32767, Converter.Convert<int>(short.MaxValue));
-			Assert.AreEqual(-32768, Converter.Convert<int>(short.MinValue));
+			TestHelper.AreEqual(32767, Converter.Convert<int>(short.MaxValue));
+			TestHelper.AreEqual(-32768, Converter.Convert<int>(short.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt32()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>(int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>(int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromInt64()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>((long) int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>((long) int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>((long) int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>((long) int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromSByte()
 		{
-			Assert.AreEqual(127, Converter.Convert<int>(sbyte.MaxValue));
-			Assert.AreEqual(-128, Converter.Convert<int>(sbyte.MinValue));
+			TestHelper.AreEqual(127, Converter.Convert<int>(sbyte.MaxValue));
+			TestHelper.AreEqual(-128, Converter.Convert<int>(sbyte.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromSingle()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>((float) int.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>((float) int.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>((float) int.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>((float) int.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromString()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(int.MaxValue.ToString()));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>(int.MinValue.ToString()));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(int.MaxValue.ToString()));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>(int.MinValue.ToString()));
 		}
 
 		[TestMethod]
 		public void ConvertFromTimeSpan()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(TimeSpan.MaxValue));
-			Assert.AreEqual(-2147483648, Converter.Convert<int>(TimeSpan.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(TimeSpan.MaxValue));
+			TestHelper.AreEqual(-2147483648, Converter.Convert<int>(TimeSpan.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt16()
 		{
-			Assert.AreEqual(65535, Converter.Convert<int>(ushort.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(ushort.MinValue));
+			TestHelper.AreEqual(65535, Converter.Convert<int>(ushort.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(ushort.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt32()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(uint.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(uint.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(uint.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(uint.MinValue));
 		}
 
 		[TestMethod]
 		public void ConvertFromUInt64()
 		{
-			Assert.AreEqual(2147483647, Converter.Convert<int>(ulong.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<int>(ulong.MinValue));
+			TestHelper.AreEqual(2147483647, Converter.Convert<int>(ulong.MaxValue));
+			TestHelper.AreEqual(0, Converter.Convert<int>(ulong.MinValue));
 		}
 
 		[TestMethod]
 		public void Parse()
 		{
-			Assert.AreEqual(2147483647, Converter.Parse<int>("2147483648"));
-			Assert.AreEqual(2147483647, Converter.Parse<int>("2147483647"));
-			Assert.AreEqual(0, Converter.Parse<int>("0"));
-			Assert.AreEqual(-2147483648, Converter.Parse<int>("-2147483648"));
-			Assert.AreEqual(-2147483648, Converter.Parse<int>("-2147483649"));
+			TestHelper.AreEqual(2147483647, Converter.Parse<int>("2147483648"));
+			TestHelper.AreEqual(2147483647, Converter.Parse<int>("2147483647"));
+			TestHelper.AreEqual(0, Converter.Parse<int>("0"));
+			TestHelper.AreEqual(-2147483648, Converter.Parse<int>("-2147483648"));
+			TestHelper.AreEqual(-2147483648, Converter.Parse<int>("-2147483649"));
 		}
 
 		#endregion

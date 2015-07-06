@@ -25,7 +25,7 @@ namespace Rosetta.UnitTests.Configuration
 			var expected = "Header,Add,10";
 			var actual = processSettings.DisplayName;
 
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		#endregion

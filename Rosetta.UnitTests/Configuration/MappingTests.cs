@@ -29,7 +29,7 @@ namespace Rosetta.UnitTests.Configuration
 			var expected = "[Source1,Source2],Destination,Join, ,System.String";
 			var actual = mapping.DisplayName;
 
-			Assert.AreEqual(expected, actual);
+			TestHelper.AreEqual(expected, actual);
 		}
 
 		#endregion
