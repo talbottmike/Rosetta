@@ -72,6 +72,8 @@
     <Compile Include="Types\DecimalConverterTests.cs" />
     <Compile Include="Types\DoubleConverterTests.cs" />
     <Compile Include="Types\IConverterTests.cs" />
+    <Compile Include="Types\ByteConverterTests.cs" />
+    <Compile Include="Types\SByteConverterTests.cs" />
     <Compile Include="Types\Int16ConverterTests.cs" />
     <Compile Include="Types\Int32ConverterTests.cs" />
     <Compile Include="Types\Int64ConverterTests.cs" />

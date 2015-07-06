@@ -16,7 +16,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromByte()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(byte.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(byte.MinValue));
 		}
 
@@ -51,7 +50,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromDecimal()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(int.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(int.MinValue));
 		}
 
@@ -59,7 +57,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromDouble()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(double.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(double.MinValue));
 		}
 
@@ -67,7 +64,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt16()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(short.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(short.MinValue));
 		}
 
@@ -75,7 +71,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt32()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(int.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(int.MinValue));
 		}
 
@@ -83,7 +78,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt64()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(long.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(long.MinValue));
 		}
 
@@ -91,7 +85,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSByte()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(sbyte.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(sbyte.MinValue));
 		}
 
@@ -99,7 +92,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSingle()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(float.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(float.MinValue));
 		}
 
@@ -135,7 +127,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt16()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(ushort.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(ushort.MinValue));
 		}
 
@@ -143,7 +134,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt32()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(uint.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(uint.MinValue));
 		}
 
@@ -151,7 +141,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt64()
 		{
 			Assert.AreEqual(true, Converter.Convert<bool>(ulong.MaxValue));
-			Assert.AreEqual(false, Converter.Convert<bool>(0));
 			Assert.AreEqual(false, Converter.Convert<bool>(ulong.MinValue));
 		}
 

@@ -16,7 +16,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromByte()
 		{
 			Assert.AreEqual(255, Converter.Convert<double>(byte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(0, Converter.Convert<double>(byte.MinValue));
 		}
 
@@ -24,7 +23,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromChar()
 		{
 			Assert.AreEqual(255, Converter.Convert<double>(char.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(0, Converter.Convert<double>(char.MinValue));
 		}
 
@@ -41,7 +39,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromDecimal()
 		{
 			TestHelper.AreEqual(double.Parse(decimal.MaxValue.ToString()), Converter.Convert<double>(decimal.MaxValue));
-			TestHelper.AreEqual(0, Converter.Convert<double>(0));
 			TestHelper.AreEqual(double.Parse(decimal.MinValue.ToString()), Converter.Convert<double>(decimal.MinValue));
 		}
 
@@ -50,7 +47,6 @@ namespace Rosetta.UnitTests.Types
 		{
 			var value = double.Parse("1.79769313486231E+308");
 			TestHelper.AreEqual(value, Converter.Convert<double>(value));
-			TestHelper.AreEqual(0, Converter.Convert<double>(0.0));
 			TestHelper.AreEqual(value * -1, Converter.Convert<double>(value * -1));
 		}
 
@@ -58,7 +54,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt16()
 		{
 			Assert.AreEqual(32767, Converter.Convert<double>(short.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(-32768, Converter.Convert<double>(short.MinValue));
 		}
 
@@ -66,7 +61,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt32()
 		{
 			Assert.AreEqual(2147483647, Converter.Convert<double>(int.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(-2147483648, Converter.Convert<double>(int.MinValue));
 		}
 
@@ -74,7 +68,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt64()
 		{
 			Assert.AreEqual(9223372036854775807, Converter.Convert<double>(long.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(-9223372036854775808, Converter.Convert<double>(long.MinValue));
 		}
 
@@ -82,7 +75,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSByte()
 		{
 			Assert.AreEqual(127, Converter.Convert<double>(sbyte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(-128, Converter.Convert<double>(sbyte.MinValue));
 		}
 
@@ -90,7 +82,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSingle()
 		{
 			TestHelper.AreEqual(double.Parse("3.402823E+38"), Converter.Convert<double>(float.MaxValue));
-			TestHelper.AreEqual(0, Converter.Convert<double>(0));
 			TestHelper.AreEqual(double.Parse("-3.402823E+38"), Converter.Convert<double>(float.MinValue));
 		}
 
@@ -99,7 +90,6 @@ namespace Rosetta.UnitTests.Types
 		{
 			var value = double.Parse("1.79769313486231E+308");
 			Assert.AreEqual(value, Converter.Convert<double>(value.ToString()));
-			Assert.AreEqual(0, Converter.Convert<double>("0"));
 			Assert.AreEqual(value * -1, Converter.Convert<double>((value * -1).ToString()));
 		}
 
@@ -116,7 +106,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt16()
 		{
 			Assert.AreEqual(65535, Converter.Convert<double>(ushort.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(0, Converter.Convert<double>(ushort.MinValue));
 		}
 
@@ -124,7 +113,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt32()
 		{
 			Assert.AreEqual(4294967295, Converter.Convert<double>(uint.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(0, Converter.Convert<double>(uint.MinValue));
 		}
 
@@ -132,7 +120,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt64()
 		{
 			Assert.AreEqual(18446744073709551615, Converter.Convert<double>(ulong.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<double>(0));
 			Assert.AreEqual(0, Converter.Convert<double>(ulong.MinValue));
 		}
 

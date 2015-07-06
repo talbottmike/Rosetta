@@ -16,7 +16,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromByte()
 		{
 			Assert.AreEqual(255, Converter.Convert<decimal>(byte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(0, Converter.Convert<decimal>(byte.MinValue));
 		}
 
@@ -24,7 +23,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromChar()
 		{
 			Assert.AreEqual(255, Converter.Convert<decimal>(char.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(0, Converter.Convert<decimal>(char.MinValue));
 		}
 
@@ -41,7 +39,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromDecimal()
 		{
 			Assert.AreEqual(79228162514264337593543950335m, Converter.Convert<decimal>(decimal.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-79228162514264337593543950335m, Converter.Convert<decimal>(decimal.MinValue));
 		}
 
@@ -49,7 +46,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromDouble()
 		{
 			Assert.AreEqual(79228162514264300000000000000m, Converter.Convert<decimal>((double) decimal.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0.0));
 			Assert.AreEqual(-79228162514264300000000000000m, Converter.Convert<decimal>((double) decimal.MinValue));
 		}
 
@@ -57,7 +53,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt16()
 		{
 			Assert.AreEqual(32767, Converter.Convert<decimal>(short.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-32768, Converter.Convert<decimal>(short.MinValue));
 		}
 
@@ -65,7 +60,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt32()
 		{
 			Assert.AreEqual(2147483647, Converter.Convert<decimal>(int.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-2147483648, Converter.Convert<decimal>(int.MinValue));
 		}
 
@@ -73,7 +67,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromInt64()
 		{
 			Assert.AreEqual(9223372036854775807, Converter.Convert<decimal>(long.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-9223372036854775808, Converter.Convert<decimal>(long.MinValue));
 		}
 
@@ -81,7 +74,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSByte()
 		{
 			Assert.AreEqual(127, Converter.Convert<decimal>(sbyte.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-128, Converter.Convert<decimal>(sbyte.MinValue));
 		}
 
@@ -89,7 +81,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromSingle()
 		{
 			Assert.AreEqual(79228160000000000000000000000m, Converter.Convert<decimal>((float) decimal.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(-79228160000000000000000000000m, Converter.Convert<decimal>((float) decimal.MinValue));
 		}
 
@@ -97,7 +88,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromString()
 		{
 			Assert.AreEqual(79228162514264337593543950335m, Converter.Convert<decimal>(decimal.MaxValue.ToString()));
-			Assert.AreEqual(0, Converter.Convert<decimal>("0"));
 			Assert.AreEqual(-79228162514264337593543950335m, Converter.Convert<decimal>(decimal.MinValue.ToString()));
 		}
 
@@ -114,7 +104,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt16()
 		{
 			Assert.AreEqual(65535, Converter.Convert<decimal>(ushort.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(0, Converter.Convert<decimal>(ushort.MinValue));
 		}
 
@@ -122,7 +111,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt32()
 		{
 			Assert.AreEqual(4294967295, Converter.Convert<decimal>(uint.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(0, Converter.Convert<decimal>(uint.MinValue));
 		}
 
@@ -130,7 +118,6 @@ namespace Rosetta.UnitTests.Types
 		public void ConvertFromUInt64()
 		{
 			Assert.AreEqual(18446744073709551615, Converter.Convert<decimal>(ulong.MaxValue));
-			Assert.AreEqual(0, Converter.Convert<decimal>(0));
 			Assert.AreEqual(0, Converter.Convert<decimal>(ulong.MinValue));
 		}
 
