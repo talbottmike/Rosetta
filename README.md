@@ -1,4 +1,4 @@
-# Rosetta
+# Rosetta (alpha - more like a prototype of an idea)
 
 Data conversion tool to convert and transform any data type to any other type. Many types of transforming supported. Here are some examples.
 
